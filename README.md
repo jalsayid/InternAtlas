@@ -47,9 +47,10 @@
 
 ## 👥 Team Members & Roles
 
-| Name   | Role        |
-|--------|-------------|
-| Joud   | Team Member |
-| Rawan  | Team Member |
-| Aryam  | Team Member |
-| Danah  | Team Member |
+| Name            | Role        |
+|-----------------|-------------|
+| Joud Alsayid    | Team Member |
+| Rawan Asiri     | Team Member |
+| Aryam Alshehri  | Team Member |
+| Danah Alotaibi  | Team Member |
+| Aishah Algharib | Team Member |
