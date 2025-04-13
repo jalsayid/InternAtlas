@@ -26,7 +26,7 @@
 
 - **Sign Up / Log In** – Create an account or log in with your credentials.
 - **Browse Internships** – Navigate to the homepage to explore available internship opportunities.
-- **Search & Filter** – Use the search bar and filters (e.g., location, major, company) to find relevant internships.
+- **Search & Filter** – Use the search bar and filters (e.g., location, opportunity type, company) to find relevant internships.
 - **Apply** – Click on a specific opportunity and hit “Apply” to submit your application.
 - **Notifications** – Receive email updates about your application status.
 
