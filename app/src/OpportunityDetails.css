@@ -1,0 +1,61 @@
+/* you may remove this */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.OpportunityDetails {
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  background-color: #F1F2F8;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  
+  
+}
+
+.header p, .content p, #subp {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+#subp {
+  margin-top: 15px;
+}
+
+.content h3 {
+  color: black;
+  margin-top: 20px;
+}
+
+.separator {
+  margin: 0 10px;
+}
+
+strong {
+  color: #FFB608;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 10px;
+  
+}
+
+li::before {
+  content: "✔";
+  color: #3AB500;
+  margin-right: 10px;
+}
+
+button {
+  width: 100px;
+}
+
+
