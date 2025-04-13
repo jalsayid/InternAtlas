@@ -1,0 +1,24 @@
+.dashboard-wrapper {
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+.dashboard-header {
+    border-bottom: 1px solid #ddd;
+}
+
+button.primary-btn {
+    background-color: #FFB608 !important;
+    color: white !important;
+    font-weight: bold;
+    border: none !important;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.primary-btn:hover {
+    background-color: #e6a800 !important;
+}
