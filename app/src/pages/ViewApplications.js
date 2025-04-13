@@ -1,12 +1,11 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ApplicantCard from "./components/ApplicantCard.js";
-import Header from "./components/Header";
-import Navbar from "./components/Navbar";
-import "./App.css";
+import ApplicantCard from "../components/ApplicantCard.js";
+import Header from "../components/Header.js";
+import Navbar from "../components/Navbar.js";
 
-export default function CompanyViewApplications() {
+export default function ViewApplications() {
   const title = "Job Applicants";
   const applicant1 = {
     imgSrc: "/applicant1.png",
@@ -29,6 +28,7 @@ export default function CompanyViewApplications() {
         </p>
       </>
     ),
+    link: "/applicant-details/1",
   };
 
   const applicant2 = {
@@ -52,6 +52,7 @@ export default function CompanyViewApplications() {
         </p>
       </>
     ),
+    link: "/applicant-details/2",
   };
 
   const applicant3 = {
@@ -75,6 +76,7 @@ export default function CompanyViewApplications() {
         </p>
       </>
     ),
+    link: "/applicant-details/3",
   };
 
   const applicant4 = {
@@ -97,6 +99,7 @@ export default function CompanyViewApplications() {
         </p>
       </>
     ),
+    link: "/applicant-details/4",
   };
 
   return (

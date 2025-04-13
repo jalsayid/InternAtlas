@@ -55,3 +55,24 @@
   font-size: 40;
   font-weight: 600;
 }
+.accept-badge {
+  padding: 4px 12px;
+  border-radius: 1000px;
+  background-color: #dff8cf;
+  text-align: center;
+  color: #34c759;
+}
+.pending-badge {
+  padding: 4px 12px;
+  border-radius: 1000px;
+  background-color: #ffeacc;
+  text-align: center;
+  color: #ff9500;
+}
+.reject-badge {
+  padding: 4px 12px;
+  border-radius: 1000px;
+  background-color: #ffe1df;
+  text-align: center;
+  color: #ff3b30;
+}

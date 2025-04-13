@@ -1,12 +1,16 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Header from "./components/Header";
-import Navbar from "./components/Navbar";
+import Header from "./Header";
+import Navbar from "./Navbar";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
+import Alert from "react-bootstrap/Alert";
+import { useState } from "react";
 
-export default function ViewApplicantDetails({ applicantData }) {
+export default function Details({ name, email, cv_path }) {
+  const [showAcceptAlert, setShowAcceptAlert] = useState(false);
+  const [showRejectAlert, setShowRejectAlert] = useState(false);
   const title = "Applicant Details";
 
   // Example questions and answers (in real app, these would come from props or API)
@@ -29,9 +33,7 @@ export default function ViewApplicantDetails({ applicantData }) {
   ];
 
   const handleDownloadCV = () => {
-    // In a real application, this would be the path to the actual CV file
-    const cvPath = "/sample-cv.pdf";
-    window.open(cvPath, "_blank");
+    window.open(cv_path, "_blank");
   };
 
   return (
@@ -40,22 +42,51 @@ export default function ViewApplicantDetails({ applicantData }) {
         <Navbar />
         <Header title={title} />
 
+        {/* Alerts positioned at the top */}
+        <div
+          style={{
+            position: "fixed",
+            top: "100px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 1000,
+            width: "50%",
+          }}
+        >
+          {showAcceptAlert && (
+            <Alert
+              variant="success"
+              onClose={() => setShowAcceptAlert(false)}
+              dismissible
+              style={{ marginBottom: "10px" }}
+            >
+              The Applicant is accepted!
+            </Alert>
+          )}
+          {showRejectAlert && (
+            <Alert
+              variant="danger"
+              onClose={() => setShowRejectAlert(false)}
+              dismissible
+              style={{ marginBottom: "10px" }}
+            >
+              The Applicant is rejected!
+            </Alert>
+          )}
+        </div>
+
         <Col md={6} className="mb-4">
           <Card className="p-4">
             <h2 className="h2-joud mb-4">Contact Information</h2>
             <Form>
               <Form.Group className="mb-3">
                 <Form.Label>Full Name</Form.Label>
-                <Form.Control type="text" value="Fatima Al-Dossari" readOnly />
+                <Form.Control type="text" value={name} readOnly />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  value="fatima@example.com"
-                  readOnly
-                />
+                <Form.Control type="email" value={email} readOnly />
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -73,20 +104,11 @@ export default function ViewApplicantDetails({ applicantData }) {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>LinkedIn Profile</Form.Label>
-                <Form.Control
-                  type="url"
-                  value="linkedin.com/in/fatima-dev"
-                  readOnly
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
                 <Form.Label>Curriculum Vitae</Form.Label>
                 <div className="d-flex align-items-center">
                   <Form.Control
                     type="text"
-                    value="Fatima_Al-Dossari_CV.pdf"
+                    value={`${name.replace(/\s+/g, "_")}_CV.pdf`}
                     readOnly
                     className="me-2"
                   />
@@ -120,8 +142,24 @@ export default function ViewApplicantDetails({ applicantData }) {
       </Row>
       <Row>
         <Col className="d-flex gap-3 mb-5">
-          <button className="def-btn">Accept</button>
-          <button className="second-btn">Reject</button>
+          <button
+            className="def-btn"
+            onClick={() => {
+              setShowAcceptAlert(true);
+              setShowRejectAlert(false);
+            }}
+          >
+            Accept
+          </button>
+          <button
+            className="second-btn"
+            onClick={() => {
+              setShowRejectAlert(true);
+              setShowAcceptAlert(false);
+            }}
+          >
+            Reject
+          </button>
         </Col>
       </Row>
     </Container>

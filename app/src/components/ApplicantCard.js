@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-function ApplicantCard({ imgSrc, title, content }) {
+function ApplicantCard({ imgSrc, title, content, link }) {
   return (
     <Card className="mb-4">
       <div className="d-flex flex-column flex-md-row">
@@ -27,7 +27,7 @@ function ApplicantCard({ imgSrc, title, content }) {
               marginTop: "auto",
             }}
           >
-            <Link to="/applicant-details">
+            <Link to={link}>
               <button className="def-btn">view details</button>
             </Link>
           </div>
