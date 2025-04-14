@@ -10,6 +10,9 @@ function TrackApplicationCard({ app }) {
   const goToOpportunityDetails = () => {
     navigate('/OpportunityDetails');
   };
+  // const goToViewReviews = () => {
+  //   navigate('/');
+  // };
 
 
   return (

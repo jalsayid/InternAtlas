@@ -8,6 +8,10 @@ import ReviewCompany from "./pages/ReviewCompany.js";
 import ViewCompany from "./pages/ViewCompany.js";
 import ModerateContentNav from './components/ModerateContentNav.js';
 import OpportunityDetails from "./components/OpportunityDetails.js";
+import TrackApplicationsCompany from "./components/TrackApplications.js";
+
+
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SearchCompany from './Review/Student/Search/SearchCompany';
@@ -23,6 +27,8 @@ import PostInternshipForm from './components/PostInternshipForm.js';
 import EditInternshipForm from './components/EditInternshipForm.js';
 import ContactInformationForm from './components/ContactInformationForm.js';
 import GeneralInformationForm from './components/GeneralInformationForm.js';
+import ManageApplications from "./components/ManageApplications.js"
+
 
 function App() {
   return (
@@ -36,6 +42,9 @@ function App() {
         <Route path="/companies/:id" element={<ViewCompany />} />
         <Route path="/OpportunityDetails" element={<OpportunityDetails />} />
         <Route path="/ModerateContentNav" element={<ModerateContentNav />} />
+        <Route path="/TrackApplicationsCompany" element={<TrackApplicationsCompany />} />
+        
+
 
         <Route path="/dashboard/student" element={<StudentDashboard />} />
         <Route path="/search" element={<SearchCompany />} />
@@ -53,6 +62,7 @@ function App() {
 
       </Routes>
     </Router>
+    
   );
 }
 

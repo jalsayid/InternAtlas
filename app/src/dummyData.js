@@ -229,6 +229,7 @@ export const opportunities = [
       jobsCount: 5,
       contactPerson: "Mansour Al-Qahtani",
       description: "A global leader in diversified chemicals, committed to innovation and sustainability.",
+      logo: "/sabic_logo.png",
     },
     {
       id: 2,
@@ -239,6 +240,7 @@ export const opportunities = [
       jobsCount: 3,
       contactPerson: "Noura Al-Shehri",
       description: "Saudi Aramco is the world’s leading energy producer and supplier of petroleum and natural gas.",
+      logo: "/aramcoLogo.png",
     },
     {
       id: 3,
@@ -249,6 +251,7 @@ export const opportunities = [
       jobsCount: 4,
       contactPerson: "Faisal Al-Dossary",
       description: "The Saudi Data and AI Authority focuses on driving the national data and AI agenda for boosting innovation.",
+      logo:"/sdaiaLogo.jpg",
     }
   ];
   export const invalidCompanyRatings = [

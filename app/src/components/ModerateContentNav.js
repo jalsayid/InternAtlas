@@ -1,23 +1,23 @@
 import Nav from 'react-bootstrap/Nav';
 import React, { useState } from 'react';
-import TrackApplications from './TrackApplications.js'
+import ManageApplications from './ManageApplications.js'
 import TrackProfiles from './TrackProfiles.js';
 import TrackComments from "./TrackComments.js";
 
 
 function ModerateContentNav() {
-    const [activeTab, setActiveTab] = useState('TrackApplications');
+    const [activeTab, setActiveTab] = useState('ManageApplications');
 
     const renderTabContent = () => {
       switch (activeTab) {
-        case 'TrackApplications':
-          return <TrackApplications />;
+        case 'ManageApplications':
+          return <ManageApplications />;
         case 'TrackComments':
           return <TrackComments />;
         case 'TrackProfiles':
           return <TrackProfiles />;
         default:
-          return null;
+          return <ManageApplications />;
       }
     };
   
