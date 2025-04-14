@@ -1,0 +1,167 @@
+
+body {
+  background-color: #F1F2F7; /* Secondary background color */
+  color: #666666; /* For text color */
+  font-family: 'Arial', sans-serif;
+}
+
+
+.primary-color {
+  color: #FFB608 !important;
+  background-color: #FFB608 !important;
+}
+
+
+.success {
+  color: #55BE24;
+}
+
+
+.error {
+  color: #FF3B2F;
+}
+
+
+.info {
+  color: #1FABFF;
+}
+
+
+.btn-primary {
+  background-color: #FFB608 !important;
+  border-color: #FFB608 !important;
+}
+
+.btn-primary:hover {
+  background-color: #e8a700 !important;
+  border-color: #e8a700 !important;
+}
+
+.btn-secondary {
+  background-color: transparent !important;
+  border: 1px solid #333333 !important;
+}
+
+.btn-secondary:hover {
+  background-color: #333333 !important;
+  border-color: #333333 !important;
+}
+
+
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  background-color: #fff;
+  color: #666666;
+  border: 1px solid #E2E0DB;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #FFB608; /* Border becomes primary color on focus */
+  outline: none;
+}
+
+/* Form Field Error */
+.is-invalid {
+  border-color: #FF3B2F !important; /* Red border for error */
+}
+
+.is-invalid:focus {
+  border-color: #FF3B2F !important;
+  outline: none;
+}
+
+
+.is-valid {
+  border-color: #55BE24 !important; 
+}
+
+.is-valid:focus {
+  border-color: #55BE24 !important;
+  outline: none;
+}
+
+
+label {
+  font-weight: bold;
+  color: #333333;
+}
+
+
+.form-container {
+  background-color: #FFB608;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+
+.text-danger {
+  color: #FF3B2F !important;
+}
+
+.text-success {
+  color: #55BE24 !important;
+}
+
+.text-info {
+  color: #1FABFF !important;
+}
+
+
+hr {
+  border: 1px solid #E2E0DB;
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #FFB608 !important; 
+  box-shadow: none;
+}
+
+
+button {
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+button[type="submit"] {
+  background-color: #FFB608;
+  border-color: #FFB608;
+}
+
+button[type="submit"]:hover {
+  background-color: #e8a700;
+  border-color: #e8a700;
+}
+
+
+/* Customize Yes Button */
+.custom-modal .btn-primary {
+  background-color: #007AFF; /* Blue background */
+  border-color: #007AFF; /* Blue border */
+}
+
+/* Customize Cancel Button */
+.custom-modal .btn-secondary {
+  color: #F51A1A; /* Red text */
+  border-color: #F51A1A; /* Red border */
+  background-color: transparent; /* Transparent background */
+}
