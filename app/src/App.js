@@ -15,7 +15,6 @@ import ReportGenerate from './pages/ReportGenerate.js';
 
 
 
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SearchCompany from './Review/Student/Search/SearchCompany';
@@ -51,6 +50,7 @@ function App() {
         <Route path="/OpportunityDetails" element={<OpportunityDetails />} />
         <Route path="/ModerateContentNav" element={<ModerateContentNav />} />
         <Route path="/TrackApplicationsCompany" element={<TrackApplicationsCompany />} /> //dana
+
 
 
         //new routes from Rawan
