@@ -11,7 +11,7 @@ function OpportunityCard({ opportunity, onClick }) {
             <img
               src={opportunity.logo}
               alt={opportunity.company}
-              style={{ width: '50px', height: '50px', objectFit: 'contain' }}
+              style={{ width: '110px', height: '110px', objectFit: 'contain' }}
             />
           </Col>
 

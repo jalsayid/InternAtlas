@@ -23,3 +23,7 @@ function OpportunityDetailModal({ show, handleClose, opportunity }) {
 }
 
 export default OpportunityDetailModal;
+
+
+
+//this might be deleteddd ;rawan

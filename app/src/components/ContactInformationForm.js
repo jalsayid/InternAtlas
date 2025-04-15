@@ -1,11 +1,20 @@
 import React, { useState} from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import WithLabelExample from './ProgressBar.js'
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload } from 'react-icons/fa';
 
+//rawan
+import { opportunities } from '../Data/dummyData';
+
+
 function ContactInformationForm() {
     const navigate = useNavigate();
+
+//rawan
+    const { id } = useParams();
+    const opportunity = opportunities.find(o => o.id === parseInt(id));
+
 
 
     const [fullName, setFullName] = useState('');
@@ -67,13 +76,14 @@ function ContactInformationForm() {
         setErrors(formErrors);
 
         if (valid) {
-            navigate('/general-informationForm');
+            navigate(`/general-informationForm/${id}`);
         }
+
 
     };
 
     const handleBack = () => {
-        //navigate('/');  
+        navigate(`/opportunity/${id}`);
     };
 
 
@@ -81,7 +91,9 @@ function ContactInformationForm() {
         <Container className="mt-5">
 
             <h1 className="text-center">Internship Application</h1>
-            <h2 className="text-center">Sabic - Software Engineering Intern</h2>
+            <h2 className="text-center">
+  {opportunity ? `${opportunity.company} - ${opportunity.title}` : 'Internship Opportunity'}
+</h2>
 
             <WithLabelExample now={35} />
 
