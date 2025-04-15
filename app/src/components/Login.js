@@ -28,6 +28,13 @@ function Login({ onSwitchToRegister }) {
 
     return (
         <Container className="p-3 my-5 d-flex flex-column w-50">
+            <img
+                src='./logo.png'
+                alt='logo'
+                width={200}
+                height={200}
+                style={{ display: 'block', margin: '0 auto' }} 
+            />
             <p>Login with your informations</p>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">

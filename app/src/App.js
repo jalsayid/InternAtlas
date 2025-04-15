@@ -23,6 +23,8 @@ import PostInternshipForm from './components/PostInternshipForm.js';
 import EditInternshipForm from './components/EditInternshipForm.js';
 import ContactInformationForm from './components/ContactInformationForm.js';
 import GeneralInformationForm from './components/GeneralInformationForm.js';
+import SearchOpportunities from './pages/SearchOpportunities.js'
+import LandingPage from './pages/LandingPage.js'
 
 function App() {
   return (
@@ -45,12 +47,15 @@ function App() {
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
         <Route path="/dashboard/company" element={<CompanyDashboard />} />
 
+        <Route path="/search-opportunities" element={<SearchOpportunities />} />
+
         <Route path="/login" element={<SignTaps />} />
         <Route path="/post-opportunity" element={<PostInternshipForm />} /> 
         <Route path="/edit-opportunity" element={<EditInternshipForm />} /> 
         <Route path="/contact-informationForm" element={<ContactInformationForm />} />
         <Route path="/general-informationForm" element={<GeneralInformationForm />} />
 
+        <Route path="/landing-page" element={<LandingPage />} />
       </Routes>
     </Router>
   );

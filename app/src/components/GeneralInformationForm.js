@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Form, Button, Container, Row, Col  } from 'react-bootstrap';
 import Confirmation from './Confirmation.js';  // Confirmation modal component
 import WithLabelExample from './ProgressBar.js'
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +19,16 @@ function GeneralInformationForm() {
 
     // Form error states
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        const storedData = JSON.parse(localStorage.getItem('generalquestions')) || {};
+        setAvailability(storedData.availability || '');
+        setFullTimeInterest(storedData.fullTimeInterest || '');
+        setRelocation(storedData.relocation || '');
+        setWhyInterested(storedData.whyInterested || '');
+        setSkills(storedData.skills || '');
+        setCareerGoals(storedData.careerGoals || '');
+    }, []);
 
     // Modal and Alert visibility states
     const [showModal, setShowModal] = useState(false);
@@ -42,15 +52,6 @@ function GeneralInformationForm() {
             navigate('/track-applications')
 
         }, 2000);
-
-
-        // Reset form fields
-        setAvailability('');
-        setFullTimeInterest('');
-        setRelocation('');
-        setWhyInterested('');
-        setSkills('');
-        setCareerGoals('');
 
     };
 
@@ -89,6 +90,17 @@ function GeneralInformationForm() {
         setErrors(formErrors);
 
         if (valid) {
+            const formData = {
+                availability,
+                fullTimeInterest,
+                relocation,
+                whyInterested,
+                skills,
+                careerGoals,
+            };
+            localStorage.setItem('generalquestions', JSON.stringify(formData));
+
+
             setShowModal(true);  // Show confirmation modal
             console.log("here")
         }
@@ -97,13 +109,31 @@ function GeneralInformationForm() {
 
 
     const handleBack = () => {
+        const formData = {
+            availability,
+            fullTimeInterest,
+            relocation,
+            whyInterested,
+            skills,
+            careerGoals,
+        };
+        localStorage.setItem('generalquestions', JSON.stringify(formData));
+
         navigate('/contact-informationForm');
     };
 
     return (
         <Container className="mt-5">
-            <h1 className="text-center">Internship Application</h1>
-            <h2 className="text-center">Sabic - Software Engineering Intern</h2>
+            <div className="header py-4 text-center">
+                <Row>
+                    <Col>
+                        <h1>Software Engineering Intern</h1>
+                        <h4>By <strong>Sabic</strong></h4>
+                    </Col>
+                </Row>
+            </div>
+
+            <br/>
 
             <WithLabelExample now={70} />
 

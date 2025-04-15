@@ -1,13 +1,13 @@
-import React, { useState} from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import WithLabelExample from './ProgressBar.js'
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload , FaGraduationCap,FaBook} from 'react-icons/fa';
 
 function ContactInformationForm() {
     const navigate = useNavigate();
 
-
+    // Initial state to hold the user input values
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -16,11 +16,26 @@ function ContactInformationForm() {
     const [gpa, setGpa] = useState('');
     const [university, setUniversity] = useState('');
     const [major, setMajor] = useState('');
-    const [resume, setResume] = useState(null);
+    const [resume, setResume] = useState(null); // For the resume file
+
 
     // form error states
     const [errors, setErrors] = useState({});
-    
+
+    // Load stored form data from localStorage when the component mounts
+    useEffect(() => {
+        const storedData = JSON.parse(localStorage.getItem('contactInformation')) || {};
+        setFullName(storedData.fullName || '');
+        setEmail(storedData.email || '');
+        setPhone(storedData.phone || '');
+        setLinkedin(storedData.linkedin || '');
+        setLocation(storedData.location || '');
+        setGpa(storedData.gpa || '');
+        setUniversity(storedData.university || '');
+        setMajor(storedData.major || '');
+        setResume(null);
+    }, []);
+
     // handle form 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -67,6 +82,22 @@ function ContactInformationForm() {
         setErrors(formErrors);
 
         if (valid) {
+            // Create a data object
+            const formData = {
+                fullName,
+                email,
+                phone,
+                linkedin,
+                location,
+                gpa,
+                university,
+                major,
+            };
+
+            // Save the form data to localStorage
+            localStorage.setItem('contactInformation', JSON.stringify(formData));
+
+            // Navigate to the next page
             navigate('/general-informationForm');
         }
 
@@ -77,11 +108,25 @@ function ContactInformationForm() {
     };
 
 
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setResume(file);
+        }
+    };
     return (
         <Container className="mt-5">
+            <div className="header py-4 text-center">
+                <Row>
+                    <Col>
+                        <h1>Software Engineering Intern</h1>
+                        <h4>By <strong>Sabic</strong></h4>
+                    </Col>
+                </Row>
+            </div>
 
-            <h1 className="text-center">Internship Application</h1>
-            <h2 className="text-center">Sabic - Software Engineering Intern</h2>
+            <br/>
 
             <WithLabelExample now={35} />
 
@@ -94,7 +139,7 @@ function ContactInformationForm() {
             <Form onSubmit={handleSubmit}>
                 {/* Full Name */}
                 <Form.Group controlId="fullName" className="mb-4">
-                    <Form.Label><FaUser /> Full Name</Form.Label>
+                    <Form.Label><FaUser style={{ color: '#FFB608', marginRight: '8px' }}/> Full Name</Form.Label>
                     <Form.Control
                         type="text"
                         value={fullName}
@@ -107,7 +152,7 @@ function ContactInformationForm() {
 
                 {/* Email */}
                 <Form.Group controlId="email" className="mb-4">
-                    <Form.Label><FaEnvelope /> Email</Form.Label>
+                    <Form.Label><FaEnvelope style={{ color: '#FFB608', marginRight: '8px' }}/> Email</Form.Label>
                     <Form.Control
                         type="email"
                         value={email}
@@ -120,7 +165,7 @@ function ContactInformationForm() {
 
                 {/* Phone Number */}
                 <Form.Group controlId="phone" className="mb-4">
-                    <Form.Label><FaPhone /> Mobile Phone Number</Form.Label>
+                    <Form.Label><FaPhone style={{ color: '#FFB608', marginRight: '8px' }}/> Mobile Phone Number</Form.Label>
                     <Form.Control
                         type="text"
                         value={phone}
@@ -133,7 +178,7 @@ function ContactInformationForm() {
 
                 {/* LinkedIn Profile Link */}
                 <Form.Group controlId="linkedin" className="mb-4">
-                    <Form.Label><FaLinkedin /> LinkedIn Profile Link</Form.Label>
+                    <Form.Label><FaLinkedin style={{ color: '#FFB608', marginRight: '8px' }}/> LinkedIn Profile Link</Form.Label>
                     <Form.Control
                         type="text"
                         value={linkedin}
@@ -146,7 +191,7 @@ function ContactInformationForm() {
 
                 {/* Location */}
                 <Form.Group controlId="location" className="mb-4">
-                    <Form.Label><FaMapMarkerAlt /> Location</Form.Label>
+                    <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Location</Form.Label>
                     <Form.Control
                         type="text"
                         value={location}
@@ -160,7 +205,7 @@ function ContactInformationForm() {
 
                 {/* GPA */}
                 <Form.Group controlId="gpa" className="mb-4">
-                    <Form.Label>GPA</Form.Label>
+                    <Form.Label><FaGraduationCap style={{ color: '#FFB608', marginRight: '8px' }} />GPA</Form.Label>
                     <Form.Control
                         type="text"
                         value={gpa}
@@ -173,7 +218,7 @@ function ContactInformationForm() {
 
                 {/* University */}
                 <Form.Group controlId="university" className="mb-4">
-                    <Form.Label><FaUniversity /> University</Form.Label>
+                    <Form.Label><FaUniversity style={{ color: '#FFB608', marginRight: '8px' }} /> University</Form.Label>
                     <Form.Control
                         type="text"
                         value={university}
@@ -186,7 +231,7 @@ function ContactInformationForm() {
 
                 {/* Major */}
                 <Form.Group controlId="major" className="mb-4">
-                    <Form.Label>Major</Form.Label>
+                    <Form.Label><FaBook style={{ color: '#FFB608', marginRight: '8px' }} />Major</Form.Label>
                     <Form.Control
                         type="text"
                         value={major}
@@ -199,10 +244,10 @@ function ContactInformationForm() {
 
                 {/* Resume Upload */}
                 <Form.Group controlId="resume" className="mb-4">
-                    <Form.Label><FaUpload /> Upload Resume</Form.Label>
+                    <Form.Label><FaUpload style={{ color: '#FFB608', marginRight: '8px' }} /> Upload Resume</Form.Label>
                     <Form.Control
                         type="file"
-                        onChange={(e) => setResume(e.target.files[0])}
+                        onChange={handleFileChange}
                         isInvalid={!!errors.resume}
                     />
                     <Form.Control.Feedback type="invalid">{errors.resume}</Form.Control.Feedback>
@@ -211,7 +256,7 @@ function ContactInformationForm() {
                 {/* Buttons */}
                 <Form.Group className="mb-4 d-flex justify-content-end">
                     <Button variant="secondary" onClick={handleBack} style={{ color: 'black', width: '120px', marginRight: '10px' }}>Back</Button>
-                    <Button variant="primary" type="submit" style={{ width: '120px' }} >Next</Button>
+                    <Button variant="primary" onClick={handleSubmit} type="submit" style={{ width: '120px' }} >Next</Button>
                 </Form.Group>
             </Form>
 

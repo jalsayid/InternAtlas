@@ -3,7 +3,7 @@ import { Container, Form } from 'react-bootstrap';
 import OpportunityCard from '../components/OpportunityCard';
 import OpportunityDetailModal from '../components/OpportunityDetailModal';
 import FilterPanel from '../components/FilterPanel';
-import { opportunities } from '../data/dummyData';
+import { opportunities } from '../dummyData.js';
 
 function SearchOpportunities() {
   const [selected, setSelected] = useState(null);

@@ -1,7 +1,7 @@
 
 body {
-  background-color: #F1F2F7; /* Secondary background color */
-  color: #666666; /* For text color */
+  background-color: #F1F2F7 !important; /* Secondary background color */
+  color: #666666 !important; /* For text color */
   font-family: 'Arial', sans-serif;
 }
 
@@ -164,4 +164,17 @@ button[type="submit"]:hover {
   color: #F51A1A; /* Red text */
   border-color: #F51A1A; /* Red border */
   background-color: transparent; /* Transparent background */
+}
+.progress-bar {
+  background-color: #007bff !important; /* Primary color */
+}
+
+.custom-tab-title .nav-link {
+  color: black!important;
+  font-weight: bold;
+}
+
+.register-tab-title .nav-link {
+  color: #FFB608!important;
+  font-weight: bold;
 }

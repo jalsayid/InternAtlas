@@ -19,8 +19,9 @@ function SignTaps() {
         id="controlled-tab-example"
         activeKey={key}
         onSelect={(k) => setKey(k)}
-        className="mb-3"
+        className="mb-3 custom-tab-title"
         justify
+        style={{fontSize:"16px", color:"#FFB608"}}
       >
         <Tab eventKey="login" title="Login">
          <Login/>

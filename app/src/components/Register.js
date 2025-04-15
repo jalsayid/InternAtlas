@@ -96,8 +96,9 @@ function Register({ onSwitchToRegister }) {
                 id="controlled-tab-example"
                 activeKey={key}
                 onSelect={(k) => setKey(k)}
-                className="mb-3"
+                className="mb-3 register-tab-title"
                 justify
+
             >
                 <Tab eventKey="register" title="Register as Student">
                     <p>Register as a Student</p>
