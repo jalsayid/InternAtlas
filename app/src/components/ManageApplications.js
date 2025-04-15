@@ -2,27 +2,42 @@ import React, { useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import ApplicationCardAdmin from './ApplicationCardAdmin.js';
 import { applications } from '../dummyData'; 
+import Confirmation from './Confirmation.js';
+import SubmissionAlert from './Alert.js';
+
+
 
 function ManageApplications() {
   const [search, setSearch] = useState("");
   const [application, setApplication] = useState(applications);
+
+
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [pendingDeleteId, setPendingDeleteId] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
 
   const filtered = application.filter(app =>
     app.position.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleDelete = (id) => {
-    const confirmAction = window.confirm("Are you sure you want to delete this item?");
-    if (confirmAction) {
-      const updated = application.filter(application => application.id !== id);
-      setApplication(updated);
-      alert("Item deleted!");
-    } else {
-      alert("Deletion canceled.");
-    }
+    setPendingDeleteId(id);
+    setShowConfirm(true);
 
       
     };
+    const confirmDeletion = () => {
+      const updated = application.filter(app => app.id !== pendingDeleteId);
+      setApplication(updated);
+      setShowConfirm(false);
+      setPendingDeleteId(null);
+    
+
+      setShowAlert(true);
+    
+      setTimeout(() => setShowAlert(false), 3000); // Auto-dismiss alert
+    };
+    
 
   return (
     <Container className="my-5" style={{ maxWidth: '1000px' }}>
@@ -36,6 +51,12 @@ function ManageApplications() {
           style={{width:"300px", margin: "20px 20px"}}
         />
       </Form>
+      <SubmissionAlert
+        show={showAlert}
+        message="Application deleted!"
+        variant="success"
+        onClose={() => setShowAlert(false)}
+      />
 
       {filtered.map(app => (
         <ApplicationCardAdmin
@@ -44,7 +65,18 @@ function ManageApplications() {
           onDelete={handleDelete}
         />
       ))}
-
+      <Confirmation
+        show={showConfirm}
+        onHide={() => {
+          setShowConfirm(false);
+          setPendingDeleteId(null);
+        }}
+        title="Confirm Deletion"
+        bodyText="Are you sure you want to delete this application?"
+        closeButtonLabel="Cancel"
+        saveButtonLabel="Delete"
+        onSave={confirmDeletion}
+      />
     </Container>
   );
 }
