@@ -9,7 +9,7 @@ import ViewCompany from "./pages/ViewCompany.js";
 import ModerateContentNav from './components/ModerateContentNav.js';
 import OpportunityDetails from "./components/OpportunityDetails.js";
 import TrackApplicationsCompany from "./components/TrackApplications.js";
-import SearchOpportunities from './pages/SearchOpportunities.js';
+
 import TrackApplicationsRawan from './pages/TrackApplicationsRawan.js';
 import ReportGenerate from './pages/ReportGenerate.js';
 

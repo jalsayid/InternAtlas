@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import WithLabelExample from './ProgressBar.js'
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload,FaBook,FaGraduationCap } from 'react-icons/fa';
 
 //rawan
 import { opportunities } from '../Data/dummyData';
