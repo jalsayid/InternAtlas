@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import OpportunityCard from '../components/OpportunityCard';
-import OpportunityDetailModal from '../components/OpportunityDetailModal';
 import FilterPanel from '../components/FilterPanel';
-import { opportunities } from '../dummyData.js';
+import { opportunities } from '../Data/dummyData.js';
 
 function SearchOpportunities() {
-  const [selected, setSelected] = useState(null);
-  const [showDetail, setShowDetail] = useState(false);
   const [filters, setFilters] = useState({
     type: '',
     company: '',
     location: '',
     title: ''
   });
+
+  const navigate = useNavigate();
 
   const handleFilterChange = (type, value) => {
     setFilters(prev => ({ ...prev, [type]: value }));
@@ -48,19 +48,10 @@ function SearchOpportunities() {
           <OpportunityCard
             key={op.id}
             opportunity={op}
-            onClick={op => {
-              setSelected(op);
-              setShowDetail(true);
-            }}
+            onClick={() => navigate(`/opportunity/${op.id}`)}
           />
         ))}
       </div>
-
-      <OpportunityDetailModal
-        show={showDetail}
-        handleClose={() => setShowDetail(false)}
-        opportunity={selected}
-      />
     </Container>
   );
 }

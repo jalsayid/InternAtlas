@@ -12,7 +12,7 @@ function OpportunityDetails() {
     const navigate = useNavigate();
   
     const goToTrackApplications = () => {
-      navigate('/TrackApplications');
+      navigate('/TrackApplicationsCompany');
     };
   
     return (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import TrackApplicationCard from '../components/TrackApplicationCard';
 import ApplicationDetailModal from '../components/ApplicationDetailModal';
-import { applications } from '../data/dummyData'; 
+import { applications } from "../Data/dummyData.js"; 
 
 function TrackApplicationsRawan() {
   const [selected, setSelected] = useState(null);

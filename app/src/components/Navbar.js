@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
   return (
     <nav
       className="d-flex justify-content-between align-items-center shadow-lg p-3 bg-white"
@@ -12,7 +18,7 @@ export default function Navbar() {
         zIndex: 1000,
       }}
     >
-      <button className="second-btn">Dashboard</button>
+      <button className="second-btn" onClick={() => navigate('/dashboard/student')}>Dashboard</button>
       <div className="d-flex align-items-center gap-2">
         <img
           src="/userIcon.svg"

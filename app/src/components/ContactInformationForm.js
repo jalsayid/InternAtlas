@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import WithLabelExample from './ProgressBar.js'
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload , FaGraduationCap,FaBook} from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload } from 'react-icons/fa';
+
+//rawan
+import { opportunities } from '../Data/dummyData';
 
 function ContactInformationForm() {
     const navigate = useNavigate();
+
+    //rawan
+    const { id } = useParams();
+    const opportunity = opportunities.find(o => o.id === parseInt(id));
+
 
     // Initial state to hold the user input values
     const [fullName, setFullName] = useState('');
@@ -101,10 +109,11 @@ function ContactInformationForm() {
             navigate('/general-informationForm');
         }
 
+
     };
 
     const handleBack = () => {
-        //navigate('/');  
+        navigate(`/opportunity/${id}`);
     };
 
 
@@ -120,13 +129,15 @@ function ContactInformationForm() {
             <div className="header py-4 text-center">
                 <Row>
                     <Col>
-                        <h1>Software Engineering Intern</h1>
-                        <h4>By <strong>Sabic</strong></h4>
+                        <h1 className="text-center">Internship Application</h1>
+                        <h2 className="text-center">
+                            {opportunity ? `${opportunity.company} - ${opportunity.title}` : 'Internship Opportunity'}
+                        </h2>
                     </Col>
                 </Row>
             </div>
 
-            <br/>
+            <br />
 
             <WithLabelExample now={35} />
 
@@ -139,7 +150,7 @@ function ContactInformationForm() {
             <Form onSubmit={handleSubmit}>
                 {/* Full Name */}
                 <Form.Group controlId="fullName" className="mb-4">
-                    <Form.Label><FaUser style={{ color: '#FFB608', marginRight: '8px' }}/> Full Name</Form.Label>
+                    <Form.Label><FaUser style={{ color: '#FFB608', marginRight: '8px' }} /> Full Name</Form.Label>
                     <Form.Control
                         type="text"
                         value={fullName}
@@ -152,7 +163,7 @@ function ContactInformationForm() {
 
                 {/* Email */}
                 <Form.Group controlId="email" className="mb-4">
-                    <Form.Label><FaEnvelope style={{ color: '#FFB608', marginRight: '8px' }}/> Email</Form.Label>
+                    <Form.Label><FaEnvelope style={{ color: '#FFB608', marginRight: '8px' }} /> Email</Form.Label>
                     <Form.Control
                         type="email"
                         value={email}
@@ -165,7 +176,7 @@ function ContactInformationForm() {
 
                 {/* Phone Number */}
                 <Form.Group controlId="phone" className="mb-4">
-                    <Form.Label><FaPhone style={{ color: '#FFB608', marginRight: '8px' }}/> Mobile Phone Number</Form.Label>
+                    <Form.Label><FaPhone style={{ color: '#FFB608', marginRight: '8px' }} /> Mobile Phone Number</Form.Label>
                     <Form.Control
                         type="text"
                         value={phone}
@@ -178,7 +189,7 @@ function ContactInformationForm() {
 
                 {/* LinkedIn Profile Link */}
                 <Form.Group controlId="linkedin" className="mb-4">
-                    <Form.Label><FaLinkedin style={{ color: '#FFB608', marginRight: '8px' }}/> LinkedIn Profile Link</Form.Label>
+                    <Form.Label><FaLinkedin style={{ color: '#FFB608', marginRight: '8px' }} /> LinkedIn Profile Link</Form.Label>
                     <Form.Control
                         type="text"
                         value={linkedin}
@@ -191,7 +202,7 @@ function ContactInformationForm() {
 
                 {/* Location */}
                 <Form.Group controlId="location" className="mb-4">
-                    <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Location</Form.Label>
+                    <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }} /> Location</Form.Label>
                     <Form.Control
                         type="text"
                         value={location}

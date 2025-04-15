@@ -4,7 +4,7 @@ import CompanyStats from "../components/CompanyStat";
 import ApprovalBarChart from "../components/ApprovalBarChart";
 import MajorPieChart from "../components/MajorPieChart";
 import OpportunitiesBarChart from "../components/OpportunitiesBarChart";
-import { dashboardSummary, companyApprovalStats, opportunities } from "../data/dummyData";
+import { dashboardSummary, companyApprovalStats, opportunities } from "../Data/dummyData.js";
 import { Modal } from "react-bootstrap";
 
 export default function ReportGenerate() {

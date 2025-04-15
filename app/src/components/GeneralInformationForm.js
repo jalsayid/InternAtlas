@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Container, Row, Col  } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import Confirmation from './Confirmation.js';  // Confirmation modal component
 import WithLabelExample from './ProgressBar.js'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Alert from "react-bootstrap/Alert";
+
+import { opportunities } from '../Data/dummyData';
+
 
 function GeneralInformationForm() {
     const navigate = useNavigate();
+
+    const { id } = useParams();
+    const opportunity = opportunities.find(o => o.id === parseInt(id));
 
     // Form states
     const [availability, setAvailability] = useState('');
@@ -127,13 +133,15 @@ function GeneralInformationForm() {
             <div className="header py-4 text-center">
                 <Row>
                     <Col>
-                        <h1>Software Engineering Intern</h1>
-                        <h4>By <strong>Sabic</strong></h4>
+                        <h1>Internship Application</h1>
+                        <h2 className="text-center">
+                            {opportunity ? `${opportunity.company} - ${opportunity.title}` : 'Internship Opportunity'}
+                        </h2>
                     </Col>
                 </Row>
             </div>
 
-            <br/>
+            <br />
 
             <WithLabelExample now={70} />
 
