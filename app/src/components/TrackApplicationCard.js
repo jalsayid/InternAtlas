@@ -11,7 +11,8 @@ function TrackApplicationCard({ app }) {
     navigate('/OpportunityDetails');
   };
   const goToViewReviews = () => {
-    navigate('/CompanyReview');
+    navigate(`/CompanyReview/${app.company.toLowerCase()}/${app.position.toLowerCase()}/reviews`);
+
   };
   const goToEdit = () => {
     navigate('/edit-opportunity');

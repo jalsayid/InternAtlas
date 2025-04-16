@@ -26,7 +26,7 @@ const StudentDashboard = () => {
                     <Col xs={12} md={4}>
                         <Button
                             className="primary-btn w-100"
-                            onClick={() => navigate('/SearchOpportunities')}
+                            onClick={() => navigate('/search-opportunities')}
                         >
                             Explore Training Opportunities
                         </Button>

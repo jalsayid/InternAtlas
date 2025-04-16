@@ -1,5 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ViewApplications from "./pages/ViewApplications.js";
 import ApplicantDetails from "./pages/ApplicantDetails.js";
 import TrackApplications from "./pages/TrackApplications.js";
@@ -11,12 +13,7 @@ import OpportunityDetails from "./components/OpportunityDetails.js";
 import TrackApplicationsCompany from "./components/TrackApplications.js";
 
 import TrackApplicationsRawan from './pages/TrackApplicationsRawan.js';
-import ReportGenerate from './pages/ReportGenerate.js';
 
-
-
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SearchCompany from './Review/Student/Search/SearchCompany';
 import CompanyReview from './Review/Student/rate/CompanyReview';
 import WriteReview from './Review/Student/write/WriteReview';
@@ -37,6 +34,9 @@ import ManageApplications from "./components/ManageApplications.js"
 
 import OpportunityDetailsPage from './pages/OpportunityDetailsPageStudent';
 
+
+import ReportGenerate from './pages/ReportGenerate'; 
+
 function App() {
   return (
     <Router>
@@ -49,14 +49,14 @@ function App() {
         <Route path="/companies/:id" element={<ViewCompany />} />
         <Route path="/OpportunityDetails" element={<OpportunityDetails />} />
         <Route path="/ModerateContentNav" element={<ModerateContentNav />} />
-        <Route path="/TrackApplicationsCompany" element={<TrackApplicationsCompany />} /> //dana
-
+        <Route path="//company/applications" element={<TrackApplicationsCompany />} /> //dana
+        <Route path="/company/applications" element={<ManageApplications />} /> // has been linked in the company dashboard - aryam
 
 
         //new routes from Rawan
-        <Route path="/SearchOpportunities" element={<SearchOpportunities />} /> 
+        <Route path="/search-opportunities" element={<SearchOpportunities />} /> // has been linked in the student dashboard - aryam
         <Route path="/TrackApplicationsRawan" element={<TrackApplicationsRawan />} />
-        <Route path="/ReportGenerate" element={<ReportGenerate />} />
+        <Route path="/admin/reports" element={<ReportGenerate />} /> // has been linked in the admin dashboard - aryam
         <Route path="/opportunity/:id" element={<OpportunityDetailsPage />} />
 
         <Route path="/submit-application/:id" element={<ContactInformationForm />} />
@@ -75,14 +75,17 @@ function App() {
         <Route path="/search" element={<SearchCompany />} />
         <Route path="/company/:companyName/write-review" element={<WriteReview />} />
         <Route path="/company/:companyName" element={<CompanyReview />} />
-        <Route path="/CompanyReview" element={<CompanyPageReviews />} />
+        <Route path="/CompanyReview/:companyName/:position/reviews" element={<CompanyPageReviews />} /> // has been linked in the track applications - aryam
+
+    
+
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
         <Route path="/dashboard/company" element={<CompanyDashboard />} />
 
         <Route path="/search-opportunities" element={<SearchOpportunities />} />
 
         <Route path="/login" element={<SignTaps />} />
-        <Route path="/post-opportunity" element={<PostInternshipForm />} /> 
+        <Route path="/post-opportunity" element={<PostInternshipForm />} /> // has been linked in the company dashboard - aryam
         <Route path="/edit-opportunity" element={<EditInternshipForm />} /> 
         <Route path="/contact-informationForm/:id" element={<ContactInformationForm />} /> //معلومات التسجيل الاسم وكذا
         <Route path="/general-informationForm/:id" element={<GeneralInformationForm />} /> //اسئلة تخص الشركة

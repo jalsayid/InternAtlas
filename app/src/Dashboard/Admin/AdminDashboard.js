@@ -20,21 +20,35 @@ const AdminDashboard = () => {
             </div>
 
             <Container className="text-center py-5">
-                <Image src={logo} height="300" className="mb-3" />
+                <Image src={logo} height="300" className="mb-4" />
 
                 <Row className="justify-content-center gy-3">
                     <Col xs={12} md={4}>
-                        <Button variant="none" className="primary-btn w-100" onClick={() => navigate('/admin/profiles')}>
+                        <Button
+                            variant="none"
+                            className="primary-btn w-100"
+                            onClick={() => navigate('/admin/profiles')}
+                        >
                             Control Profiles
                         </Button>
                     </Col>
+
                     <Col xs={12} md={4}>
-                        <Button variant="none" className="primary-btn w-100" onClick={() => navigate('/admin/companies')}>
+                        <Button
+                            variant="none"
+                            className="primary-btn w-100"
+                            onClick={() => navigate('/admin/companies')}
+                        >
                             Manage Companies Requests
                         </Button>
                     </Col>
+
                     <Col xs={12} md={6}>
-                        <Button variant="none" className="primary-btn w-100" onClick={() => navigate('/admin/reports')}>
+                        <Button
+                            variant="none"
+                            className="primary-btn w-100"
+                            onClick={() => navigate('/admin/reports')}
+                        >
                             Generate Analytical Reports
                         </Button>
                     </Col>

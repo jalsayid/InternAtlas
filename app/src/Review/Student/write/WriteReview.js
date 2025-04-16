@@ -77,7 +77,8 @@ const WriteReview = () => {
                     <div className="d-flex align-items-center">
                         <i className="bi bi-building me-3"></i>
                         <div>
-                            <h5 className="mb-0">{companyName}</h5>
+                        <h5 className="mb-0 company-name">{companyName}</h5>
+
                             <small className="text-muted">Software Engineering Intern</small>
                         </div>
                     </div>
