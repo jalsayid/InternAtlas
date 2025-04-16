@@ -28,7 +28,7 @@ function TrackApplicationCard({ app }) {
         <Row className="align-items-center">
           <Col style={{textAlign: "left"}}>
             <h5 style={{fontSize: "26px", fontFamily: 'Roboto'}}>{app.position}</h5>
-            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Company:</strong> {app.company}</p>
+            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Company:</strong> {app.company} </p>
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Duration:</strong> {app.duration}</p>
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Location:</strong> {app.location}</p>
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>

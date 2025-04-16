@@ -12,7 +12,7 @@ function OpportunityDetails() {
     const navigate = useNavigate();
   
     const goToTrackApplications = () => {
-      navigate('/TrackApplicationsCompany');
+      navigate('/company/applications');
     };
   
     return (
@@ -34,7 +34,7 @@ function OpportunityDetails() {
           </Container>
         </div>
   
-        <div className="content py-4">
+        <div className="content py-4" style={{background:"white"}}>
           <Container>
             <Row className="mb-4">
               <Col>

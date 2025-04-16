@@ -37,7 +37,7 @@ function OpportunityDetailsPagesStudent() {
         </Container>
       </div>
 
-      <div className="content py-4">
+      <div className="content py-4" style={{background:"white"}}>
         <Container>
           <Row className="mb-4">
             <Col>

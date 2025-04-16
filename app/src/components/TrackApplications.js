@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import TrackApplicationCard from './TrackApplicationCard.js';
-import { applications } from '../dummyData'; 
+import { applicationsForCompany } from '../dummyData'; 
 
 function TrackApplications() {
   const [search, setSearch] = useState("");
 
-  const filtered = applications.filter(app =>
+  const filtered = applicationsForCompany.filter(app =>
     app.position.toLowerCase().includes(search.toLowerCase())
   );
 

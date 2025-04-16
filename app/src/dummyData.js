@@ -289,3 +289,26 @@ export const opportunities = [
     }
   ];
   
+  export const applicationsForCompany = [
+    {
+      id: 1,
+      position: "Software Engineering Intern",
+      company: "Sabic",
+      duration: "Summer 2025 (3 months)",
+      location: "Remote",
+    },
+    {
+      id: 2,
+      position: "AI & Machine Learning Intern",
+      company: "Sabic",
+      duration: "Summer 2025 (3 months)",
+      location: "Dhahran",
+    },
+    {
+      id: 3,
+      position: "Cybersecurity Intern",
+      company: "Sabic",
+      duration: "Summer 2025 (3 months)",
+      location: "Riyadh",
+    }
+  ];

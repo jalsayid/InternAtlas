@@ -27,9 +27,9 @@ const AdminDashboard = () => {
                         <Button
                             variant="none"
                             className="primary-btn w-100"
-                            onClick={() => navigate('/admin/profiles')}
+                            onClick={() => navigate('/ModerateContentNav')}
                         >
-                            Control Profiles
+                            Moderate Content
                         </Button>
                     </Col>
 
