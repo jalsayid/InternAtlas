@@ -20,7 +20,7 @@ function Login({ onSwitchToRegister }) {
         if (Object.keys(errors).length > 0) {
             setFormErrors(errors);
         } else {
-            navigate('/dashboard/student');
+            navigate('/welcome'); //it was dashboard for student
             setUsername('');
             setPassword('');
         }

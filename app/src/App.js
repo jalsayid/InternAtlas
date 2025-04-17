@@ -37,6 +37,8 @@ import OpportunityDetailsPage from './pages/OpportunityDetailsPageStudent';
 
 import ReportGenerate from './pages/ReportGenerate'; 
 
+import WelcomeScreen from "./pages/WelcomeScreen.js";
+
 function App() {
   return (
     <Router>
@@ -60,6 +62,11 @@ function App() {
         <Route path="/opportunity/:id" element={<OpportunityDetailsPage />} />
 
         <Route path="/submit-application/:id" element={<ContactInformationForm />} />
+
+
+
+        <Route path="/welcome" element={<WelcomeScreen userName="User"/>} /> //ممكن هنا نحط اسم اليوزر الفعلي 
+
 
 
 

@@ -41,17 +41,15 @@ export default function MajorPieChart({ data }) {
       .on("mouseover", function (event, d) {
         d3.select(this).transition().duration(200).attr("transform", "scale(1.05)");
 
-        const [x, y] = arc.centroid(d);
-        const angle = (d.startAngle + d.endAngle) / 2;
-        const bubbleX = Math.cos(angle) * (radius + 40);
-        const bubbleY = Math.sin(angle) * (radius + 40);
+        const bubbleX = -30; // Centered horizontally (adjust if needed)
+        const bubbleY = -15; // Centered vertically (adjust if needed)
         const percentage = ((d.data.value / total) * 100).toFixed(1) + "%";
 
         g.append("foreignObject")
           .attr("id", "tooltip")
           .attr("x", bubbleX -20)
           .attr("y", bubbleY - 10)
-          .attr("width", 50)
+          .attr("width", 100)
           .attr("height", 50)
           .append("xhtml:div")
           .style("background", "white")
@@ -75,6 +73,7 @@ export default function MajorPieChart({ data }) {
       .attr("text-anchor", "middle")
       .attr("font-size", "12px")
       .attr("fill", "#333")
+      .attr("font-weight", "bold")
       .text(d => d.data.label);
   }, [data]);
 
