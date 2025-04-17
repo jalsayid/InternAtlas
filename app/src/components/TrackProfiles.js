@@ -50,7 +50,7 @@ function TrackProfiles() {
       </Form>
       <SubmissionAlert
         show={showAlert}
-        message="item deleted successfully"
+        message="Profile deleted successfully"
         variant="success"
         onClose={() => setShowAlert(false)}
       />

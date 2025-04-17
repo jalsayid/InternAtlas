@@ -35,7 +35,7 @@ function ManageApplications() {
 
       setShowAlert(true);
     
-      setTimeout(() => setShowAlert(false), 3000); // Auto-dismiss alert
+      setTimeout(() => setShowAlert(false), 3000); 
     };
     
 
@@ -53,7 +53,7 @@ function ManageApplications() {
       </Form>
       <SubmissionAlert
         show={showAlert}
-        message="Application deleted!"
+        message="Application deleted successfully"
         variant="success"
         onClose={() => setShowAlert(false)}
       />

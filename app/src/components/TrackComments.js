@@ -53,7 +53,7 @@ function TrackComments() {
       </Form>
       <SubmissionAlert
         show={showAlert}
-        message="item deleted successfully"
+        message="Comment deleted successfully"
         variant="success"
         onClose={() => setShowAlert(false)}
       />
