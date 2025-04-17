@@ -115,6 +115,7 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
     return (
         <Container className="mt-5">
             <h2>Edit Internship Opportunity</h2>
+            <br/>
 
             <div
                 style={{

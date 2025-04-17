@@ -106,7 +106,7 @@ function ContactInformationForm() {
             localStorage.setItem('contactInformation', JSON.stringify(formData));
 
             // Navigate to the next page
-            navigate('/general-informationForm');
+            navigate(`/general-informationForm/${id}}`);
         }
 
 
