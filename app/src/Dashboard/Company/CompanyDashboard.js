@@ -23,18 +23,27 @@ const CompanyDashboard = () => {
     }
   ];
 
-  return (
+ return (
     <div className="dashboard-wrapper">
-      {/* Header */}
-      <div className="dashboard-header px-4 py-2 d-flex justify-content-between align-items-center">
+      {/* Header with logout button */}
+      <div className="dashboard-header px-4 py-2 d-flex justify-content-between align-items-center bg-light">
         <span className="text-muted small">Company Dashboard</span>
-        <div className="d-flex align-items-center gap-2">
-          <PersonCircle size={24} />
-          <span className="fw-bold">Hello, Sabic</span>
+        <div className="d-flex align-items-center gap-3">
+          <button
+            className="btn btn-outline-dark btn-sm"
+            onClick={() => navigate('/')}
+          >
+            Logout
+          </button>
+          <div className="d-flex align-items-center gap-2">
+            <PersonCircle size={24} />
+            <span className="fw-bold">Hello, Sabic</span>
+          </div>
         </div>
       </div>
 
-      {/* Main Content */}
+  
+
       <Container className="text-center py-5">
         <img src={logo} height="210" className="mb-4" alt="InternAtlas Logo" />
 
@@ -60,5 +69,4 @@ const CompanyDashboard = () => {
     </div>
   );
 };
-
 export default CompanyDashboard;

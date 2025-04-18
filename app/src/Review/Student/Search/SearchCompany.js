@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, InputGroup } from 'react-bootstrap';
 import './SearchCompany.css';
 import { useNavigate } from 'react-router-dom';
-import NavBar from '../StudentNavBar';
+import StudentNavBar from '../../../StudentNavBar'; 
 import { opportunities } from '../../../Data/dummyData';
 import { StarFill } from 'react-bootstrap-icons';
 
@@ -23,7 +23,7 @@ const SearchCompany = () => {
 
     return (
         <>
-            <NavBar />
+            <StudentNavBar />
 
             <Container className="bg-light py-5 min-vh-100">
                 <Row className="justify-content-center mb-4">

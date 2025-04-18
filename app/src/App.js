@@ -54,7 +54,7 @@ function App() {
         <Route path="/OpportunityDetails/:id" element={<OpportunityDetails />} />
         <Route path="/ModerateContentNav" element={<ModerateContentNav />} />
         <Route path="/company/applications" element={<TrackApplicationsCompany />} /> //dana
-        <Route path="/company/applications" element={<ManageApplications />} /> // has been linked in the company dashboard - aryam
+        <Route path="/admin/applications" element={<ManageApplications />} /> 
 
 
         //new routes from Rawan
