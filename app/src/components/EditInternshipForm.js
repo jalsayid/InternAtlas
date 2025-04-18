@@ -4,7 +4,7 @@ import Confirmation from './Confirmation';
 import Alter from './Alert';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaPen, FaFileAlt, FaMapMarkerAlt, FaClipboardCheck, FaGraduationCap, FaTasks } from 'react-icons/fa';
-import { opportunities } from '../Data/dummyDataCompany'; 
+import { opportunities } from '../Data/dummyDataSabic'; 
 
 const EditInternshipForm = ({ internship, onSaveChanges }) => {
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
         setShowAlert(true);
         setTimeout(() => {
             setShowAlert(false);
-            navigate('/dashboard/company');
+            navigate('/company/applications');
 
         }, 2500); // Delay navigation to show alert
 
