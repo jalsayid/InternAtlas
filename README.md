@@ -7,7 +7,7 @@
 ## 🚀 Features
 
 - Students can search and filter internships based on various criteria.
-- Students receive notifications regarding their applications.
+- Students can track the status of their internship applications.
 - Companies can register, post internship opportunities, and manage applications.
 - Admins can approve/reject company profiles, delete inappropriate content, and generate reports.
 - Integration with external APIs (e.g., LinkedIn Jobs, Maps) for enhanced experience.
@@ -26,15 +26,18 @@
 
 - **Sign Up / Log In** – Create an account or log in with your credentials.
 - **Browse Internships** – Navigate to the homepage to explore available internship opportunities.
-- **Search & Filter** – Use the search bar and filters (e.g., location, major, company) to find relevant internships.
+- **Search & Filter** – Use the search bar and filters (e.g., location, opportunity type, company) to find relevant internships.
 - **Apply** – Click on a specific opportunity and hit “Apply” to submit your application.
-- **Notifications** – Receive email updates about your application status.
+- **Track Applications** – Monitor the status of your submitted applications.
+- **Ratings & Reviews** - Read feedback from fellow students about their internship experiences and contribute by writing your review to help others.
 
 ### 🏢 Company
 
 - **Register Your Company** – Sign up and fill out your company profile. Wait for admin approval.
 - **Post Opportunities** – After approval, post new internships and manage listings.
-- **Review Applications** – View applications submitted by students and contact candidates if needed.
+- **Review Applications** – View student applications and contact candidates if needed.
+- **Update Existing Opportunity** – Edit any posted internship by selecting it from the list, updating its details, and saving the changes.
+- **View & Respond to Reviews** – Check student feedback on your internships and respond directly through your dashboard.
 
 ### 🛡️ Admin
 
