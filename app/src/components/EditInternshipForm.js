@@ -4,7 +4,7 @@ import Confirmation from './Confirmation';
 import Alter from './Alert';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaPen, FaFileAlt, FaMapMarkerAlt, FaClipboardCheck, FaGraduationCap, FaTasks } from 'react-icons/fa';
-import { opportunities } from '../Data/dummyDataSabic'; 
+import { opportunities } from '../Data/dummyDataSabic';
 
 const EditInternshipForm = ({ internship, onSaveChanges }) => {
     const navigate = useNavigate();
@@ -15,7 +15,6 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
     const [title, setTitle] = useState(internshipId.title || '');
     const [description, setDescription] = useState(internshipId.description || '');
     const [location, setLocation] = useState(internshipId.location || '');
-    const [requirements, setRequirements] = useState(internshipId.requirements || '');
     const [qualifications, setQualifications] = useState(internshipId.qualifications || '');
     const [responsibilities, setResponsibilities] = useState(internshipId.responsibilities || '');
 
@@ -24,7 +23,6 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
         title: '',
         description: '',
         location: '',
-        requirements: '',
         qualifications: '',
         responsibilities: ''
     });
@@ -54,7 +52,6 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
     const handleTitleChange = (event) => setTitle(event.target.value);
     const handleDescriptionChange = (event) => setDescription(event.target.value);
     const handleLocationChange = (event) => setLocation(event.target.value);
-    const handleRequirementsChange = (event) => setRequirements(event.target.value);
     const handleQualificationsChange = (event) => setQualifications(event.target.value);
     const handleResponsibilitiesChange = (event) => setResponsibilities(event.target.value);
 
@@ -77,10 +74,6 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
             newErrors.location = 'Location is required';
             isValid = false;
         }
-        if (!requirements) {
-            newErrors.requirements = 'Requirements are required';
-            isValid = false;
-        }
         if (!qualifications) {
             newErrors.qualifications = 'Qualifications are required';
             isValid = false;
@@ -99,20 +92,23 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
                 title,
                 description,
                 location,
-                requirements,
                 qualifications,
                 responsibilities
                 });*/}
         }
     };
 
+    const handleBack = () => {
+        navigate(`/company/applications`);
+    };
+
     return (
         <Container className="mt-5">
             <div className='text-center'>
-            <h1>Edit Internship Opportunity</h1>
-            <h2>{internshipId?.title || 'Internship Information'}</h2>
+                <h1>Edit Internship Opportunity</h1>
+                <h2>{internshipId?.title || 'Internship Information'}</h2>
             </div>
-            <br/>
+            <br />
 
             <div
                 style={{
@@ -178,22 +174,6 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
                     <Form.Control.Feedback type="invalid">{errors.location}</Form.Control.Feedback>
                 </Form.Group>
 
-                {/* Requirements */}
-                <Form.Group controlId="formRequirements" className="mb-4">
-                    <Form.Label><FaClipboardCheck /> Requirements</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={3}
-                        value={requirements}
-                        onChange={handleRequirementsChange}
-                        placeholder="Enter internship requirements"
-                        isInvalid={!!errors.requirements}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.requirements}
-                    </Form.Control.Feedback>
-                </Form.Group>
-
                 {/* Qualifications */}
                 <Form.Group controlId="formQualifications" className="mb-4">
                     <Form.Label><FaGraduationCap /> Qualifications</Form.Label>
@@ -227,7 +207,8 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
                 </Form.Group>
 
                 {/* Save Button */}
-                <Form.Group className="mb-4 d-flex justify-content-end">
+                <Form.Group className="d-flex justify-content-between">
+                    <Button variant="secondary" onClick={handleBack} style={{ width: '120px' }}>Cancel</Button>
                     <Button style={{ width: '120px' }} variant="primary" type="submit">
                         Save
                     </Button>

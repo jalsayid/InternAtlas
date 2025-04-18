@@ -14,7 +14,6 @@ function PostInternshipForm() {
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
     const [duration, setDuration] = useState('');
-    const [requirements, setRequirements] = useState('');
     const [qualifications, setQualifications] = useState('');
     const [responsibilities, setResponsibilities] = useState('');
 
@@ -23,7 +22,6 @@ function PostInternshipForm() {
         description: '',
         location: '',
         duration: '',
-        requirements: '',
         qualifications: '',
         responsibilities: ''
     });
@@ -43,7 +41,6 @@ function PostInternshipForm() {
         setDescription('');
         setLocation('');
         setDuration('');
-        setRequirements('');
         setQualifications('');
         setResponsibilities('');
 
@@ -53,7 +50,7 @@ function PostInternshipForm() {
 
             setShowAlert(false);
 
-            navigate('/dashboard/company');
+            navigate('/company/applications');
 
         }, 3000);
     };
@@ -82,10 +79,6 @@ function PostInternshipForm() {
             newErrors.duration = 'Duration is required';
             isValid = false;
         }
-        if (!requirements) {
-            newErrors.requirements = 'Requirements are required';
-            isValid = false;
-        }
         if (!qualifications) {
             newErrors.qualifications = 'Qualifications are required';
             isValid = false;
@@ -101,6 +94,10 @@ function PostInternshipForm() {
         if (isValid) {
             setShowModal(true);  // Show confirmation modal
         }
+    };
+
+    const handleBack = () => {
+        navigate(`/dashboard/company`);
     };
 
     return (
@@ -196,25 +193,6 @@ function PostInternshipForm() {
                     <Form.Control.Feedback type="invalid">{errors.location}</Form.Control.Feedback>
                 </Form.Group>
 
-                {/* Requirements */}
-                <Form.Group controlId="formRequirements" className="mb-4">
-                    <Form.Label><FaClipboardCheck /> Requirements</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        rows={3}
-                        value={requirements}
-                        onChange={(e) => setRequirements(e.target.value)}
-                        placeholder="Enter internship requirements"
-                        isInvalid={!!errors.requirements}
-                        minLength={50}
-                        maxLength={500}
-                    />
-                    <Form.Control.Feedback type="invalid">{errors.requirements}</Form.Control.Feedback>
-                    <small className="text-muted">
-                        Minimum 50 characters, maximum 500 characters. Current length: {requirements.length}
-                    </small>
-                </Form.Group>
-
                 {/* Qualifications */}
                 <Form.Group controlId="formQualifications" className="mb-4">
                     <Form.Label><FaGraduationCap /> Qualifications</Form.Label>
@@ -254,7 +232,8 @@ function PostInternshipForm() {
                 </Form.Group>
 
                 {/* Submit Button */}
-                <Form.Group className="mb-4 d-flex justify-content-end">
+                <Form.Group className="d-flex justify-content-between">
+                    <Button variant="secondary" onClick={handleBack} style={{ width: '120px' }}>Cancel</Button>
                     <Button variant="primary" type="submit" style={{ width: '120px' }}>Publish</Button>
                 </Form.Group>
             </Form>
