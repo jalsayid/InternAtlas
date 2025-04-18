@@ -37,6 +37,8 @@ import OpportunityDetailsPage from './pages/OpportunityDetailsPageStudent';
 
 import ReportGenerate from './pages/ReportGenerate'; 
 
+import WelcomeScreen from "./pages/WelcomeScreen.js";
+
 function App() {
   return (
     <Router>
@@ -65,6 +67,11 @@ function App() {
 
 
 
+        <Route path="/welcome" element={<WelcomeScreen userName="User"/>} /> //ممكن هنا نحط اسم اليوزر الفعلي 
+
+
+
+
 
 
 
@@ -82,7 +89,7 @@ function App() {
     
 
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
-        <Route path="/dashboard/company" element={<CompanyDashboard />} />
+        <Route path="/dashboard/company" element={<CompanyDashboard />} /> //
 
         <Route path="/search-opportunities" element={<SearchOpportunities />} />
 

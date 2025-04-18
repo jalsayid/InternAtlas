@@ -35,7 +35,7 @@ export default function OpportunitiesBarChart({ data }) {
       .attr("x", 0)
       .attr("height", y.bandwidth())
       .attr("width", d => x(d.value))
-      .attr("fill", "#FFB608");
+      .attr("fill", "#FFD419");
 
 
     chart.append("g")

@@ -17,6 +17,7 @@ export default function ApprovalBarChart({ data }) {
       .attr("height", height)
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
+    
 
     const x = d3.scaleBand()
       .domain(data.map(d => d.label))
@@ -39,7 +40,7 @@ export default function ApprovalBarChart({ data }) {
       .attr("fill", "#FFB608")
       .on("mouseover", function (event, d) {
         d3.select(this)
-          .attr("fill", "#FFD95A");
+        .attr("fill", d => d.label === "Approved" ? "#66BB6A" : "#E57373"); // lighter green or red
 
         chart.append("text")
           .attr("id", "tooltip")
@@ -57,7 +58,9 @@ export default function ApprovalBarChart({ data }) {
 
     chart.append("g")
       .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .style("font-weight", "bold");
 
     chart.append("g").call(d3.axisLeft(y));
   }, [data]);

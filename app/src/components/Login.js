@@ -20,8 +20,21 @@ function Login({ onSwitchToRegister }) {
         if (Object.keys(errors).length > 0) {
             setFormErrors(errors);
         } else {
-            navigate('/dashboard/student');
+            if (username === 'admin' && password === 'admin') {
+                // Redirect to admin dashboard
+                navigate('/dashboard/admin');
+            } else if (username === 'student' && password === 'student') {
+                // Redirect to student dashboard
+                navigate('/dashboard/student');
+            } else if (username === 'company' && password === 'company') {
+                // Redirect to company dashboard
+                navigate('/dashboard/company');
+            } else {
+                // Show error if no match
+                setFormErrors({ general: 'Invalid username or password' });
+            }
             setUsername('');
+            setPassword('');            setUsername('');
             setPassword('');
         }
     };
