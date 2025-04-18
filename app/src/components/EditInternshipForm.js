@@ -2,28 +2,22 @@ import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import Confirmation from './Confirmation';
 import Alter from './Alert';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaPen, FaFileAlt, FaMapMarkerAlt, FaClipboardCheck, FaGraduationCap, FaTasks } from 'react-icons/fa';
+import { opportunities } from '../Data/dummyDataCompany'; 
 
 const EditInternshipForm = ({ internship, onSaveChanges }) => {
     const navigate = useNavigate();
+    const { id } = useParams();
+    const internshipId = opportunities.find(i => i.id === parseInt(id));
 
-    //Dummy data of the post
-    const initialInternship = {
-        title: 'Software Engineering Internship',
-        description: 'A challenging internship for budding engineers.',
-        location: 'Riyadh',
-        requirements: 'Strong programming skills in Java, Python.',
-        qualifications: 'Bachelor\'s degree in Computer Science or related field.',
-        responsibilities: 'Assist in software development, debugging, and testing.'
-    };
 
-    const [title, setTitle] = useState(initialInternship.title || '');
-    const [description, setDescription] = useState(initialInternship.description || '');
-    const [location, setLocation] = useState(initialInternship.location || '');
-    const [requirements, setRequirements] = useState(initialInternship.requirements || '');
-    const [qualifications, setQualifications] = useState(initialInternship.qualifications || '');
-    const [responsibilities, setResponsibilities] = useState(initialInternship.responsibilities || '');
+    const [title, setTitle] = useState(internshipId.title || '');
+    const [description, setDescription] = useState(internshipId.description || '');
+    const [location, setLocation] = useState(internshipId.location || '');
+    const [requirements, setRequirements] = useState(internshipId.requirements || '');
+    const [qualifications, setQualifications] = useState(internshipId.qualifications || '');
+    const [responsibilities, setResponsibilities] = useState(internshipId.responsibilities || '');
 
     // state to store error messages
     const [errors, setErrors] = useState({
@@ -114,7 +108,10 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
 
     return (
         <Container className="mt-5">
-            <h2>Edit Internship Opportunity</h2>
+            <div className='text-center'>
+            <h1>Edit Internship Opportunity</h1>
+            <h2>{internshipId?.title || 'Internship Information'}</h2>
+            </div>
             <br/>
 
             <div

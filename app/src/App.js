@@ -41,6 +41,8 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="" element={<LandingPage />} />
+
         <Route path="/view-applicants" element={<ViewApplications />} />
         <Route path="/applicant-details/*" element={<ApplicantDetails />} />
         <Route path="/track-applications" element={<TrackApplications />} /> //joud
@@ -86,7 +88,7 @@ function App() {
 
         <Route path="/login" element={<SignTaps />} />
         <Route path="/post-opportunity" element={<PostInternshipForm />} /> // has been linked in the company dashboard - aryam
-        <Route path="/edit-opportunity" element={<EditInternshipForm />} /> 
+        <Route path="/edit-opportunity/:id" element={<EditInternshipForm />} /> 
         <Route path="/contact-informationForm/:id" element={<ContactInformationForm />} /> //معلومات التسجيل الاسم وكذا
         <Route path="/general-informationForm/:id" element={<GeneralInformationForm />} /> //اسئلة تخص الشركة
 

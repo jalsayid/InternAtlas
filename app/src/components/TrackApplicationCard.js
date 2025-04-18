@@ -1,11 +1,12 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
 function TrackApplicationCard({ app }) {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const goToOpportunityDetails = () => {
     navigate('/OpportunityDetails');
@@ -14,9 +15,10 @@ function TrackApplicationCard({ app }) {
     navigate(`/CompanyReview/${app.company.toLowerCase()}/${app.position.toLowerCase()}/reviews`);
 
   };
-  const goToEdit = () => {
-    navigate('/edit-opportunity');
-  }
+  const goToEdit = (id) => {
+    console.log(id); // Debugging: check the value of id
+    navigate(`/edit-opportunity/${app.id}`);
+}
   const goToViewApplications= () => {
     navigate('/view-applicants');
   }
