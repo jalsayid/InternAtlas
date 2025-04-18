@@ -15,7 +15,7 @@ function OpportunityDetailsPagesStudent() {
   };
 
   const handleBack = () => {
-    navigate('/SearchOpportunities');
+    navigate('/search-opportunities');
   };
 
   return (
@@ -51,7 +51,7 @@ function OpportunityDetailsPagesStudent() {
               <h3>Qualifications:</h3>
               <ul className="ps-0 ms-0">
                 {opportunity.qualifications?.split('\n').filter(q => q.trim()).map((q, idx) => (
-                  <li key={idx} style={{ listStyle: 'none', marginBottom: '0.5rem', display: 'flex', alignItems: 'center' }}>
+                  <li key={idx} className='greenCheck' style={{ listStyle: 'none', marginBottom: '0.5rem', display: 'flex', alignItems: 'center' }}>
                     <span style={{ color: 'green', marginRight: '0.5rem' }}></span>{q.trim()}
                   </li>
                 ))}
@@ -64,7 +64,7 @@ function OpportunityDetailsPagesStudent() {
               <h3>Responsibilities:</h3>
               <ul className="ps-0 ms-0">
                 {opportunity.responsibilities?.split('\n').filter(r => r.trim()).map((r, idx) => (
-                  <li key={idx} style={{ listStyle: 'none', marginBottom: '0.5rem', display: 'flex', alignItems: 'center' }}>
+                  <li className='greenCheck' key={idx} style={{ listStyle: 'none', marginBottom: '0.5rem', display: 'flex', alignItems: 'center' }}>
                     <span style={{ color: 'green', marginRight: '0.5rem' }}></span>{r.trim()}
                   </li>
                 ))}

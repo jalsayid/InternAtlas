@@ -48,7 +48,7 @@ li {
   
 }
 
-li::before {
+.greenCheck::before {
   content: "✔";
   color: #3AB500;
   margin-right: 10px;
