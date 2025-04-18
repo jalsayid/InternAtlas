@@ -4,7 +4,7 @@ export default function ApplicantDetails() {
   const applicant1 = {
     name: "Fatima Al-Dossari",
     email: "fatima.a@gmail.com",
-    cv_path: "/app1-cv.pdf",
+    cv_path: "../app1-cv.pdf",
   };
   const applicant2 = {
     name: "Ahmed Al-Saud",

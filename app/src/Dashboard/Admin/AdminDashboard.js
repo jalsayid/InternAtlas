@@ -19,7 +19,7 @@ const AdminDashboard = () => {
       title: "Manage Company Requests",
       icon: <BuildingGear className="card-icon" />,
       description: "Approve or reject company registration requests",
-      route: "/admin/companies"
+      route: "/company-regestration"
     },
     {
       title: "Generate Reports",
