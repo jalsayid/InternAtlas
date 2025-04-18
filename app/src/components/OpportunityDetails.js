@@ -59,11 +59,9 @@ function OpportunityDetails() {
               <Col>
                 <h3>Responsibilities:</h3>
                 <ul className='ps-0 ms-0'>
-                    <li>Collaborating on Software Development Projects: Participate in the analysis, design, implementation, and testing phases of software projects, working closely with IT and business teams to gather requirements and develop effective solutions.</li>
-                    <li>Assisting with IT Infrastructure Initiatives: Support the deployment and maintenance of IT infrastructure, including VoIP telephony, video conferencing, and collaboration tools, ensuring seamless communication and operational efficiency.</li>                        <li>Conducting Research and Development: Engage in research activities related to process technology development, polymer synthesis, and the characterization of new materials, applying scientific principles to real-world challenges.</li>
-                    <li>Ensuring Compliance and Safety: Adhere to all applicable work processes and safety protocols, contributing to a safe and compliant working environment.</li>
-                    <li>Documenting and Reporting: Prepare detailed documentation, including policies, procedures, and technical reports, to support project implementation and knowledge sharing within the team.</li>
-
+                {opportunity.responsibilities.split('\n').map((item, index) => (
+                  <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </Col>
             </Row>
