@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Form, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Alter from './Alert';
 
 function Login({ onSwitchToRegister }) {
     const navigate = useNavigate();
+    const [showAlert, setShowAlert] = useState(false);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -30,11 +32,9 @@ function Login({ onSwitchToRegister }) {
                 // Redirect to company dashboard
                 navigate('/dashboard/company');
             } else {
-                // Show error if no match
-                setFormErrors({ general: 'Invalid username or password' });
+                setShowAlert(true);
             }
             setUsername('');
-            setPassword('');            setUsername('');
             setPassword('');
         }
     };
@@ -42,13 +42,34 @@ function Login({ onSwitchToRegister }) {
     return (
         <Container className="p-3 my-5 d-flex flex-column w-50">
             <img
-                src='./logo.png'
+                src='./imgs/logo.png'
                 alt='logo'
                 width={200}
                 height={200}
-                style={{ display: 'block', margin: '0 auto' }} 
+                style={{ display: 'block', margin: '0 auto' }}
             />
             <p>Login with your informations</p>
+
+            {showAlert && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: '100px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        zIndex: 1000,
+                        width: '50%',
+                    }}
+                >
+                    <Alter
+                        show={showAlert}
+                        message="Wrong username or password"
+                        variant="danger"
+                        onClose={() => setShowAlert(false)} // Close alert
+                    />
+                </div>
+            )}
+            
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>

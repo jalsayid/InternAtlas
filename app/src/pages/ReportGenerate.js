@@ -109,7 +109,7 @@ export default function ReportGenerate() {
                                 </div>
                             </div>
                         </div>
-                        <a href="/reportk.pdf" target="_blank" rel="noopener noreferrer">
+                        <a href="/docs/reportk.pdf" target="_blank" rel="noopener noreferrer">
                             <button
                                 className="btn mt-3"
                                 style={{ backgroundColor: "#FFB608", color: "#000", fontWeight: "bold" }}

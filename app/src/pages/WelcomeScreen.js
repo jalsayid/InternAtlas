@@ -16,7 +16,7 @@ export default function WelcomeScreen({ userName = "User" }) {
   return (
     <div className="welcome-container">
       <div className="logo-drop">
-        <img src="/logo.png" alt="InternAtlas Logo" className="logo" />
+        <img src="/imgs/logo.png" alt="InternAtlas Logo" className="logo" />
       </div>
       <h2 className="fade-in">Welcome, {userName} 👋</h2>
       <p className="typing-text">Your future starts here.</p>

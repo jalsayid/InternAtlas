@@ -8,7 +8,7 @@ function FeaturesCards() {
   return (
     <CardGroup>
       <Card  style={{ border: '2px solid #FFD419', marginRight: '10px' }}>
-        <Card.Img variant="top" src="./searching.svg" /> {/* Replace with your image path */}
+        <Card.Img variant="top" src="./imgs/searching.svg" /> {/* Replace with your image path */}
         <Card.Body>
           <Card.Title>Searching</Card.Title>
           <Card.Text>
@@ -18,7 +18,7 @@ function FeaturesCards() {
       </Card>
 
       <Card  style={{ border: '2px solid #FFB608',marginRight: '10px'  }}>
-        <Card.Img variant="top" src="track.svg" /> {/* Replace with your image path */}
+        <Card.Img variant="top" src="./imgs/track.svg" /> {/* Replace with your image path */}
         <Card.Body>
           <Card.Title>Tracking</Card.Title>
           <Card.Text>
@@ -28,7 +28,7 @@ function FeaturesCards() {
       </Card>
 
       <Card  style={{ border: '2px solid #E28900',marginRight: '10px'  }}>
-        <Card.Img variant="top" src="./rating.svg" /> {/* Replace with your image path */}
+        <Card.Img variant="top" src="./imgs/rating.svg" /> {/* Replace with your image path */}
         <Card.Body>
           <Card.Title>Rating</Card.Title>
           <Card.Text>

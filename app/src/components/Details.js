@@ -32,8 +32,8 @@ export default function Details({ name, email, cv_path }) {
     },
   ];
 
-  const handleViewDocument = (docPath) => {
-    window.open(`/pdf-viewer.html?file=${docPath}`, "_blank");
+  const handleViewDocument = () => {
+    window.open(`/docs/pdf-viewer.html?file=${cv_path}`, "_blank");
   };
 
   return (

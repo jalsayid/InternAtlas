@@ -8,7 +8,7 @@ export const opportunities = [
       posted: "4 days ago",
       rating: 5,
       type: "Full-time",
-      logo: "/companiesLogo/P&G_logo.png",
+      logo: "/imgs/companiesLogo/P&G_logo.png",
       description: "Work on real projects with real impact.",
       qualifications: "CS, Engineering students, good communication skills.",
       responsibilities: "Collaborate with teams, solve technical problems."
@@ -22,7 +22,7 @@ export const opportunities = [
       posted: "1 day ago",
       rating: 3,
       type: "Full-time",
-      logo: "/companiesLogo/ZMI_logo.jpeg", 
+      logo: "/imgs/companiesLogo/ZMI_logo.jpeg", 
       description: "Support mechanical design team.",
       qualifications: "Mechanical Engineering student.",
       responsibilities: "Assist in mechanical design and analysis."
@@ -36,7 +36,7 @@ export const opportunities = [
       posted: "2 days ago",
       rating: 4,
       type: "Full-time",
-      logo: "/companiesLogo/rawabi_logo.jpeg", 
+      logo: "/imgs/companiesLogo/rawabi_logo.jpeg", 
       description: "Hands-on field training in oil and gas.",
       qualifications: "Petroleum, Mechanical, or Electrical Engineering students.",
       responsibilities: "Fieldwork support, reporting, and analysis."
@@ -50,7 +50,7 @@ export const opportunities = [
       posted: "23 days ago",
       rating: 1,
       type: "Full-time",
-      logo: "/companiesLogo/kreativstorm_logo.jpeg", 
+      logo: "/imgs/companiesLogo/kreativstorm_logo.jpeg", 
       description: "Assist with project coordination and timelines.",
       qualifications: "Business/IT students with leadership skills.",
       responsibilities: "Track tasks, support PMs, and coordinate meetings."
@@ -64,7 +64,7 @@ export const opportunities = [
       posted: "12 days ago",
       rating: 4,
       type: "Full-time", 
-      logo: "/companiesLogo/PepsiCo_logo.jpeg", 
+      logo: "/imgs/companiesLogo/PepsiCo_logo.jpeg", 
       description: "Production line support and performance analysis.",
       qualifications: "Industrial engineering or operations management.",
       responsibilities: "Monitor lines, suggest improvements."
@@ -78,7 +78,7 @@ export const opportunities = [
       posted: "15 days ago",
       rating: 2,
       type: "Full-time",
-      logo: "/companiesLogo/waed_ventures_logo.jpeg", 
+      logo: "/imgs/companiesLogo/waed_ventures_logo.jpeg", 
       description: "Assist investment teams and portfolio startups.",
       qualifications: "Finance, Business Admin students.",
       responsibilities: "Analyze markets, help build startup reports."
@@ -92,7 +92,7 @@ export const opportunities = [
       posted: "5 days ago",
       rating: 4,
       type: "Full-time",
-      logo: "/companiesLogo/Innovatex_logopng.png", 
+      logo: "/imgs/companiesLogo/Innovatex_logopng.png", 
       description: "Support UI/UX design tasks across web and mobile apps.",
       qualifications: "UI/UX or graphic design students.",
       responsibilities: "Create wireframes, user journeys, and interface assets."
@@ -106,7 +106,7 @@ export const opportunities = [
       posted: "8 days ago",
       rating: 3,
       type: "Full-time",
-      logo: "/companiesLogo/JazeeraTech_logojpeg.jpeg", 
+      logo: "/imgs/companiesLogo/JazeeraTech_logojpeg.jpeg", 
       description: "Assist in creating content and running social campaigns.",
       qualifications: "Marketing or communications students.",
       responsibilities: "Write posts, design visuals, and report engagement."
@@ -120,7 +120,7 @@ export const opportunities = [
       posted: "3 days ago",
       rating: 5,
       type: "Full-time",
-      logo: "/companiesLogo/ShieldX_logo.jpeg", 
+      logo: "/imgs/companiesLogo/ShieldX_logo.jpeg", 
       description: "Participate in monitoring and securing network traffic.",
       qualifications: "Cybersecurity or IT-related majors.",
       responsibilities: "Scan systems, analyze vulnerabilities, write reports."
@@ -134,7 +134,7 @@ export const opportunities = [
       posted: "6 days ago",
       rating: 5,
       type: "Full-time",
-      logo: "/companiesLogo/VisionLab_logo.png", 
+      logo: "/imgs/companiesLogo/VisionLab_logo.png", 
       description: "Contribute to machine learning model development.",
       qualifications: "CS, AI, or Data Science students.",
       responsibilities: "Work with datasets, tune models, evaluate accuracy."
@@ -148,7 +148,7 @@ export const opportunities = [
       posted: "9 days ago",
       rating: 2,
       type: "Full-time",
-      logo: "/companiesLogo/Aramix_logo.png", 
+      logo: "/imgs/companiesLogo/Aramix_logo.png", 
       description: "Support the finance department in daily operations.",
       qualifications: "Finance, Accounting majors.",
       responsibilities: "Process invoices, assist with reports and data entry."
@@ -229,7 +229,7 @@ export const opportunities = [
       jobsCount: 5,
       contactPerson: "Mansour Al-Qahtani",
       description: "A global leader in diversified chemicals, committed to innovation and sustainability.",
-      logo: "/sabic_logo.png",
+      logo: "/imgs/sabic_logo.png",
     },
     {
       id: 2,
@@ -240,7 +240,7 @@ export const opportunities = [
       jobsCount: 3,
       contactPerson: "Noura Al-Shehri",
       description: "Saudi Aramco is the world’s leading energy producer and supplier of petroleum and natural gas.",
-      logo: "/aramcoLogo.png",
+      logo: "/imgs/aramcoLogo.png",
     },
     {
       id: 3,
@@ -251,7 +251,7 @@ export const opportunities = [
       jobsCount: 4,
       contactPerson: "Faisal Al-Dossary",
       description: "The Saudi Data and AI Authority focuses on driving the national data and AI agenda for boosting innovation.",
-      logo:"/sdaiaLogo.jpg",
+      logo:"/imgs/sdaiaLogo.jpg",
     }
   ];
   export const invalidCompanyRatings = [

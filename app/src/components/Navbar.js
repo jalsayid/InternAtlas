@@ -21,7 +21,7 @@ export default function Navbar() {
       <button className="second-btn" onClick={() => navigate('/dashboard/student')}>Dashboard</button>
       <div className="d-flex align-items-center gap-2">
         <img
-          src="/userIcon.svg"
+          src="/imgs/userIcon.svg"
           alt="User Icon"
           style={{ width: "30px", height: "30px" }}
         />

@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar.js";
 export default function TrackApplications(params) {
   const title = "Track Applications";
   const application1 = {
-    imgSrc: "/openai.png",
+    imgSrc: "/imgs/openai.png",
     title: "OpenAI Internship - Summer 2025",
     content: (
       <>
@@ -36,7 +36,7 @@ export default function TrackApplications(params) {
     link: "/application-details/2",
   };
   const application2 = {
-    imgSrc: "/pif.png",
+    imgSrc: "/imgs/pif.png",
     title: "PIF Tech Internship - 2025 Cohort",
     content: (
       <>
@@ -67,7 +67,7 @@ export default function TrackApplications(params) {
   };
 
   const application3 = {
-    imgSrc: "/sdaia.jpg",
+    imgSrc: "/imgs/sdaia.jpg",
     title: "SDAIA Data Science Internship - 2025",
     content: (
       <>

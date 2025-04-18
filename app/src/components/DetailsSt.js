@@ -10,7 +10,7 @@ export default function Details({ name, email, cv_path, questions }) {
   const title = "Applicant Details";
 
   const handleDownloadCV = () => {
-    window.open(`/pdf-viewer.html?file=${cv_path}`, "_blank");
+    window.open(`/docs/pdf-viewer.html?file=${cv_path}`, "_blank");
   };
 
   return (

@@ -10,12 +10,12 @@ export default function ViewCompany() {
       name: "STC",
       email: "careers@stc.com.sa",
       description: "Saudi Telecom Company offering internships in network engineering, AI, and software development.",
-      logo: "../stc.avif",
+      logo: "/imgs/stc.avif",
       documents: [
         {
           title: "Commercial Registration",
           filename: "stc_cr.pdf",
-          path: "../stcCertificate.pdf",
+          path: "./stcCertificate.pdf",
         },
       ],
     },
@@ -23,12 +23,12 @@ export default function ViewCompany() {
       name: "NEOM",
       email: "careers@neom.com",
       description: "A futuristic city project shaping the future of innovation and sustainability.",
-      logo: "../neom.jpg",
+      logo: "/imgs/neom.jpg",
       documents: [
         {
           title: "Commercial Registration",
           filename: "neom_cr.pdf",
-          path: "../neomCertificate.pdf",
+          path: "./neomCertificate.pdf",
         },
       ],
     },
@@ -36,12 +36,12 @@ export default function ViewCompany() {
       name: "Noon",
       email: "careers@noon.com",
       description: "E-commerce leader in MENA offering roles in data analysis, software engineering, and UX design.",
-      logo: "../noon.png",
+      logo: "/imgs/noon.png",
       documents: [
         {
           title: "Commercial Registration",
           filename: "noon_cr.pdf",
-          path: "../noonCertificate.pdf",
+          path: "./noonCertificate.pdf",
         },
       ],
     },
@@ -49,12 +49,12 @@ export default function ViewCompany() {
       name: "Tawuniya",
       email: "careers@tawuniya.com.sa",
       description: "A leading insurance company embracing digital transformation with AI, cybersecurity, and app dev internships.",
-      logo: "../taw.png",
+      logo: "/imgs/taw.png",
       documents: [
         {
           title: "Commercial Registration",
           filename: "tawuniya_cr.pdf",
-          path: "../tawCertificate.pdf",
+          path: "./tawCertificate.pdf",
         },
       ],
     },

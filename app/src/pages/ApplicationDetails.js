@@ -102,19 +102,19 @@ export default function ApplicantDetails() {
   const applicantion1 = {
     name: "Nouf Al-Qahtani",
     email: "nouf.q@gmail.com",
-    cv_path: "/app4-cv.pdf",
+    cv_path: "/docs/app4-cv.pdf",
     questions: questions1,
   };
   const applicantion2 = {
     name: "Nouf Al-Qahtani",
     email: "nouf.q@gmail.com",
-    cv_path: "/app4-cv.pdf",
+    cv_path: "/docs/app4-cv.pdf",
     questions: questions2,
   };
   const applicantion3 = {
     name: "Nouf Al-Qahtani",
     email: "nouf.q@gmail.com",
-    cv_path: "/app4-cv.pdf",
+    cv_path: "/docs/app4-cv.pdf",
     questions: questions3,
   };
   return (

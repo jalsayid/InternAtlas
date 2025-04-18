@@ -13,7 +13,7 @@ export default function CompanyDetails({ name, email, description, documents, lo
   const [showRejectAlert, setShowRejectAlert] = useState(false);
 
   const handleViewDocument = (docPath) => {
-    window.open(`/pdf-viewer.html?file=${docPath}`, "_blank");
+    window.open(`/docs/pdf-viewer.html?file=${docPath}`, "_blank");
   };
 
   return (

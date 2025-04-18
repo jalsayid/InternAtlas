@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar.js";
 export default function ViewApplications() {
   const title = "Job Applicants";
   const applicant1 = {
-    imgSrc: "/applicant1.png",
+    imgSrc: "/imgs/applicant1.png",
     title: "Fatima Al-Dossari",
     content: (
       <>
@@ -32,7 +32,7 @@ export default function ViewApplications() {
   };
 
   const applicant2 = {
-    imgSrc: "/applicant2.png",
+    imgSrc: "/imgs/applicant2.png",
     title: "Ahmed Al-Saud",
     content: (
       <>
@@ -56,7 +56,7 @@ export default function ViewApplications() {
   };
 
   const applicant3 = {
-    imgSrc: "/applicant3.png",
+    imgSrc: "/imgs/applicant3.png",
     title: "Omar Al-Harbi",
     content: (
       <>
@@ -80,7 +80,7 @@ export default function ViewApplications() {
   };
 
   const applicant4 = {
-    imgSrc: "/applicant4.png",
+    imgSrc: "/imgs/applicant4.png",
     title: "Nouf Al-Qahtani",
     content: (
       <>

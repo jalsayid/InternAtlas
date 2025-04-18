@@ -13,7 +13,7 @@ export default function ReviewCompany() {
       <p><span className="pending-badge">pending</span></p>
       </>
     ),
-    image: "../stc.avif",
+    image: "/imgs/stc.avif",
     link: "/companies/stc",
   };
 
@@ -25,7 +25,7 @@ export default function ReviewCompany() {
         <p><span className="pending-badge">pending</span></p>
       </>
     ),
-    image: "../neom.jpg",
+    image: "/imgs/neom.jpg",
     link: "/companies/neom",
   };
 
@@ -37,7 +37,7 @@ export default function ReviewCompany() {
         <p><span className="pending-badge">pending</span></p>
       </>
     ),
-    image: "../noon.png",
+    image: "./imgs/noon.png",
     link: "/companies/noon",
   };
 
@@ -49,7 +49,7 @@ export default function ReviewCompany() {
         <p><span className="pending-badge">pending</span></p>
       </>
     ),
-    image: "../taw.png",
+    image: "./imgs/taw.png",
     link: "/companies/tawuniya",
   };
   return (

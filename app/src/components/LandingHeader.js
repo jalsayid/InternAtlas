@@ -18,7 +18,7 @@ export default function LandingHeader() {
             <button className="second-btn" onClick={handleLogin}>Lonin</button>
             <div className="d-flex align-items-center gap-2">
                 <img
-                    src="/userIcon.svg"
+                    src="./imgs/userIcon.svg"
                     alt="User Icon"
                     style={{ width: "30px", height: "30px" }}
                 />

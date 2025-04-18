@@ -7,7 +7,7 @@ export const opportunities = [
     type: "Summer Training",
     posted: "4 days ago",
     rating: 5,
-    logo: "/companiesLogo/P&G_logo.png",
+    logo: "./companiesLogo/P&G_logo.png",
     description: "Join P&G's internship program and gain hands-on experience solving real-world business challenges through innovation and collaboration.",
     qualifications: "Currently enrolled in a CS or Engineering degree\nExcellent communication skills\nStrong academic performance\nPassion for innovation and leadership",
     responsibilities: "Collaborate with cross-functional teams\nAnalyze business data and recommend improvements\nParticipate in ongoing engineering and R&D projects"
@@ -20,7 +20,7 @@ export const opportunities = [
     type: "Internship",
     posted: "1 day ago",
     rating: 3,
-    logo: "/companiesLogo/ZMI_logo.jpeg",
+    logo: "./companiesLogo/ZMI_logo.jpeg",
     description: "Support ZMI’s engineering team in developing mechanical systems with exposure to field operations and technical documentation.",
     qualifications: "Enrolled in a Mechanical Engineering program\nKnowledge of CAD tools\nBasic understanding of materials and structures",
     responsibilities: "Assist in design and prototyping\nConduct field measurements and testing\nPrepare technical documentation"
@@ -33,7 +33,7 @@ export const opportunities = [
     type: "Internship",
     posted: "2 days ago",
     rating: 4,
-    logo: "/companiesLogo/rawabi_logo.jpeg",
+    logo: "./companiesLogo/rawabi_logo.jpeg",
     description: "Join our oil and gas team for a comprehensive hands-on internship in upstream and downstream field operations.",
     qualifications: "Petroleum, Mechanical, or Electrical Engineering background\nAbility to work in field environments\nStrong analytical mindset",
     responsibilities: "Assist in maintenance and monitoring operations\nCollect and analyze field data\nSupport HSE initiatives"
@@ -46,7 +46,7 @@ export const opportunities = [
     type: "Summer Training",
     posted: "23 days ago",
     rating: 1,
-    logo: "/companiesLogo/kreativstorm_logo.jpeg",
+    logo: "./companiesLogo/kreativstorm_logo.jpeg",
     description: "Assist with project coordination and timelines.",
     qualifications: "Business/IT students with leadership skills",
     responsibilities: "Track tasks\nSupport PMs\nCoordinate meetings"
@@ -59,7 +59,7 @@ export const opportunities = [
     type: "Summer Training",
     posted: "12 days ago",
     rating: 4,
-    logo: "/companiesLogo/PepsiCo_logo.jpeg",
+    logo: "./companiesLogo/PepsiCo_logo.jpeg",
     description: "Production line support and performance analysis.",
     qualifications: "Industrial engineering or operations management",
     responsibilities: "Monitor lines\nSuggest improvements"
@@ -72,7 +72,7 @@ export const opportunities = [
     type: "Summer Training",
     posted: "5 days ago",
     rating: 4,
-    logo: "/companiesLogo/Innovatex_logopng.png",
+    logo: "./companiesLogo/Innovatex_logopng.png",
     description: "Support UI/UX design tasks across web and mobile apps.",
     qualifications: "UI/UX or graphic design students",
     responsibilities: "Create wireframes\nDesign user journeys\nDevelop interface assets"
@@ -85,7 +85,7 @@ export const opportunities = [
     type: "Summer Training",
     posted: "8 days ago",
     rating: 3,
-    logo: "/companiesLogo/JazeeraTech_logojpeg.jpeg",
+    logo: "./companiesLogo/JazeeraTech_logojpeg.jpeg",
     description: "Assist in creating content and running social campaigns.",
     qualifications: "Marketing or communications students",
     responsibilities: "Write posts\nDesign visuals\nReport engagement"
@@ -98,7 +98,7 @@ export const opportunities = [
     type: "Internship",
     posted: "3 days ago",
     rating: 5,
-    logo: "/companiesLogo/ShieldX_logo.jpeg",
+    logo: "./companiesLogo/ShieldX_logo.jpeg",
     description: "Participate in monitoring and securing network traffic.",
     qualifications: "Cybersecurity or IT-related majors",
     responsibilities: "Scan systems\nAnalyze vulnerabilities\nWrite reports"
@@ -111,7 +111,7 @@ export const opportunities = [
     type: "Internship",
     posted: "6 days ago",
     rating: 5,
-    logo: "/companiesLogo/VisionLab_logo.png",
+    logo: "./companiesLogo/VisionLab_logo.png",
     description: "Contribute to machine learning model development.",
     qualifications: "CS, AI, or Data Science students",
     responsibilities: "Work with datasets\nTune models\nEvaluate accuracy"
@@ -124,7 +124,7 @@ export const opportunities = [
     type: "Summer Training",
     posted: "9 days ago",
     rating: 2,
-    logo: "/companiesLogo/Aramix_logo.png",
+    logo: "./companiesLogo/Aramix_logo.png",
     description: "Support the finance department in daily operations.",
     qualifications: "Finance, Accounting majors",
     responsibilities: "Process invoices\nAssist with reports\nEnter financial data"
@@ -137,7 +137,7 @@ export const opportunities = [
     type: "Internship",
     posted: "10 days ago",
     rating: 4,
-    logo: "/companiesLogo/ShieldX_logo.jpeg",
+    logo: "./companiesLogo/ShieldX_logo.jpeg",
     description: "Work with security team to analyze system threats.",
     qualifications: "Cybersecurity students",
     responsibilities: "Risk assessment\nFirewall rule testing"
@@ -150,7 +150,7 @@ export const opportunities = [
     type: "Internship",
     posted: "13 days ago",
     rating: 5,
-    logo: "/companiesLogo/VisionLab_logo.png",
+    logo: "./companiesLogo/VisionLab_logo.png",
     description: "Assist in frontend and backend integration.",
     qualifications: "CS students with JavaScript skills",
     responsibilities: "React.js interface building\nFlask API integration"
@@ -163,7 +163,7 @@ export const opportunities = [
     type: "Internship",
     posted: "2 days ago",
     rating: 5,
-    logo: "/companiesLogo/VisionLab_logo.png",
+    logo: "./companiesLogo/VisionLab_logo.png",
     description: "Support data collection and analysis tasks.",
     qualifications: "AI and DS background",
     responsibilities: "Analyze model outputs"
@@ -176,7 +176,7 @@ export const opportunities = [
     type: "Internship",
     posted: "1 day ago",
     rating: 4,
-    logo: "/companiesLogo/JazeeraTech_logojpeg.jpeg",
+    logo: "./companiesLogo/JazeeraTech_logojpeg.jpeg",
     description: "Develop market plans and assist outreach.",
     qualifications: "Business, marketing students",
     responsibilities: "Competitor research\nCampaign planning"
@@ -189,7 +189,7 @@ export const opportunities = [
     type: "Internship",
     posted: "7 days ago",
     rating: 4,
-    logo: "/companiesLogo/Innovatex_logopng.png",
+    logo: "./companiesLogo/Innovatex_logopng.png",
     description: "Prototype mobile apps and test features.",
     qualifications: "CS, UX design majors",
     responsibilities: "Work in design sprint teams"
@@ -198,7 +198,7 @@ export const opportunities = [
     id: 16,
     title: "Legal Intern",
     company: "LexEdge",
-    logo: "/companiesLogo/lexEdge_logo.jpg",
+    logo: "./companiesLogo/lexEdge_logo.jpg",
     location: "Dhahran",
     type: "Internship",
     posted: "2 days ago",
@@ -211,7 +211,7 @@ export const opportunities = [
     id: 17,
     title: "Frontend Developer",
     company: "Nextify",
-    logo: "/companiesLogo/nextify_logo.jpg",
+    logo: "./companiesLogo/nextify_logo.jpg",
     location: "Riyadh",
     type: "Internship",
     posted: "1 day ago",
@@ -224,7 +224,7 @@ export const opportunities = [
     id: 18,
     title: "Content Creator",
     company: "BrightLoop",
-    logo: "/companiesLogo/brightloop_logo.jpg",
+    logo: "./companiesLogo/brightloop_logo.jpg",
     location: "Jeddah",
     type: "Internship",
     posted: "4 days ago",
@@ -241,7 +241,7 @@ export const opportunities = [
     type: "Internship",
     posted: "2 days ago",
     rating: 5,
-    logo: "/companiesLogo/sabic_logo.png",
+    logo: "./companiesLogo/sabic_logo.png",
     description: "Join SABIC’s digital innovation team to contribute to next-gen industry solutions.",
     qualifications: "Computer Science, Software Engineering, or Data Science students with strong problem-solving skills",
     responsibilities: "Support digital transformation projects\nBuild internal tools\nCollaborate on data-driven solutions"
