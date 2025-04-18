@@ -18,11 +18,13 @@ function ApplicationCardAdmin({ app, onDelete }) {
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Duration:</strong> {app.duration}</p>
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Location:</strong> {app.location}</p>
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>
-            <Button onClick={(e) => {
+            <button
+            className='second-btn'
+             onClick={(e) => {
                   e.stopPropagation();
                   onDelete(app.id);
                 }}
-                style={{ padding: '4px 8px', fontSize: '12px' }} type="button" variant="danger">Delete</Button>
+            >Delete</button>
 
             </div>
           </Col>

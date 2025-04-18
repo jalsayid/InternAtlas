@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Button, Row, Col} from 'react-bootstrap';
+import { Modal, Row, Col} from 'react-bootstrap';
 
 function ProfileDetailModal({ show, handleClose, app }) {
   if (!app) return null;
@@ -24,7 +24,7 @@ function ProfileDetailModal({ show, handleClose, app }) {
       </Modal.Body>
       <Modal.Footer>
 
-        <Button variant="secondary" onClick={handleClose}>Back</Button>
+        <button className='second-btn' onClick={handleClose}>Back</button>
       </Modal.Footer>
     </Modal>
   );

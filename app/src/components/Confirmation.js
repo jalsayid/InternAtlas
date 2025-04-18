@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../formsStyles.css';
 
@@ -22,12 +21,12 @@ function Confirmation({
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
+        <button className='second-btn' onClick={onHide}>
           {closeButtonLabel || 'Close'}
-        </Button>
-        <Button variant="primary" onClick={onSave}>
+        </button>
+        <button className='def-btn' onClick={onSave}>
           {saveButtonLabel || 'Save changes'}
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );

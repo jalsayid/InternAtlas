@@ -7,8 +7,7 @@ export default function SummaryCard({ title, count, onViewAll }) {
       <h2 style={{ fontWeight: "bold" }}>{count}</h2>
       {onViewAll && (
         <button
-          className="btn btn-sm mt-2"
-          style={{ backgroundColor: "#FFB608", color: "#fff", fontWeight: "bold" }}
+          className="def-btn"
           onClick={onViewAll}
         >
           View all

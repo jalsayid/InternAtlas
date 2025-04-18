@@ -25,11 +25,11 @@ function TrackCommentsCard({ app, onDelete}) {
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Comment:</strong> {app.comment}</p>
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Reason:</strong> {app.reason}</p>
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>
-              <Button onClick={(e) => {
+              <button onClick={(e) => {
                   e.stopPropagation();
                   onDelete(app.id);
                 }}
-                style={{ padding: '4px 8px', fontSize: '12px' }} type="button" variant="danger">Delete</Button>
+                className='second-btn'>Delete</button>
             </div>
           </Col>
         </Row>

@@ -113,8 +113,7 @@ export default function Details({ name, email, cv_path }) {
                     className="me-2"
                   />
                   <button onClick={handleViewDocument} className="third-btn">
-                    <i className="bi bi-download me-2"></i>
-                    Download CV
+                    <i className="bi bi-download me-2"></i>CV
                   </button>
                 </div>
               </Form.Group>

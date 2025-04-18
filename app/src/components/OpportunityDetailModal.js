@@ -16,7 +16,7 @@ function OpportunityDetailModal({ show, handleClose, opportunity }) {
         <p><strong>Responsibilities:</strong> {opportunity.responsibilities}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>Close</Button>
+        <Button variant="secondary" className='second-btn' onClick={handleClose}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

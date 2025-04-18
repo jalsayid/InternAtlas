@@ -65,4 +65,10 @@
     color: #FFB608;
     margin-bottom: 10px;
   }
+  .dashboard-header button {
+    border-radius: 6px;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+  }
+  
   

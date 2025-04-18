@@ -207,11 +207,11 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
                 </Form.Group>
 
                 {/* Save Button */}
-                <Form.Group className="d-flex justify-content-between">
-                    <Button variant="secondary" onClick={handleBack} style={{ width: '120px' }}>Cancel</Button>
-                    <Button style={{ width: '120px' }} variant="primary" type="submit">
+                <Form.Group className="d-flex justify-content-between mb-4">
+                    <button className='second-btn' onClick={handleBack} >Cancel</button>
+                    <button className='def-btn' type="submit">
                         Save
-                    </Button>
+                    </button>
                 </Form.Group>
 
             </Form>
