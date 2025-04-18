@@ -51,7 +51,7 @@ function App() {
         <Route path="/application-details/*" element={<ApplicationDetails />} />
         <Route path="/company-regestration" element={<ReviewCompany />} />
         <Route path="/companies/:id" element={<ViewCompany />} />
-        <Route path="/OpportunityDetails" element={<OpportunityDetails />} />
+        <Route path="/OpportunityDetails/:id" element={<OpportunityDetails />} />
         <Route path="/ModerateContentNav" element={<ModerateContentNav />} />
         <Route path="/company/applications" element={<TrackApplicationsCompany />} /> //dana
         <Route path="/company/applications" element={<ManageApplications />} /> // has been linked in the company dashboard - aryam

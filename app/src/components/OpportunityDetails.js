@@ -1,15 +1,14 @@
 import '../OpportunityDetails.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-
-/* 
-important:
-    make sure to import booststrap in index.js
-*/
+import { applicationsForCompany } from '../dummyData';
 
 
 function OpportunityDetails() {
     const navigate = useNavigate();
+    const { id } = useParams();
+    const opportunity = applicationsForCompany.find(op => op.id === parseInt(id));
+
   
     const goToTrackApplications = () => {
       navigate('/company/applications');
@@ -21,13 +20,13 @@ function OpportunityDetails() {
           <Container>
             <Row>
               <Col>
-                <h1>Software Engineering Intern</h1>
-                <p>By <strong>Sabic</strong></p>
+                <h1>{opportunity.position}</h1>
+                <p>By <strong>{opportunity.company}</strong></p>
                 <p id="subp">
-                  Location <strong>Dammam</strong>
+                  Location <strong>{opportunity.location}</strong>
                   <span className="separator"></span>|
                   <span className="separator"></span>
-                  Duration: Summer 2025 (<strong>3 months</strong>)
+                  Duration: (<strong>{opportunity.duration}</strong>)
                 </p>
               </Col>
             </Row>
@@ -40,7 +39,7 @@ function OpportunityDetails() {
               <Col>
                 <h3>Description</h3>
                 <p>
-                SABIC's Software Engineering Internship provides students and recent graduates with hands-on experience in IT and technology-driven projects. Interns collaborate on software development, IT infrastructure, and cybersecurity initiatives, gaining exposure to real-world business applications. The program focuses on problem-solving, system analysis, and implementing innovative solutions while working alongside industry experts. Ideal candidates are those pursuing degrees in Computer Science, Software Engineering, or related fields, with strong analytical and teamwork skills. For the latest opportunities, visit SABIC Careers.
+                {opportunity.description}
                 </p>
               </Col>
             </Row>
@@ -49,11 +48,9 @@ function OpportunityDetails() {
               <Col>
                 <h3>Qualifications:</h3>
                 <ul className='ps-0 ms-0'>
-                    <li>Educational Background: Pursuing a Bachelor's  in Computer Science, Software Engineering, Cyber Security, or a closely related discipline.</li>
-                    <li>Academic Performance: A minimum GPA of 3.0 on a 4.0 scale is often preferred.</li>
-                    <li>Technical Proficiency: Demonstrated skills in programming languages such as Python or Java</li>
-                    <li>Analytical and Problem-Solving Skills: Ability to analyze complex technical data and develop effective solutions.</li>
-                    <li>Team Collaboration: Ability to work effectively both independently and as part of a team.</li>
+                  {opportunity.qualifications.split('\n').map((item, index) => (
+                  <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </Col>
             </Row>

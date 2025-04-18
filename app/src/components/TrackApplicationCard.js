@@ -9,7 +9,7 @@ function TrackApplicationCard({ app }) {
   const { id } = useParams();
 
   const goToOpportunityDetails = () => {
-    navigate('/OpportunityDetails');
+    navigate(`/OpportunityDetails/${app.id}`);
   };
   const goToViewReviews = () => {
     navigate(`/CompanyReview/${app.company.toLowerCase()}/${app.position.toLowerCase()}/reviews`);
