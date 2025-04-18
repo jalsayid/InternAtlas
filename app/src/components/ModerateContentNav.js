@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ManageApplications from './ManageApplications.js'
 import TrackProfiles from './TrackProfiles.js';
 import TrackComments from "./TrackComments.js";
+import AdminNavbar from '../AdminNavbar.js'; 
 
 
 function ModerateContentNav() {
@@ -39,9 +40,11 @@ function ModerateContentNav() {
         
   return (
     <>
+    
+    <AdminNavbar />
     <Nav fill variant="tabs" defaultActiveKey="TrackApplications" onSelect={(selectedKey) => setActiveTab(selectedKey)} >
       <Nav.Item style={{}}>
-        <Nav.Link style={activeTab === 'TrackApplications' ? activeTabStyle : customTabStyle} eventKey="TrackApplications">Manage Job Applications</Nav.Link>
+        <Nav.Link style={activeTab === 'ManageApplications' ? activeTabStyle : customTabStyle} eventKey="ManageApplications">Manage Job Applications</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link style={activeTab === 'TrackComments' ? activeTabStyle : customTabStyle} eventKey="TrackComments">Manage Comments</Nav.Link>

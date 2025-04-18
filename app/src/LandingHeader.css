@@ -1,0 +1,11 @@
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: scale(5); 
+    transform-origin: center;
+}
+
+.logo-img {
+    height: 32px;
+}

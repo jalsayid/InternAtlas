@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import { StarFill } from 'react-bootstrap-icons';
 import './CompanyReview.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import NavBar from '../StudentNavBar';
+import StudentNavBar from '../../../StudentNavBar'; 
 import { reviewData } from '../../../Data/reviews';
 import { opportunities } from '../../../Data/dummyData';
 
@@ -14,30 +14,29 @@ const CompanyReview = () => {
     const companyKey = companyName.toLowerCase();
     const reviews = reviewData[companyKey] || [];
 
-    // Find the matched opportunity from the data
     const matchedOpportunity = opportunities.find(
         (op) => op.company.toLowerCase() === companyKey
     );
     const positionTitle = matchedOpportunity ? matchedOpportunity.title : "Internship Opportunity";
 
-    const renderStars = (count) => {
-        return [...Array(5)].map((_, i) => (
+    const renderStars = (count) =>
+        [...Array(5)].map((_, i) => (
             <StarFill
                 key={i}
                 className={`me-1 ${i < count ? 'text-warning' : 'text-secondary'}`}
             />
         ));
-    };
 
     return (
         <>
-            <NavBar />
+            <StudentNavBar />
 
             <Container className="py-4">
                 <a href="/search" className="text-muted mb-2 d-inline-block">
                     &larr; Back to search
                 </a>
 
+                {/* Company Header */}
                 <div className="d-flex align-items-center mt-3 mb-4">
                     <i className="bi bi-building fs-3 text-secondary me-3"></i>
                     <div>
@@ -50,19 +49,12 @@ const CompanyReview = () => {
                     </div>
                 </div>
 
+                {/* Category Ratings */}
                 <Row className="mb-3 flex-wrap">
-                    <Col xs={6} md={3}>
-                        <p><strong className="rating-label">Reputation</strong> {renderStars(4)}</p>
-                    </Col>
-                    <Col xs={6} md={3}>
-                        <p><strong className="rating-label">Social</strong> {renderStars(5)}</p>
-                    </Col>
-                    <Col xs={6} md={3}>
-                        <p><strong className="rating-label">Opportunities</strong> {renderStars(4)}</p>
-                    </Col>
-                    <Col xs={6} md={3}>
-                        <p><strong className="rating-label">Location</strong> {renderStars(4)}</p>
-                    </Col>
+                    <Col xs={6} md={3}><p><strong className="rating-label">Reputation</strong> {renderStars(4)}</p></Col>
+                    <Col xs={6} md={3}><p><strong className="rating-label">Social</strong> {renderStars(5)}</p></Col>
+                    <Col xs={6} md={3}><p><strong className="rating-label">Opportunities</strong> {renderStars(4)}</p></Col>
+                    <Col xs={6} md={3}><p><strong className="rating-label">Location</strong> {renderStars(4)}</p></Col>
                 </Row>
 
                 <button
@@ -72,6 +64,7 @@ const CompanyReview = () => {
                     Write a review
                 </button>
 
+                {/* Reviews Section */}
                 <h5 className="mb-3">Recent Reviews</h5>
 
                 {reviews.length === 0 ? (

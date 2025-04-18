@@ -6,6 +6,9 @@ import MajorPieChart from "../components/MajorPieChart";
 import OpportunitiesBarChart from "../components/OpportunitiesBarChart";
 import { dashboardSummary, companyApprovalStats, opportunities } from "../Data/dummyData.js";
 import { Modal } from "react-bootstrap";
+import AdminNavbar from '../AdminNavbar.js';
+
+
 
 export default function ReportGenerate() {
     const [selectedCompany, setSelectedCompany] = useState("");
@@ -47,6 +50,10 @@ export default function ReportGenerate() {
     };
 
     return (
+        <>
+      <AdminNavbar />
+
+        
         <div className="container mt-5">
             <div className="p-4 rounded shadow-sm" style={{ backgroundColor: "#fffef3" }}>
                 <h3 className="mb-4 text-center" style={{fontWeight: "bold" }}>
@@ -128,6 +135,7 @@ export default function ReportGenerate() {
                     {modalContent}
                 </Modal.Body>
             </Modal>
-        </div>
-    );
+            </div>
+    </>
+  );
 }
