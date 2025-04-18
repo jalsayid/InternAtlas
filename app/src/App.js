@@ -87,13 +87,13 @@ function App() {
     
 
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
-        <Route path="/dashboard/company" element={<CompanyDashboard />} />
+        <Route path="/dashboard/company" element={<CompanyDashboard />} /> //
 
         <Route path="/search-opportunities" element={<SearchOpportunities />} />
 
         <Route path="/login" element={<SignTaps />} />
         <Route path="/post-opportunity" element={<PostInternshipForm />} /> // has been linked in the company dashboard - aryam
-        <Route path="/edit-opportunity" element={<EditInternshipForm />} /> 
+        <Route path="/edit-opportunity" element={<EditInternshipForm />} /> // 
         <Route path="/contact-informationForm/:id" element={<ContactInformationForm />} /> //معلومات التسجيل الاسم وكذا
         <Route path="/general-informationForm/:id" element={<GeneralInformationForm />} /> //اسئلة تخص الشركة
 

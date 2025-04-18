@@ -76,3 +76,11 @@
   text-align: center;
   color: #ff3b30;
 }
+body {
+  background: url('./assets/blob-scene-haikei-3.svg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+

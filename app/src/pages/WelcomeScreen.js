@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../WelcomeScreen.css'; // Custom styles for animation
+import '../WelcomeScreen.css'; 
 
 export default function WelcomeScreen({ userName = "User" }) {
   const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/dashboard/student"); // Adjust the route as needed
-    }, 5000); // Show for 2.5 seconds
+      navigate("/dashboard/student");
+    }, 5000); 
 
     return () => clearTimeout(timer);
   }, [navigate]);
