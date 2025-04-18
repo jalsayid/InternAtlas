@@ -20,6 +20,8 @@
    ```bash
    git clone https://github.com/YourUsername/internatlas.git
    cd internatlas
+   ```
+   
 ## 💡 Usage Instructions and Examples
 
 ### 👩‍🎓 Student
