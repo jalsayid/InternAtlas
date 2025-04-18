@@ -36,7 +36,7 @@ function ApplicationDetailModal({ show, handleClose, app }) {
       </Modal.Body>
       <Modal.Footer>
 
-        <Button variant="secondary" onClick={handleClose}>Back</Button>
+        <button className='second-btn' onClick={handleClose}>Back</button>
       </Modal.Footer>
     </Modal>
   );

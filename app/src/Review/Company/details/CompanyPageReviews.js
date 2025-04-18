@@ -146,22 +146,21 @@ const CompanyPageReviews = () => {
                             onChange={(e) => handleResponseChange(r.id, e.target.value)}
                           />
                         </Form.Group>
-                        <Button
-                          variant="warning"
+                        <button
                           size="sm"
-                          className="me-2"
+                          className="me-2 def-btn"
                           onClick={() => handleSave(r.id)}
                           disabled={!r.editText.trim()}
                         >
                           💾 Save
-                        </Button>
-                        <Button
-                          variant="outline-secondary"
+                        </button>
+                        <button
+                          className='second-btn'
                           size="sm"
                           onClick={() => toggleEditing(r.id)}
                         >
                           ❌ Cancel
-                        </Button>
+                        </button>
                       </Form>
                     </>
                   ) : r.response ? (
@@ -169,27 +168,26 @@ const CompanyPageReviews = () => {
                       <strong className="d-block mb-1">Company Response:</strong>
                       <span>{r.response}</span>
                       <div className="mt-2">
-                        <Button
-                          variant="outline-secondary"
+                        <button
+                          className='second-btn me-2'
                           size="sm"
-                          className="me-2"
                           onClick={() => toggleEditing(r.id)}
                         >
                           ✏️ Edit
-                        </Button>
-                        <Button
-                          variant="outline-danger"
+                        </button>
+                        <button
+                          className='def-btn'
                           size="sm"
                           onClick={() => handleDelete(r.id)}
                         >
                           🗑️ Delete
-                        </Button>
+                        </button>
                       </div>
                     </div>
                   ) : (
-                    <Button variant="warning" onClick={() => toggleEditing(r.id)}>
+                    <button className='def-btn' onClick={() => toggleEditing(r.id)}>
                       Respond
-                    </Button>
+                    </button>
                   )}
                 </div>
               </div>

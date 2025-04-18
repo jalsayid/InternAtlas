@@ -232,9 +232,9 @@ function PostInternshipForm() {
                 </Form.Group>
 
                 {/* Submit Button */}
-                <Form.Group className="d-flex justify-content-between">
-                    <Button variant="secondary" onClick={handleBack} style={{ width: '120px' }}>Cancel</Button>
-                    <Button variant="primary" type="submit" style={{ width: '120px' }}>Publish</Button>
+                <Form.Group className="d-flex justify-content-between mb-3">
+                    <button className='second-btn' onClick={handleBack}>Cancel</button>
+                    <button className='def-btn' type="submit">Publish</button>
                 </Form.Group>
             </Form>
 

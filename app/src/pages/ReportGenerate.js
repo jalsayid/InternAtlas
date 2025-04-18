@@ -111,8 +111,7 @@ export default function ReportGenerate() {
                         </div>
                         <a href="/reportk.pdf" target="_blank" rel="noopener noreferrer">
                             <button
-                                className="btn mt-3"
-                                style={{ backgroundColor: "#FFB608", color: "#000", fontWeight: "bold" }}
+                                className="second-btn mt-3"
                             >
                                 📄 Export as PDF
                             </button>

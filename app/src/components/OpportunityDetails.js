@@ -68,9 +68,9 @@ function OpportunityDetails() {
   
             <Row>
               <Col className="text-end">
-                <Button variant="outline-warning" onClick={goToTrackApplications}>
+                <button className='second-btn' onClick={goToTrackApplications}>
                   Back
-                </Button>
+                </button>
               </Col>
             </Row>
           </Container>

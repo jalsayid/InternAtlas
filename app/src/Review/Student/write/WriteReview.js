@@ -136,8 +136,8 @@ const WriteReview = () => {
                         )}
                     </Form.Group>
 
-                    <Button type="submit" className="btn-yellow px-4">
-                        SUBMIT
+                    <Button type="submit" className="def-btn">
+                        Submit
                     </Button>
                 </Form>
 

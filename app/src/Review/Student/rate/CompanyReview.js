@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { StarFill } from 'react-bootstrap-icons';
 import './CompanyReview.css';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -65,13 +65,12 @@ const CompanyReview = () => {
                     </Col>
                 </Row>
 
-                <Button
-                    variant="dark"
-                    className="mb-4 btn-rectangle"
+                <button
+                    className="mb-4 btn-rectangle second-btn"
                     onClick={() => navigate(`/company/${companyName}/write-review`)}
                 >
                     Write a review
-                </Button>
+                </button>
 
                 <h5 className="mb-3">Recent Reviews</h5>
 

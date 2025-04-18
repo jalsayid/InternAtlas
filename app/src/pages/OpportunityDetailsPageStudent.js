@@ -15,7 +15,7 @@ function OpportunityDetailsPagesStudent() {
   };
 
   const handleBack = () => {
-    navigate('/SearchOpportunities');
+    navigate('/search-opportunities');
   };
 
   return (
@@ -74,8 +74,8 @@ function OpportunityDetailsPagesStudent() {
 
           <Row>
             <Col className="d-flex justify-content-between">
-              <Button variant="outline-secondary" onClick={handleBack}>Back</Button>
-              <Button variant="primary" onClick={handleApply}>Apply</Button>
+              <button className='second-btn' onClick={handleBack}>Back</button>
+              <button className='def-btn' onClick={handleApply}>Apply</button>
             </Col>
           </Row>
         </Container>
