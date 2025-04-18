@@ -3,7 +3,7 @@ import { Container, Form, Button, Alert, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { StarFill, InfoCircle } from 'react-bootstrap-icons';
 import './WriteReview.css';
-import NavBar from '../StudentNavBar';
+import StudentNavBar from '../../../StudentNavBar'; 
 import { addReview } from '../../../Data/reviews';
 
 const WriteReview = () => {
@@ -67,7 +67,7 @@ const WriteReview = () => {
 
     return (
         <>
-            <NavBar />
+            <StudentNavBar />
             <Container className="my-5 review-container">
                 <a href={`/company/${companyName}`} className="text-muted mb-3 d-inline-block">
                     &larr; Back to reviews
@@ -136,8 +136,8 @@ const WriteReview = () => {
                         )}
                     </Form.Group>
 
-                    <Button type="submit" className="btn-yellow px-4">
-                        SUBMIT
+                    <Button type="submit" className="def-btn">
+                        Submit
                     </Button>
                 </Form>
 

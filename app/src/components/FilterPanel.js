@@ -8,8 +8,7 @@ function FilterPanel({ filters, onChange }) {
   return (
     <>
       <Button
-        style={{ backgroundColor: '#FFB608', borderColor: '#FFB608', color: 'black' }}
-        className="mb-3"
+        className="default-btn mb-3"
         onClick={() => setOpen(!open)}
         aria-controls="filter-collapse"
         aria-expanded={open}

@@ -38,9 +38,11 @@ import OpportunityDetailsPage from './pages/OpportunityDetailsPageStudent';
 import ReportGenerate from './pages/ReportGenerate'; 
 
 import WelcomeScreen from "./pages/WelcomeScreen.js";
+import Footer from "./components/Footer.js";
 
 function App() {
   return (
+    <>
     <Router>
       <Routes>
         <Route path="" element={<LandingPage />} />
@@ -54,7 +56,7 @@ function App() {
         <Route path="/OpportunityDetails/:id" element={<OpportunityDetails />} />
         <Route path="/ModerateContentNav" element={<ModerateContentNav />} />
         <Route path="/company/applications" element={<TrackApplicationsCompany />} /> //dana
-        <Route path="/company/applications" element={<ManageApplications />} /> // has been linked in the company dashboard - aryam
+        {/* <Route path="/company/applications" element={<ManageApplications />} /> // has been linked in the company dashboard - aryam (delete admin) */}
 
 
         //new routes from Rawan
@@ -102,6 +104,9 @@ function App() {
         <Route path="/landing-page" element={<LandingPage />} />
       </Routes>
     </Router>
+    <Footer></Footer>
+    </>
+    
     
   );
 }

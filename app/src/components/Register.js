@@ -217,7 +217,7 @@ function Register({ onSwitchToRegister }) {
                         </Form.Group>
 
                         {/* Submit Button */}
-                        <Button variant="primary" type="submit" className="w-100">
+                        <Button variant="primary" type="submit" className="def-button">
                             Sign up
                         </Button>
                     </Form>
@@ -322,7 +322,7 @@ function Register({ onSwitchToRegister }) {
                         </Form.Group>
 
                         {/* Submit Button */}
-                        <Button variant="primary" type="submit" className="w-100">
+                        <Button variant="primary" type="submit" className="def-button">
                             Sign up
                         </Button>
                     </Form>

@@ -11,7 +11,7 @@ export default function CompanyStats({ stats, onBack }) {
         <li>Waiting for Approval: {stats.pending}</li>
         <li>Approval Rate: {stats.approvalRate}%</li>
       </ul>
-      <button className="btn btn-secondary mt-3"  style={{ backgroundColor: "#FFF185", borderColor: "#FFF185", color: "#000" }} back onClick={onBack}>Back</button>
+      <button className="second-btn mt-3"  back onClick={onBack}>Back</button>
     </div>
   );
 }

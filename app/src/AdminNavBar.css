@@ -1,0 +1,34 @@
+/* Navbar spacing */
+.custom-navbar {
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+}
+
+/* Nav link styling */
+.nav-item-link {
+    color: #333;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-item-link:hover {
+    color: #ffb608;
+}
+
+.active-link {
+    color: #ffb608 !important;
+}
+
+/* Logo wrapper styling */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transform: scale(1.2); /* Adjusted from 5 to avoid extreme size */
+    transform-origin: center;
+}
+
+.logo-img {
+    height: 48px; /* slightly larger logo */
+}

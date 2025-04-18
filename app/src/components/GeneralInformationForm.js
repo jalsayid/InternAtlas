@@ -125,7 +125,7 @@ function GeneralInformationForm() {
         };
         localStorage.setItem('generalquestions', JSON.stringify(formData));
 
-        navigate('/contact-informationForm');
+        navigate(`/contact-informationForm/${id}`);
     };
 
     return (
@@ -310,9 +310,9 @@ function GeneralInformationForm() {
 
 
                 {/* Buttons */}
-                <Form.Group className="mb-4 d-flex justify-content-end">
-                    <Button variant="secondary" onClick={handleBack} style={{ color: 'black', width: '120px', marginRight: '10px' }}>Back</Button>
-                    <Button variant="primary" type="submit" style={{ width: '120px' }} >Submit</Button>
+                <Form.Group className="mb-4 d-flex justify-content-end gap-2">
+                    <button className='second-btn' onClick={handleBack} >Back</button>
+                    <button className='def-btn' type="submit" >Submit</button>
                 </Form.Group>
             </Form>
 

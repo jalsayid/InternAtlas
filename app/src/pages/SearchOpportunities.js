@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import OpportunityCard from '../components/OpportunityCard';
 import FilterPanel from '../components/FilterPanel';
 import { opportunities } from '../Data/dummyData.js';
+import StudentNavBar from '../StudentNavBar'; 
 
 function SearchOpportunities() {
   const [filters, setFilters] = useState({
@@ -27,32 +28,43 @@ function SearchOpportunities() {
   );
 
   return (
-    <Container className="my-5">
-      <h2 className="mb-4 text-center">Internship Opportunities</h2>
+    <>
+      <StudentNavBar />
 
-      <div className="d-flex justify-content-between align-items-center">
-        <FilterPanel filters={filters} onChange={handleFilterChange} />
-      </div>
+      <Container className="my-5">
+        <h2 className="mb-4 text-center fw-bold">Internship Opportunities</h2>
 
-      <Form className="mb-3">
-        <Form.Control
-          type="text"
-          placeholder="Search position name..."
-          value={filters.title}
-          onChange={e => handleFilterChange('title', e.target.value)}
-        />
-      </Form>
+        {/* Filters */}
+        <div className="mb-3">
+          <FilterPanel filters={filters} onChange={handleFilterChange} />
+        </div>
 
-      <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
-        {filtered.map(op => (
-          <OpportunityCard
-            key={op.id}
-            opportunity={op}
-            onClick={() => navigate(`/opportunity/${op.id}`)}
+        {/* Search by Title */}
+        <Form className="mb-4">
+          <Form.Control
+            type="text"
+            placeholder="Search by internship title..."
+            value={filters.title}
+            onChange={e => handleFilterChange('title', e.target.value)}
           />
-        ))}
-      </div>
-    </Container>
+        </Form>
+
+        {/* Results */}
+        <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
+          {filtered.length > 0 ? (
+            filtered.map(op => (
+              <OpportunityCard
+                key={op.id}
+                opportunity={op}
+                onClick={() => navigate(`/opportunity/${op.id}`)}
+              />
+            ))
+          ) : (
+            <p className="text-muted text-center">No opportunities match your search.</p>
+          )}
+        </div>
+      </Container>
+    </>
   );
 }
 

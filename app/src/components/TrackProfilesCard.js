@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Row, Col, Image } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 
 
 
@@ -24,11 +23,11 @@ function TrackProfilesCard({ app ,onClick, onDelete}) {
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Industry:</strong> {app.industry}</p>
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Location:</strong> {app.location}</p>
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>
-              <Button onClick={(e) => {
+              <button onClick={(e) => {
                   e.stopPropagation();
                   onDelete(app.id);
                 }}
-                style={{ padding: '4px 8px', fontSize: '12px' }} type="button" variant="danger">Delete</Button>
+               type="button" className='second-btn'>Delete</button>
             </div>
           </Col>
         </Row>

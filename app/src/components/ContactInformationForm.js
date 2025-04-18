@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import WithLabelExample from './ProgressBar.js'
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload,FaBook,FaGraduationCap } from 'react-icons/fa';
@@ -265,9 +265,9 @@ function ContactInformationForm() {
                 </Form.Group>
 
                 {/* Buttons */}
-                <Form.Group className="mb-4 d-flex justify-content-end">
-                    <Button variant="secondary" onClick={handleBack} style={{ color: 'black', width: '120px', marginRight: '10px' }}>Back</Button>
-                    <Button variant="primary" onClick={handleSubmit} type="submit" style={{ width: '120px' }} >Next</Button>
+                <Form.Group className="mb-4 d-flex justify-content-end gap-2">
+                    <button className='second-btn' onClick={handleBack}>Back</button>
+                    <button className='def-btn' onClick={handleSubmit} type="submit" >Next</button>
                 </Form.Group>
             </Form>
 

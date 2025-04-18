@@ -94,10 +94,11 @@ function Login({ onSwitchToRegister }) {
                     />
                     {formErrors.password && <Form.Text className="text-danger">{formErrors.password}</Form.Text>}
                 </Form.Group>
-
-                <Button variant="primary" type="submit" className="w-100">
-                    Sign in
-                </Button>
+                <div className="d-flex justify-content-center">
+                    <Button variant="primary" type="submit" className="def-button">
+                        Sign in
+                    </Button>
+                </div>
             </Form>
         </Container>
     );

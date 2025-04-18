@@ -31,13 +31,24 @@ const StudentDashboard = () => {
 
   return (
     <div className="dashboard-wrapper">
-      <div className="dashboard-header px-4 py-2 d-flex justify-content-between align-items-center">
+      {/* Header with logout button */}
+      <div className="dashboard-header px-4 py-2 d-flex justify-content-between align-items-center bg-light">
         <span className="text-muted small">Student Dashboard</span>
-        <div className="d-flex align-items-center gap-2">
-          <PersonCircle size={24} />
-          <span className="fw-bold">Hello, Danah</span>
+        <div className="d-flex align-items-center gap-3">
+          <button
+            className="btn btn-outline-dark btn-sm"
+            onClick={() => navigate('/')}
+          >
+            Logout
+          </button>
+          <div className="d-flex align-items-center gap-2">
+            <PersonCircle size={24} />
+            <span className="fw-bold">Hello, Student</span>
+          </div>
         </div>
       </div>
+
+  
 
       <Container className="text-center py-5">
         <img src={logo} height="210" className="mb-4" alt="InternAtlas Logo" />

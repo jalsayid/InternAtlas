@@ -1,8 +1,8 @@
 // LandingPage.js
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import FeaturesCards from "../components/FeaturesCards" // Import the GroupExample component
-import '../landingPage.css';  // Add your custom styles here
+import FeaturesCards from "../components/FeaturesCards" 
+import '../landingPage.css';  
 import TargetsAllCollapse from '../components/TargetsAllCollapse.js'
 import Image from 'react-bootstrap/Image';
 import LandingHeader from '../components/LandingHeader.js';

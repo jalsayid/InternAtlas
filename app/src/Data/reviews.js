@@ -171,7 +171,6 @@ export const reviewData = {
 
 
 
-
 export function addReview(company, review) {
     const key = company.toLowerCase();
     if (!reviewData[key]) {

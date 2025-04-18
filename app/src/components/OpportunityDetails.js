@@ -49,7 +49,7 @@ function OpportunityDetails() {
                 <h3>Qualifications:</h3>
                 <ul className='ps-0 ms-0'>
                   {opportunity.qualifications.split('\n').map((item, index) => (
-                  <li key={index}>{item}</li>
+                  <li className='greenCheck' key={index}>{item}</li>
                   ))}
                 </ul>
               </Col>
@@ -60,7 +60,7 @@ function OpportunityDetails() {
                 <h3>Responsibilities:</h3>
                 <ul className='ps-0 ms-0'>
                 {opportunity.responsibilities.split('\n').map((item, index) => (
-                  <li key={index}>{item}</li>
+                  <li className='greenCheck' key={index}>{item}</li>
                   ))}
                 </ul>
               </Col>
@@ -68,9 +68,9 @@ function OpportunityDetails() {
   
             <Row>
               <Col className="text-end">
-                <Button variant="outline-warning" onClick={goToTrackApplications}>
+                <button className='second-btn' onClick={goToTrackApplications}>
                   Back
-                </Button>
+                </button>
               </Col>
             </Row>
           </Container>
