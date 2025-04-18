@@ -32,8 +32,8 @@ export default function Details({ name, email, cv_path }) {
     },
   ];
 
-  const handleDownloadCV = () => {
-    window.open(cv_path, "_blank");
+  const handleViewDocument = (docPath) => {
+    window.open(`/pdf-viewer.html?file=${docPath}`, "_blank");
   };
 
   return (
@@ -112,7 +112,7 @@ export default function Details({ name, email, cv_path }) {
                     readOnly
                     className="me-2"
                   />
-                  <button onClick={handleDownloadCV} className="third-btn">
+                  <button onClick={handleViewDocument} className="third-btn">
                     <i className="bi bi-download me-2"></i>
                     Download CV
                   </button>

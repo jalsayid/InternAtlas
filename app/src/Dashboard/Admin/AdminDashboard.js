@@ -37,7 +37,7 @@ const AdminDashboard = () => {
                         <Button
                             variant="none"
                             className="primary-btn w-100"
-                            onClick={() => navigate('/admin/companies')}
+                            onClick={() => navigate('/company-regestration')}
                         >
                             Manage Companies Requests
                         </Button>

@@ -15,17 +15,7 @@ export default function ViewCompany() {
         {
           title: "Commercial Registration",
           filename: "stc_cr.pdf",
-          path: "/documents/stc_cr.pdf",
-        },
-        {
-          title: "Company Profile",
-          filename: "stc_profile.pdf",
-          path: "/documents/stc_profile.pdf",
-        },
-        {
-          title: "Tax Registration",
-          filename: "stc_tax.pdf",
-          path: "/documents/stc_tax.pdf",
+          path: "../stcCertificate.pdf",
         },
       ],
     },
@@ -38,17 +28,7 @@ export default function ViewCompany() {
         {
           title: "Commercial Registration",
           filename: "neom_cr.pdf",
-          path: "/documents/neom_cr.pdf",
-        },
-        {
-          title: "Company Profile",
-          filename: "neom_profile.pdf",
-          path: "/documents/neom_profile.pdf",
-        },
-        {
-          title: "Tax Registration",
-          filename: "neom_tax.pdf",
-          path: "/documents/neom_tax.pdf",
+          path: "../neomCertificate.pdf",
         },
       ],
     },
@@ -61,17 +41,7 @@ export default function ViewCompany() {
         {
           title: "Commercial Registration",
           filename: "noon_cr.pdf",
-          path: "/documents/noon_cr.pdf",
-        },
-        {
-          title: "Company Profile",
-          filename: "noon_profile.pdf",
-          path: "/documents/noon_profile.pdf",
-        },
-        {
-          title: "Tax Registration",
-          filename: "noon_tax.pdf",
-          path: "/documents/noon_tax.pdf",
+          path: "../noonCertificate.pdf",
         },
       ],
     },
@@ -84,17 +54,7 @@ export default function ViewCompany() {
         {
           title: "Commercial Registration",
           filename: "tawuniya_cr.pdf",
-          path: "/documents/tawuniya_cr.pdf",
-        },
-        {
-          title: "Company Profile",
-          filename: "tawuniya_profile.pdf",
-          path: "/documents/tawuniya_profile.pdf",
-        },
-        {
-          title: "Tax Registration",
-          filename: "tawuniya_tax.pdf",
-          path: "/documents/tawuniya_tax.pdf",
+          path: "../tawCertificate.pdf",
         },
       ],
     },
