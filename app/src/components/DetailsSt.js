@@ -1,10 +1,10 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Header from "./Header";
-import Navbar from "./Navbar";
+
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
+import StudentNavBar from '../StudentNavBar'; 
 
 export default function Details({ name, email, cv_path, questions }) {
   const title = "Applicant Details";
@@ -14,10 +14,11 @@ export default function Details({ name, email, cv_path, questions }) {
   };
 
   return (
+<>
+<StudentNavBar />
     <Container style={{ justifyContent: "center", paddingTop: "80px" }}>
       <Row className="justify-content-center w-100">
-        <Navbar />
-        <Header title={title} />
+       
         <Col md={6} className="mb-4">
           <Card className="p-4">
             <h2 className="h2-joud mb-4">Contact Information</h2>
@@ -83,5 +84,6 @@ export default function Details({ name, email, cv_path, questions }) {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }

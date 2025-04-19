@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import DetailsSt from "../components/DetailsSt";
+
+
 export default function ApplicantDetails() {
   const questions1 = [
     {
@@ -118,10 +120,12 @@ export default function ApplicantDetails() {
     questions: questions3,
   };
   return (
+    
     <Routes>
       <Route path="/1" element={<DetailsSt {...applicantion1} />} />
       <Route path="/2" element={<DetailsSt {...applicantion2} />} />
       <Route path="/3" element={<DetailsSt {...applicantion3} />} />
     </Routes>
+  
   );
 }
