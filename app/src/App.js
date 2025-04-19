@@ -45,7 +45,7 @@ function App() {
     <>
     <Router>
       <Routes>
-        <Route path="" element={<LandingPage />} />
+        <Route path="" element={<LandingPage />} /> 
 
         <Route path="/view-applicants" element={<ViewApplications />} />
         <Route path="/applicant-details/*" element={<ApplicantDetails />} />
@@ -61,7 +61,6 @@ function App() {
 
         //new routes from Rawan
         <Route path="/search-opportunities" element={<SearchOpportunities />} /> // has been linked in the student dashboard - aryam
-        <Route path="/TrackApplicationsRawan" element={<TrackApplicationsRawan />} />
         <Route path="/admin/reports" element={<ReportGenerate />} /> // has been linked in the admin dashboard - aryam
         <Route path="/opportunity/:id" element={<OpportunityDetailsPage />} />
 

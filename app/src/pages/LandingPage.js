@@ -15,7 +15,7 @@ function LandingPage() {
         <div className="landing-page">
 
             <Card>
-                <Image src="./imgs/landingLogo.svg" fluid style={{ paddingTop: 80 }} />
+                <Image src="./imgs/landingPageLogo.svg" fluid style={{ paddingTop: 80 }} />
             </Card>
 
             {/* Overview Section */}

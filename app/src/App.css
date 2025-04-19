@@ -172,6 +172,20 @@ p, .description-text {
   0%, 100% { border-color: transparent; }
   50% { border-color: #ffb608; }
 }
+@media (max-width: 768px) {
+  .animated-subtitle {
+    animation: none !important;
+    border-right: none !important;
+    width: auto !important;
+    white-space: normal !important;
+    font-size: 20px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
 
 
 
