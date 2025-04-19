@@ -21,6 +21,21 @@
    git clone https://github.com/YourUsername/internatlas.git
    cd internatlas
    ```
+
+2. **Install dependencies**
+   ```bash
+   npm install react-bootstrap
+   npm install bootstrap
+   npm install react-router-dom
+   npm install react-icons
+   npm install d3
+   npm install bootstrap-icons
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
    
 ## 💡 Usage Instructions and Examples
 
