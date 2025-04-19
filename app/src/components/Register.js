@@ -71,6 +71,7 @@ function Register({ onSwitchToRegister }) {
         if (!companyEmail) errors.companyEmail = 'Email is required';
         if (!companyPassword) errors.companyPassword = 'Password is required';
         if (!companyConfirmPassword) errors.companyConfirmPassword = 'Confirm password is required';
+        if (companyPassword !== companyConfirmPassword) errors.companyConfirmPassword = 'Passwords do not match';
         if (!companyVerification) errors.companyVerification = 'Verification file is required';
 
         if (Object.keys(errors).length > 0) {
