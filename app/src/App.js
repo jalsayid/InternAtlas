@@ -28,7 +28,6 @@ import ContactInformationForm from './components/ContactInformationForm.js';
 import GeneralInformationForm from './components/GeneralInformationForm.js';
 import SearchOpportunities from './pages/SearchOpportunities.js'
 import LandingPage from './pages/LandingPage.js'
-import ManageApplications from "./components/ManageApplications.js"
 
 
 import OpportunityDetailsPage from './pages/OpportunityDetailsPageStudent';
