@@ -32,13 +32,7 @@ const CompanyReview = () => {
             <StudentNavBar />
 
             <Container className="py-4">
-                <span
-                    onClick={() => navigate('/search')}
-                    className="text-muted mb-2 d-inline-block"
-                    style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                >
-                    &larr; Back to search
-                </span>
+                
 
                 {/* Company Header */}
                 <div className="d-flex align-items-center mt-3 mb-4">
