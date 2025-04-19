@@ -1,8 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Header from "./Header";
-import Navbar from "./Navbar";
+import CompanyNavBar from '../CompanyNavBar'; 
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Alert from "react-bootstrap/Alert";
@@ -37,10 +36,11 @@ export default function Details({ name, email, cv_path }) {
   };
 
   return (
+    <>
+      <CompanyNavBar />
     <Container style={{ justifyContent: "center", paddingTop: "80px" }}>
       <Row className="justify-content-center w-100">
-        <Navbar />
-        <Header title={title} />
+        
 
         {/* Alerts positioned at the top */}
         <div
@@ -162,5 +162,6 @@ export default function Details({ name, email, cv_path }) {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }

@@ -4,25 +4,23 @@ import { StarFill } from 'react-bootstrap-icons';
 import { useParams } from 'react-router-dom';
 import './CompanyPageReview.css';
 
-
 const reviewsData = {
-    'sabic_software engineering intern': [
-      { id: 1, rating: 5, text: 'Excellent mentorship, engaging tasks.', response: 'Thank you!' },
-      { id: 2, rating: 4, text: 'Learned a lot, but onboarding was slow.', response: null },
-      { id: 3, rating: 5, text: 'Great learning culture!', response: null }
-    ],
-    'aramco_ai & machine learning intern': [
-      { id: 4, rating: 4, text: 'Loved the datasets and mentorship.', response: 'Glad to hear!' },
-      { id: 5, rating: 5, text: 'Exciting work on real models.', response: null },
-      { id: 6, rating: 3, text: 'Need better docs.', response: 'We’ll improve that.' }
-    ],
-    'sdaia_cybersecurity intern': [
-      { id: 7, rating: 5, text: 'Challenging and rewarding!', response: null },
-      { id: 8, rating: 4, text: 'Real-world firewall tasks.', response: null },
-      { id: 9, rating: 4, text: 'Great mentoring.', response: 'Thank you!' }
-    ]
-  };
-  
+  'sabic_software engineering intern': [
+    { id: 1, rating: 5, text: 'Excellent mentorship, engaging tasks.', response: 'Thank you!' },
+    { id: 2, rating: 4, text: 'Learned a lot, but onboarding was slow.', response: null },
+    { id: 3, rating: 5, text: 'Great learning culture!', response: null }
+  ],
+  'aramco_ai & machine learning intern': [
+    { id: 4, rating: 4, text: 'Loved the datasets and mentorship.', response: 'Glad to hear!' },
+    { id: 5, rating: 5, text: 'Exciting work on real models.', response: null },
+    { id: 6, rating: 3, text: 'Need better docs.', response: 'We’ll improve that.' }
+  ],
+  'sdaia_cybersecurity intern': [
+    { id: 7, rating: 5, text: 'Challenging and rewarding!', response: null },
+    { id: 8, rating: 4, text: 'Real-world firewall tasks.', response: null },
+    { id: 9, rating: 4, text: 'Great mentoring.', response: 'Thank you!' }
+  ]
+};
 
 const CompanyPageReviews = () => {
   const { companyName, position } = useParams();
@@ -77,13 +75,10 @@ const CompanyPageReviews = () => {
 
   return (
     <Container className="py-4">
-      {/* Header */}
       <div className="d-flex align-items-center mt-3 mb-4">
         <i className="bi bi-building fs-3 text-secondary me-3"></i>
         <div>
-          <h5 className="mb-0 text-capitalize company-name fw-bold text-dark">
-            {companyName}
-          </h5>
+          <h5 className="mb-0 text-capitalize company-name fw-bold text-dark">{companyName}</h5>
           <small className="text-muted text-capitalize">{position}</small>
         </div>
         <div className="ms-auto text-primary d-flex align-items-center">
@@ -92,23 +87,13 @@ const CompanyPageReviews = () => {
         </div>
       </div>
 
-      {/* Ratings Summary */}
       <div className="mb-4 d-flex flex-wrap gap-4">
-        <div>
-          <strong className="rating-label">Reputation</strong> {renderStars(4)}
-        </div>
-        <div>
-          <strong className="rating-label">Social</strong> {renderStars(5)}
-        </div>
-        <div>
-          <strong className="rating-label">Opportunities</strong> {renderStars(4)}
-        </div>
-        <div>
-          <strong className="rating-label">Location</strong> {renderStars(4)}
-        </div>
+        <div><strong className="rating-label">Reputation</strong> {renderStars(4)}</div>
+        <div><strong className="rating-label">Social</strong> {renderStars(5)}</div>
+        <div><strong className="rating-label">Opportunities</strong> {renderStars(4)}</div>
+        <div><strong className="rating-label">Location</strong> {renderStars(4)}</div>
       </div>
 
-      {/* Reviews */}
       <h5 className="mb-3">Student Reviews</h5>
 
       {reviews.length === 0 ? (
@@ -155,7 +140,7 @@ const CompanyPageReviews = () => {
                           💾 Save
                         </button>
                         <button
-                          className='second-btn'
+                          className="second-btn"
                           size="sm"
                           onClick={() => toggleEditing(r.id)}
                         >
@@ -165,27 +150,29 @@ const CompanyPageReviews = () => {
                     </>
                   ) : r.response ? (
                     <div className="bg-light border rounded p-3 mt-2">
-                      <strong className="d-block mb-1">Company Response:</strong>
+                      <strong className="d-block mb-1 text-warning">Company Response:</strong>
                       <span>{r.response}</span>
-                      <div className="mt-2">
+                      <div className="mt-2 d-flex gap-2">
                         <button
-                          className='second-btn me-2'
+                          className="second-btn"
                           size="sm"
                           onClick={() => toggleEditing(r.id)}
                         >
                           ✏️ Edit
                         </button>
                         <button
-                          className='def-btn'
-                          size="sm"
-                          onClick={() => handleDelete(r.id)}
-                        >
-                          🗑️ Delete
-                        </button>
+  className="def-btn"
+  size="sm"
+  onClick={() => handleDelete(r.id)}
+  style={{ width: '120px' }}  
+>
+  🗑️ Delete
+</button>
+
                       </div>
                     </div>
                   ) : (
-                    <button className='def-btn' onClick={() => toggleEditing(r.id)}>
+                    <button className="def-btn" onClick={() => toggleEditing(r.id)}>
                       Respond
                     </button>
                   )}
@@ -200,4 +187,5 @@ const CompanyPageReviews = () => {
 };
 
 export default CompanyPageReviews;
+
 

@@ -4,9 +4,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Alert from "react-bootstrap/Alert";
-import Header from "./Header";
-import Navbar from "./Navbar";
 import { useState } from "react";
+import AdminNavbar from '../AdminNavbar';
 
 export default function CompanyDetails({ name, email, description, documents, logo }) {
   const [showAcceptAlert, setShowAcceptAlert] = useState(false);
@@ -17,10 +16,11 @@ export default function CompanyDetails({ name, email, description, documents, lo
   };
 
   return (
+    <>
+      <AdminNavbar />
     <Container style={{ justifyContent: "center", paddingTop: "80px" }}>
       <Row className="justify-content-center w-100">
-        <Navbar />
-        <Header title="Company Details" />
+        
 
         {/* Alerts */}
         <div
@@ -139,5 +139,6 @@ export default function CompanyDetails({ name, email, description, documents, lo
         </Col>
       </Row>
     </Container>
+    </>
   );
 }
