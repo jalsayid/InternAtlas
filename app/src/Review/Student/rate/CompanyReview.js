@@ -7,6 +7,7 @@ import StudentNavBar from '../../../StudentNavBar';
 import { reviewData } from '../../../Data/reviews';
 import { opportunities } from '../../../Data/dummyData';
 
+
 const CompanyReview = () => {
     const { companyName } = useParams();
     const navigate = useNavigate();
