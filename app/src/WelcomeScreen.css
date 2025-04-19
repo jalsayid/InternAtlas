@@ -40,32 +40,26 @@
     }
   }
 
-  .typing-text {
-    font-size: 18px;
-    font-weight: 500;
-    color: #444;
-    border-right: 2px solid #FFB608;
+  .typing-effect {
+    font-size: 20px;
+    font-weight: 450;
+    font-family: 'Roboto', sans-serif;  /* 👈 your preferred font */
     white-space: nowrap;
     overflow: hidden;
-    width: 0;
-    animation: typing 2s steps(25, end) forwards, blink 0.6s step-end infinite;
-    animation-delay: 0.8s;
-    margin-top: 10px;
+    border-right: 2px solid #FFB608;
+    animation: typing 5s steps(50, end), blink 0.6s step-end infinite;
+    animation-fill-mode: forwards;
   }
   
   @keyframes typing {
-    from {
-      width: 0;
-    }
-    to {
-      width: 240px; /* Adjust based on quote length */
-    }
+    from { width: 0; }
+    to { width: 100%; }
   }
   
   @keyframes blink {
-    50% {
-      border-color: transparent;
-    }
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #FFB608; }
   }
+  
   
   

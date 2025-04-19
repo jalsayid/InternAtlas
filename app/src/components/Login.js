@@ -23,15 +23,16 @@ function Login({ onSwitchToRegister }) {
             setFormErrors(errors);
         } else {
             if (username === 'admin' && password === 'admin') {
-                // Redirect to admin dashboard
-                navigate('/dashboard/admin');
+                sessionStorage.setItem('loggedInUser', 'admin');
+                navigate('/welcome');
             } else if (username === 'student' && password === 'student') {
-                // Redirect to student dashboard
-                navigate('/dashboard/student');
+                sessionStorage.setItem('loggedInUser', 'student');
+                navigate('/welcome');
             } else if (username === 'company' && password === 'company') {
-                // Redirect to company dashboard
-                navigate('/dashboard/company');
-            } else {
+                sessionStorage.setItem('loggedInUser', 'company');
+                navigate('/welcome');
+            }            
+             else {
                 setShowAlert(true);
             }
             setUsername('');

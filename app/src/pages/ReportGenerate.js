@@ -119,7 +119,7 @@ export default function ReportGenerate() {
                                 </div>
                             </div>
                         </div>
-                        <a href="/docs/reportk.pdf" target="_blank" rel="noopener noreferrer">
+                        <a href="/docs/reportZMI.pdf" target="_blank" rel="noopener noreferrer">
                         <button              className="def-btn"
                         >
                                 Export as PDF
