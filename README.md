@@ -65,6 +65,23 @@
 
 ---
 
+
+## 🔐 Login Credentials for Demo
+
+- **Admin**:  
+  - Username: `admin`  
+  - Password: `admin`
+
+- **Company**:  
+  - Username: `company`  
+  - Password: `company`
+
+- **Student**:  
+  - Username: `student`  
+  - Password: `student`
+
+---
+
 ## 👥 Team Members & Roles
 
 | Name            | Role        |
