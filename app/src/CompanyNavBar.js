@@ -13,8 +13,8 @@ const CompanyNavbar = () => {
         <Navbar expand="lg" bg="white" className="shadow-sm custom-navbar">
             <Container>
                 <Navbar.Brand
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => navigate('/company')}
+                    style={{ cursor: 'pointer', paddingLeft: '12px' }}
+                    onClick={() => navigate('/landing-page')}
                     className="logo-wrapper"
                 >
                     <img

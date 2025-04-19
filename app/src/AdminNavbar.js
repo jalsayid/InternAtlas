@@ -13,7 +13,7 @@ const AdminNavbar = () => {
         <Navbar expand="lg" bg="white" className="shadow-sm custom-navbar">
             <Container>
                 <Navbar.Brand
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer' , paddingLeft: '12px'}}
                     onClick={() => navigate('/')}
                     className="logo-wrapper"
                 >
