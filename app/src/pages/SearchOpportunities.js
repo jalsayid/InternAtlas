@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Form } from 'react-bootstrap';
+import { Container, Form, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import OpportunityCard from '../components/OpportunityCard';
 import FilterPanel from '../components/FilterPanel';
@@ -32,7 +32,12 @@ function SearchOpportunities() {
       <StudentNavBar />
 
       <Container className="my-5">
-        <h2 className="mb-4 text-center fw-bold">Internship Opportunities</h2>
+  <Row className="justify-content-center">
+    <Col md="auto">
+      <h1 className="page-title" style={{ marginLeft: "20px" }}>Internship Opportunities</h1>
+    </Col>
+  </Row>
+
 
         {/* Filters */}
         <div className="mb-3">

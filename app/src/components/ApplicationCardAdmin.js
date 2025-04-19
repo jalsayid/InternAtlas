@@ -19,7 +19,7 @@ function ApplicationCardAdmin({ app, onDelete }) {
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Location:</strong> {app.location}</p>
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>
             <button
-            className='second-btn'
+            className='def-btn'
              onClick={(e) => {
                   e.stopPropagation();
                   onDelete(app.id);

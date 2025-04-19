@@ -38,7 +38,8 @@ function TrackProfiles() {
 
   return (
     <Container className="my-5" style={{ maxWidth: '1000px' }}>
-      <h2 className="mb-4 text-center" style={{fontFamily: 'Roboto', fontSize: "40px"}}>Companies Profile</h2>
+              <h2 className="page-title" style={{ fontFamily: 'Roboto' }}>
+              Companies Profile</h2>
       <Form className="mb-3 d-flex justify-content-center">
         <Form.Control
           type="text"

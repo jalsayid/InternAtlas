@@ -16,7 +16,7 @@ function TrackApplications() {
       <CompanyNavBar /> {/*  Add NavBar at top */}
 
       <Container className="my-5" style={{ maxWidth: '1000px' }}>
-        <h2 className="mb-4 text-center" style={{ fontFamily: 'Roboto', fontSize: "40px" }}>
+        <h2 className="page-title" style={{ fontFamily: 'Roboto'}}>
           Internship Opportunities Posted
         </h2>
         

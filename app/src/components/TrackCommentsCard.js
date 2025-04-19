@@ -29,7 +29,7 @@ function TrackCommentsCard({ app, onDelete}) {
                   e.stopPropagation();
                   onDelete(app.id);
                 }}
-                className='second-btn'>Delete</button>
+                className='def-btn'>Delete</button>
             </div>
           </Col>
         </Row>

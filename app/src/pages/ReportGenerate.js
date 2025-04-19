@@ -53,11 +53,14 @@ export default function ReportGenerate() {
         <>
       <AdminNavbar />
 
-        
+      <h1 className="page-title" style={{ marginLeft: "20px" }}>Generate Reports</h1>
+
         <div className="container mt-5">
             <div className="p-4 rounded shadow-sm" style={{ backgroundColor: "#fffef3" }}>
+            <h2 className="animated-subtitle">Hey Admin! Here's What's Happening</h2>
+
                 <h3 className="mb-4 text-center" style={{fontWeight: "bold" }}>
-                    📊 Numerical Summaries Dashboard
+                    📊 Numerical Summaries
                 </h3>
 
                 <div className="d-flex justify-content-center gap-5 mb-5">
@@ -80,8 +83,8 @@ export default function ReportGenerate() {
                     <div className="p-3 shadow rounded bg-white">
                         <OpportunitiesBarChart data={displayedCompanies} />
                         <button
-                            className="btn btn-sm mt-3"
-                            style={{ backgroundColor: "#FFB608", color: "#fff" }}
+                                      className="def-btn"
+
                             onClick={() => setShowAllCompanies(!showAllCompanies)}
                         >
                             {showAllCompanies ? "Show Top 10 Only" : "Show All Companies"}
@@ -117,10 +120,9 @@ export default function ReportGenerate() {
                             </div>
                         </div>
                         <a href="/docs/reportk.pdf" target="_blank" rel="noopener noreferrer">
-                            <button
-                                className="second-btn mt-3"
-                            >
-                                📄 Export as PDF
+                        <button              className="def-btn"
+                        >
+                                Export as PDF
                             </button>
                         </a>
                     </div>

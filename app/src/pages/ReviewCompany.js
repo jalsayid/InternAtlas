@@ -62,6 +62,7 @@ export default function ReviewCompany() {
       <Container fluid style={{ paddingTop: "80px" }}>
         <Header title="Manage Company Requests" />
 
+
         <Row className="g-4 px-4">
           <Col lg={3} md={6} sm={12}>
             <CompanyInfoCard {...stc} />

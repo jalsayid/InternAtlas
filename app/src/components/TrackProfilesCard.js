@@ -27,7 +27,7 @@ function TrackProfilesCard({ app ,onClick, onDelete}) {
                   e.stopPropagation();
                   onDelete(app.id);
                 }}
-               type="button" className='second-btn'>Delete</button>
+               type="button" className='def-btn'>Delete</button>
             </div>
           </Col>
         </Row>

@@ -28,7 +28,7 @@ function ApplicantCard({ imgSrc, title, content, link }) {
             }}
           >
             <Link to={link}>
-              <button className="def-btn">view details</button>
+              <button className="def-btn">View Details</button>
             </Link>
           </div>
         </Card.Body>

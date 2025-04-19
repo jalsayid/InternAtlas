@@ -28,6 +28,7 @@ const SearchCompany = () => {
             <Container className="bg-light py-5 min-vh-100">
                 <Row className="justify-content-center mb-4">
                     <Col md={6} className="text-center">
+                    <h1 className="page-title">Ratings & Reviews</h1>
                         <h3 className="mb-4 fw-bold text-dark">Enter the company's name :</h3>
                         <InputGroup className="mb-4 shadow-sm">
                             <InputGroup.Text id="search-icon" onClick={handleSearch} style={{ cursor: 'pointer' }}>

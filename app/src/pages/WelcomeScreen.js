@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../WelcomeScreen.css'; 
 
-export default function WelcomeScreen({ userName = "User" }) {
+export default function WelcomeScreen({ userName = "Student" }) {
   const navigate = useNavigate();
 
   useEffect(() => {

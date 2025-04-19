@@ -23,7 +23,7 @@ function PostInternshipForm() {
         location: '',
         duration: '',
         qualifications: '',
-        responsibilities: ''
+        responsibilities: '' 
     });
 
     const [showModal, setShowModal] = useState(false);
@@ -91,7 +91,7 @@ function PostInternshipForm() {
             <CompanyNavBar /> {}
 
             <Container className="mt-5">
-                <h2>Post a New Internship Opportunity</h2>
+                <h2 className="page-title">Post a New Internship Opportunity</h2>
 
                 <div style={{
                     position: "fixed",
