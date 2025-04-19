@@ -111,7 +111,7 @@ function PostInternshipForm() {
 
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formTitle" className="mb-4">
-                        <Form.Label><FaPen /> Internship Title</Form.Label>
+                        <Form.Label><FaPen style={{ color: '#FFB608', marginRight: '8px' }}/> Internship Title</Form.Label>
                         <Form.Control
                             type="text"
                             value={title}
@@ -126,7 +126,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formDescription" className="mb-4">
-                        <Form.Label><FaFileAlt /> Internship Description</Form.Label>
+                        <Form.Label><FaFileAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Internship Description</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
@@ -142,7 +142,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formLocation" className="mb-4">
-                        <Form.Label><FaMapMarkerAlt /> Location</Form.Label>
+                        <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Location</Form.Label>
                         <Form.Control
                             type="text"
                             value={location}
@@ -154,7 +154,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formDuration" className="mb-4">
-                        <Form.Label><FaMapMarkerAlt /> Duration</Form.Label>
+                        <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Duration</Form.Label>
                         <Form.Control
                             as="select"
                             value={duration}
@@ -169,7 +169,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formQualifications" className="mb-4">
-                        <Form.Label><FaGraduationCap /> Qualifications</Form.Label>
+                        <Form.Label><FaGraduationCap style={{ color: '#FFB608', marginRight: '8px' }}/> Qualifications</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
@@ -185,7 +185,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formResponsibilities" className="mb-4">
-                        <Form.Label><FaTasks /> Responsibilities</Form.Label>
+                        <Form.Label><FaTasks style={{ color: '#FFB608', marginRight: '8px' }}/> Responsibilities</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
