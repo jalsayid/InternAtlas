@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 import { StarFill } from 'react-bootstrap-icons';
 
 
@@ -19,15 +18,15 @@ function TrackCommentsCard({ app, onDelete}) {
       <Card.Body>
         <Row className="align-items-center">
           <Col style={{textAlign: "left"}}>
-            <h5 style={{fontSize: "26px", fontFamily: 'Roboto'}}>{app.user}</h5>
+            <h5 style={{fontSize: "26px", fontFamily: 'Roboto'}}>{app.studentName}</h5>
             <div>{renderStars(app.rating)}</div>            
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Company:</strong> {app.company}</p>
-            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Comment:</strong> {app.comment}</p>
+            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Comment:</strong> {app.reviewText}</p>
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Reason:</strong> {app.reason}</p>
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>
               <button onClick={(e) => {
                   e.stopPropagation();
-                  onDelete(app.id);
+                  onDelete(app._id);
                 }}
                 className='def-btn'>Delete</button>
             </div>

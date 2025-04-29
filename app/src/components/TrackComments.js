@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import TrackCommentsCard from './TrackCommentsCard.js';
-import { invalidCompanyRatings } from '../dummyData'; 
 import Confirmation from './Confirmation.js'; 
 import SubmissionAlert from './Alert.js';
 
 
 function TrackComments() {
     const [search, setSearch] = useState("");
-    const [comments, setCommenents] = useState(invalidCompanyRatings);
+    const [comments, setCommenents] = useState([]);
 
     const [showConfirm, setShowConfirm] = useState(false);
     const [pendingDeleteId, setPendingDeleteId] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
 
+    // Fetch data from API
+       useEffect(() => {
+        fetch('http://localhost:3001/api/inappropriateComments') // Adjust if hosted elsewhere
+          .then(res => res.json())
+          .then(data => setCommenents(data))
+          .catch(err => console.error("Failed to fetch comment", err));
+      }, []);
 
     const handleDelete = (id) => {
       setPendingDeleteId(id);
@@ -21,22 +27,27 @@ function TrackComments() {
 
       };
       const confirmDeletion = () => {
-        const updated = comments.filter(comment => comment.id !== pendingDeleteId);
-        setCommenents(updated);
-        setShowConfirm(false);
-        setPendingDeleteId(null);
-      
-        
-        setShowAlert(true);
-      
-        
-        setTimeout(() => setShowAlert(false), 3000);
-      };
+        fetch(`http://localhost:3001/api/inappropriateComments/${pendingDeleteId}`, {
+          method: 'DELETE',
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error("Failed to delete comment");
+            const updated = comments.filter(app => app._id !== pendingDeleteId);
+            setCommenents(updated);
+            setShowAlert(true);
+          })
+          .catch(err => console.error("Error during deletion:", err))
+          .finally(() => {
+            setShowConfirm(false);
+            setPendingDeleteId(null);
+            setTimeout(() => setShowAlert(false), 3000);
+          });      
+        };
       
     
 
   const filtered = comments.filter(app =>
-    app.user.toLowerCase().includes(search.toLowerCase())
+    app.studentName.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -62,7 +73,7 @@ function TrackComments() {
 
       {filtered.map(app => (
         <TrackCommentsCard
-          key={app.id}
+          key={app._id}
           app={app}
           onDelete={handleDelete}
         />

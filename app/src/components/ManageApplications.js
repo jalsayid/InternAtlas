@@ -15,7 +15,7 @@ function ManageApplications() {
 
    // Fetch data from API
    useEffect(() => {
-    fetch('http://localhost:5000/api/internships') // Adjust if hosted elsewhere
+    fetch('http://localhost:3001/api/internships') // Adjust if hosted elsewhere
       .then(res => res.json())
       .then(data => setApplication(data))
       .catch(err => console.error("Failed to fetch applications", err));
@@ -32,14 +32,23 @@ function ManageApplications() {
   };
 
   const confirmDeletion = () => {
-    const updated = application.filter(app => app._id !== pendingDeleteId);
-    setApplication(updated);
-    setShowConfirm(false);
-    setPendingDeleteId(null);
-    setShowAlert(true);
-
-    setTimeout(() => setShowAlert(false), 3000); 
+    fetch(`http://localhost:3001/api/internships/${pendingDeleteId}`, {
+      method: 'DELETE',
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to delete application");
+        const updated = application.filter(app => app._id !== pendingDeleteId);
+        setApplication(updated);
+        setShowAlert(true);
+      })
+      .catch(err => console.error("Error during deletion:", err))
+      .finally(() => {
+        setShowConfirm(false);
+        setPendingDeleteId(null);
+        setTimeout(() => setShowAlert(false), 3000);
+      });
   };
+  
 
   return (
    
