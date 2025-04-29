@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Container, Form } from 'react-bootstrap';
 import ApplicationCardAdmin from './ApplicationCardAdmin.js';
-import { applications } from '../dummyData'; 
 import Confirmation from './Confirmation.js';
 import SubmissionAlert from './Alert.js';
 
 
 function ManageApplications() {
   const [search, setSearch] = useState("");
-  const [application, setApplication] = useState(applications);
+  const [application, setApplication] = useState([]);
 
   const [showConfirm, setShowConfirm] = useState(false);
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
 
+   // Fetch data from API
+   useEffect(() => {
+    fetch('http://localhost:5000/api/internships') // Adjust if hosted elsewhere
+      .then(res => res.json())
+      .then(data => setApplication(data))
+      .catch(err => console.error("Failed to fetch applications", err));
+  }, []);
+
+
   const filtered = application.filter(app =>
-    app.position.toLowerCase().includes(search.toLowerCase())
+    app.title.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleDelete = (id) => {
@@ -24,7 +32,7 @@ function ManageApplications() {
   };
 
   const confirmDeletion = () => {
-    const updated = application.filter(app => app.id !== pendingDeleteId);
+    const updated = application.filter(app => app._id !== pendingDeleteId);
     setApplication(updated);
     setShowConfirm(false);
     setPendingDeleteId(null);
@@ -60,7 +68,7 @@ function ManageApplications() {
 
         {filtered.map(app => (
           <ApplicationCardAdmin
-            key={app.id}
+            key={app._id}
             app={app}
             onDelete={handleDelete}
           />
