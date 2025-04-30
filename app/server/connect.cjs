@@ -37,6 +37,7 @@ const app = express();
 app.use(cors()); // Allow frontend to call the backend
 const PORT = 3001;
 
+
 const uri = process.env.DB_URI;
 const client = new MongoClient(uri, {
   serverApi: {
@@ -45,14 +46,33 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
-// this route is used to fetch Opportunities data
+
+
+
+// this route is used to fetch Opportunities data with logos from CompanyData
 app.get('/api/internships', async (req, res) => {
   try {
     await client.connect();
     const db = client.db('App');
-    const collection = db.collection('InternshipOpportunitiesData');
-    const data = await collection.find({}).toArray();
-    res.json(data);
+
+    const internships = await db.collection('InternshipOpportunitiesData').find({}).toArray();
+    const companies = await db.collection('CompanyData').find({}).toArray();
+
+    // Create a map: companyName (lowercased) → logo
+    const logoMap = {};
+    companies.forEach(c => {
+      if (c.companyName && c.logo) {
+        logoMap[c.companyName.toLowerCase()] = c.logo;
+      }
+    });
+
+    // Add logo to each internship by matching "company" field
+    const internshipsWithLogos = internships.map(internship => {
+      const logo = logoMap[internship.company?.toLowerCase()] || '';
+      return { ...internship, logo };
+    });
+
+    res.json(internshipsWithLogos);
   } catch (err) {
     console.error(err);
     res.status(500).send('Error fetching internship opportunities');
@@ -60,6 +80,9 @@ app.get('/api/internships', async (req, res) => {
     await client.close();
   }
 });
+
+
+
 
 //the route is used to fetch inappropriate comments
 app.get('/api/inappropriateComments', async (req, res) => {
@@ -123,4 +146,9 @@ app.delete('/api/inappropriateComments/:id', async (req, res) => {
 });
 
 
+
+
+
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+

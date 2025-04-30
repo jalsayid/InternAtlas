@@ -11,8 +11,7 @@ function OpportunityDetailsPagesStudent() {
   if (!opportunity) return <p>Opportunity not found.</p>;
 
   const handleApply = () => {
-    navigate(`/contact-informationForm/${id}`);
-  };
+    navigate(`/contact-informationForm/${id}`);};
 
   const handleBack = () => {
     navigate('/search-opportunities');
@@ -84,4 +83,4 @@ function OpportunityDetailsPagesStudent() {
   );
 }
 
-export default OpportunityDetailsPagesStudent;
+export default OpportunityDetailsPagesStudent; 

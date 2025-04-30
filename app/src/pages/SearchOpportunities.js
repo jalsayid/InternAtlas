@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Form, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import OpportunityCard from '../components/OpportunityCard';
 import FilterPanel from '../components/FilterPanel';
-import { opportunities } from '../Data/dummyData.js';
-import StudentNavBar from '../StudentNavBar'; 
+import StudentNavBar from '../StudentNavBar';
 
 function SearchOpportunities() {
+  const [opportunities, setOpportunities] = useState([]);
   const [filters, setFilters] = useState({
     type: '',
     company: '',
@@ -16,28 +16,33 @@ function SearchOpportunities() {
 
   const navigate = useNavigate();
 
-  const handleFilterChange = (type, value) => {
-    setFilters(prev => ({ ...prev, [type]: value }));
-  };
+  useEffect(() => {
+    fetch('http://localhost:3001/api/internships')
+      .then(response => response.json())
+      .then(data => {
+        const activeOnly = data.filter(item => item.status?.toLowerCase() === 'active');
+        setOpportunities(activeOnly);
+      })
+      .catch(error => console.error('Error fetching internships:', error));
+  }, []);
+  
 
   const filtered = opportunities.filter(o =>
     (!filters.type || o.type === filters.type) &&
-    (!filters.company || o.company.toLowerCase().includes(filters.company.toLowerCase())) &&
-    (!filters.location || o.location.toLowerCase().includes(filters.location.toLowerCase())) &&
-    (!filters.title || o.title.toLowerCase().includes(filters.title.toLowerCase()))
+    (!filters.company || o.company?.toLowerCase().includes(filters.company.toLowerCase())) &&
+    (!filters.location || o.location?.toLowerCase().includes(filters.location.toLowerCase())) &&
+    (!filters.title || o.title?.toLowerCase().includes(filters.title.toLowerCase()))
   );
 
   return (
     <>
       <StudentNavBar />
-
       <Container className="my-5">
-  <Row className="justify-content-center">
-    <Col md="auto">
-      <h1 className="page-title" style={{ marginLeft: "20px" }}>Internship Opportunities</h1>
-    </Col>
-  </Row>
-
+        <Row className="justify-content-center">
+          <Col md="auto">
+            <h1 className="page-title" style={{ marginLeft: "20px" }}>Internship Opportunities</h1>
+          </Col>
+        </Row>
 
         {/* Filters */}
         <div className="mb-3">
@@ -59,9 +64,9 @@ function SearchOpportunities() {
           {filtered.length > 0 ? (
             filtered.map(op => (
               <OpportunityCard
-                key={op.id}
+                key={op._id}
                 opportunity={op}
-                onClick={() => navigate(`/opportunity/${op.id}`)}
+                onClick={() => navigate(`/opportunity/${op._id}`)}
               />
             ))
           ) : (
@@ -71,6 +76,10 @@ function SearchOpportunities() {
       </Container>
     </>
   );
+
+  function handleFilterChange(type, value) {
+    setFilters(prev => ({ ...prev, [type]: value }));
+  }
 }
 
 export default SearchOpportunities;
