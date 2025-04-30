@@ -32,14 +32,23 @@ function ManageApplications() {
   };
 
   const confirmDeletion = () => {
-    const updated = application.filter(app => app._id !== pendingDeleteId);
-    setApplication(updated);
-    setShowConfirm(false);
-    setPendingDeleteId(null);
-    setShowAlert(true);
-
-    setTimeout(() => setShowAlert(false), 3000); 
+    fetch(`http://localhost:3001/api/internships/${pendingDeleteId}`, {
+      method: 'DELETE',
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to delete application");
+        const updated = application.filter(app => app._id !== pendingDeleteId);
+        setApplication(updated);
+        setShowAlert(true);
+      })
+      .catch(err => console.error("Error during deletion:", err))
+      .finally(() => {
+        setShowConfirm(false);
+        setPendingDeleteId(null);
+        setTimeout(() => setShowAlert(false), 3000);
+      });
   };
+  
 
   return (
    
