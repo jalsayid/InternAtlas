@@ -36,11 +36,7 @@ const bcrypt = require('bcrypt');
 
 const app = express();
 app.use(cors()); // Allow frontend to call the backend
-<<<<<<< HEAD
-const PORT = process.env.PORT || 3001;
-=======
 const PORT = 3001;
->>>>>>> fd0480d2ff2d3a224e6c21a2e236e31cb4dd89e8
 
 const uri = process.env.DB_URI;
 const client = new MongoClient(uri, {
@@ -50,12 +46,8 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
-<<<<<<< HEAD
 
-//dana
-=======
-// this route is used to fetch Opportunities data
->>>>>>> fd0480d2ff2d3a224e6c21a2e236e31cb4dd89e8
+//this route is used to fetch Opportunities data
 app.get('/api/internships', async (req, res) => {
   try {
     await client.connect();
@@ -71,12 +63,6 @@ app.get('/api/internships', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-app.use(express.json()); // allow you to parse JSON request body
-
-// post internship opportunity: aisha
-app.post('/api/internships', async (req, res) => {
-=======
 //the route is used to fetch inappropriate comments
 app.get('/api/inappropriateComments', async (req, res) => {
   try {
@@ -96,24 +82,10 @@ app.get('/api/inappropriateComments', async (req, res) => {
 // this route is used to delete an opportunity from opportunities data
 app.delete('/api/internships/:id', async (req, res) => {
   const id = parseInt(req.params.id);
->>>>>>> fd0480d2ff2d3a224e6c21a2e236e31cb4dd89e8
   try {
     await client.connect();
     const db = client.db('App');
     const collection = db.collection('InternshipOpportunitiesData');
-<<<<<<< HEAD
-
-    const newInternship = req.body; // Get the data sent from the frontend
-    const result = await collection.insertOne(newInternship); // Insert the data into MongoDB
-
-    res.status(201).json({
-      message: 'Internship Opportunity posted successfully!',
-      internshipId: result.insertedId,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error posting internship opportunity');
-=======
     const result = await collection.deleteOne({ _id: id });
 
     if (result.deletedCount === 1) {
@@ -124,47 +96,11 @@ app.delete('/api/internships/:id', async (req, res) => {
   } catch (err) {
     console.error('Error deleting application:', err);
     res.status(500).json({ message: 'Internal server error' });
->>>>>>> fd0480d2ff2d3a224e6c21a2e236e31cb4dd89e8
   } finally {
     await client.close();
   }
 });
 
-<<<<<<< HEAD
-//login:aisha
-app.post('/api/login', async (req, res) => {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required' });
-  }
-
-  try {
-    await client.connect();
-    const db = client.db('App');
-    const sessionCollection = db.collection('SessionData'); // The collection where login credentials are stored
-
-    // Find the user in SessionData collection
-    const user = await sessionCollection.findOne({ username });
-
-    if (user) {
-      // Compare the provided password with the stored hashed password
-      const isMatch = await bcrypt.compare(password, user.password); // Compare the hashed password in DB
-
-      if (isMatch) {
-        // Login successful
-        res.status(200).json({ message: 'Login successful', userType: user.userType });
-      } else {
-        // Incorrect password
-        res.status(401).json({ message: 'Invalid username or password' });
-      }
-    } else {
-      // User not found
-      res.status(404).json({ message: 'User not found' });
-    }
-  } catch (err) {
-    console.error('Error during login:', err);
-=======
 // this route is used to delete a comment from Review data
 app.delete('/api/inappropriateComments/:id', async (req, res) => {
   const id = req.params.id; 
@@ -182,7 +118,6 @@ app.delete('/api/inappropriateComments/:id', async (req, res) => {
     }
   } catch (err) {
     console.error('Error deleting comment:', err);
->>>>>>> fd0480d2ff2d3a224e6c21a2e236e31cb4dd89e8
     res.status(500).json({ message: 'Internal server error' });
   } finally {
     await client.close();
@@ -190,7 +125,6 @@ app.delete('/api/inappropriateComments/:id', async (req, res) => {
 });
 
 
-<<<<<<< HEAD
 //register as a student and company :aisha
 app.post('/api/register', async (req, res) => {
   const {
@@ -288,12 +222,67 @@ app.post('/api/register', async (req, res) => {
     await client.close(); // Ensure the database connection is closed
   }
 });
-
+//login:aisha
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+ 
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Username and password are required' });
+  }
+ 
+  try {
+    await client.connect();
+    const db = client.db('App');
+    const sessionCollection = db.collection('SessionData'); // The collection where login credentials are stored
+ 
+    // Find the user in SessionData collection
+    const user = await sessionCollection.findOne({ username });
+ 
+    if (user) {
+      // Compare the provided password with the stored hashed password
+      const isMatch = await bcrypt.compare(password, user.password); // Compare the hashed password in DB
+ 
+      if (isMatch) {
+        // Login successful
+        res.status(200).json({ message: 'Login successful', userType: user.userType });
+      } else {
+        // Incorrect password
+        res.status(401).json({ message: 'Invalid username or password' });
+      }
+    } else {
+      // User not found
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (err) {
+    console.error('Error during login:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+// post internship : aisha
+app.post('/api/internships', async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db('App');
+    const collection = db.collection('InternshipOpportunitiesData');
+ 
+    const newInternship = req.body; // Get the data sent from the frontend
+    const result = await collection.insertOne(newInternship); // Insert the data into MongoDB
+ 
+    res.status(201).json({
+      message: 'Internship Opportunity posted successfully!',
+      internshipId: result.insertedId,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error posting internship opportunity');
+  } finally {
+    await client.close();
+  }
+});
 
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-=======
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
->>>>>>> fd0480d2ff2d3a224e6c21a2e236e31cb4dd89e8
