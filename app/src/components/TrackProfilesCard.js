@@ -18,14 +18,13 @@ function TrackProfilesCard({ app ,onClick, onDelete}) {
           </Col>
 
           <Col style={{textAlign: "left"}}>
-            <h5 style={{fontSize: "26px", fontFamily: 'Roboto'}}>{app.name}</h5>
-            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Contact Person:</strong> {app.contactPerson}</p>
-            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Industry:</strong> {app.industry}</p>
-            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Location:</strong> {app.location}</p>
+            <h5 style={{fontSize: "26px", fontFamily: 'Roboto'}}>{app.companyName}</h5>
+            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Contact informations:</strong> {app.email}</p>
+            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Industry:</strong> {app.sector}</p>
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>
               <button onClick={(e) => {
                   e.stopPropagation();
-                  onDelete(app.id);
+                  onDelete(app._id);
                 }}
                type="button" className='def-btn'>Delete</button>
             </div>
