@@ -28,7 +28,7 @@ function Register({ onSwitchToRegister }) {
     const [companyVerification, setCompanyVerification] = useState(null);
     const [companyFormErrors, setCompanyFormErrors] = useState({});
 
-    const studentHandleSubmit = (event) => {
+    const studentHandleSubmit = async (event) => {
         event.preventDefault();
         setStudentFormErrors({});
         const errors = {};
@@ -46,21 +46,42 @@ function Register({ onSwitchToRegister }) {
         if (Object.keys(errors).length > 0) {
             setStudentFormErrors(errors);
         } else {
-            setSrudentShowAlert(true);
-            setTimeout(() => setSrudentShowAlert(false), 10000);
+            // Send POST request to register student
+            const response = await fetch('http://localhost:3001/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userType: 'student',
+                    fullName: studentFullName,
+                    username: studentUsername,
+                    email: studentEmail,
+                    password: studentPassword,
+                    confirmPassword: studentConfirmPassword,
+                    university: studentUniversity,
+                    major: studentMajor,
+                    location: studentLocation,
+                }),
+            });
 
-            setStudentUsername('');
-            setStudentFullName('');
-            setStudentEmail('');
-            setStudentPassword('');
-            setStudentConfirmPassword('');
-            setStudentUniversity('');
-            setStudentMajor('');
-            setStudentLocation('');
+            const data = await response.json();
+            if (response.ok) {
+                setSrudentShowAlert(true);
+                setTimeout(() => setSrudentShowAlert(false), 10000);
+
+                // Clear form fields
+                setStudentUsername('');
+                setStudentFullName('');
+                setStudentEmail('');
+                setStudentPassword('');
+                setStudentConfirmPassword('');
+                setStudentUniversity('');
+                setStudentMajor('');
+                setStudentLocation('');
+            }
         }
     };
 
-    const companyHandleSubmit = (event) => {
+    const companyHandleSubmit = async (event) => {
         event.preventDefault();
         setCompanyFormErrors({});
         const errors = {};
@@ -77,16 +98,43 @@ function Register({ onSwitchToRegister }) {
         if (Object.keys(errors).length > 0) {
             setCompanyFormErrors(errors);
         } else {
-            setCompanyShowAlert(true);
-            setTimeout(() => setCompanyShowAlert(false), 10000);
+            // Send POST request to register company
 
-            setCompanyName('');
-            setCompanySector('');
-            setCompanyUsername('');
-            setCompanyEmail('');
-            setCompanyPassword('');
-            setCompanyConfirmPassword('');
-            setCompanyVerification(null);
+            const verificationFilePath = companyVerification ? companyVerification.name : '';  // Get the file name from the file object
+    
+            const response = await fetch('http://localhost:3001/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userType: 'company',  // Make sure userType is correctly set to 'company'
+                    companyName,
+                    companySector,
+                    companyUsername,
+                    companyEmail,
+                    companyPassword,
+                    companyConfirmPassword,
+                    companyVerification: verificationFilePath,
+                    description: '',
+                    logo: '',
+                    registrationStatus: 'pending' 
+                }),
+            });
+        
+            const data = await response.json();
+            
+            if (response.ok) {
+                setCompanyShowAlert(true);
+                setTimeout(() => setCompanyShowAlert(false), 10000);
+
+                // Clear form fields
+                setCompanyName('');
+                setCompanySector('');
+                setCompanyUsername('');
+                setCompanyEmail('');
+                setCompanyPassword('');
+                setCompanyConfirmPassword('');
+                setCompanyVerification(null);
+            }
         }
     }
 

@@ -15,7 +15,7 @@ function ManageApplications() {
 
    // Fetch data from API
    useEffect(() => {
-    fetch('http://localhost:5000/api/internships') // Adjust if hosted elsewhere
+    fetch('http://localhost:3001/api/internships') // Adjust if hosted elsewhere
       .then(res => res.json())
       .then(data => setApplication(data))
       .catch(err => console.error("Failed to fetch applications", err));

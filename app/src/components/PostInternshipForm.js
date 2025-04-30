@@ -5,7 +5,7 @@ import { FaPen, FaFileAlt, FaMapMarkerAlt, FaGraduationCap, FaTasks } from 'reac
 import Confirmation from './Confirmation';
 import Alter from './Alert';
 import '../formsStyles.css';
-import CompanyNavBar from '../CompanyNavBar'; 
+import CompanyNavBar from '../CompanyNavBar';
 
 function PostInternshipForm() {
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ function PostInternshipForm() {
         location: '',
         duration: '',
         qualifications: '',
-        responsibilities: '' 
+        responsibilities: ''
     });
 
     const [showModal, setShowModal] = useState(false);
@@ -32,7 +32,7 @@ function PostInternshipForm() {
     const handleClose = () => setShowModal(false);
 
     const handleSave = () => {
-        handleClose();
+        // After successful form submission
         setTitle('');
         setDescription('');
         setLocation('');
@@ -47,49 +47,86 @@ function PostInternshipForm() {
         }, 3000);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const newErrors = {};
         let isValid = true;
 
+        // Form validation
         if (!title) {
             newErrors.title = 'Title is required';
             isValid = false;
-          }
-          if (!description) {
+        }
+        if (!description) {
             newErrors.description = 'Description is required';
             isValid = false;
-          }
-          if (!location) {
+        }
+        if (!location) {
             newErrors.location = 'Location is required';
             isValid = false;
-          }
-          if (!duration) {
+        }
+        if (!duration) {
             newErrors.duration = 'Duration is required';
             isValid = false;
-          }
-          if (!qualifications) {
+        }
+        if (!qualifications) {
             newErrors.qualifications = 'Qualifications are required';
             isValid = false;
-          }
-          if (!responsibilities) {
+        }
+        if (!responsibilities) {
             newErrors.responsibilities = 'Responsibilities are required';
             isValid = false;
-          }
-          
+        }
 
         setErrors(newErrors);
 
-        if (isValid) setShowModal(true);
+        if (isValid) {
+            // Show the confirmation modal before proceeding to submit the data to the backend
+            setShowModal(true);
+        }
     };
+
+    // Handle confirmation and submit data
+    const handleConfirmSubmit = async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/internships', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    company: "dummy", // Replace with dynamic company value if needed
+                    title,
+                    description,
+                    location,
+                    type: duration,
+                    qualifications,
+                    responsibilities,
+                    status: 'active', // Default status or modify as needed
+                }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                handleSave(); // Show success alert and reset fields
+            } else {
+                console.error('Error:', data.message);
+            }
+        } catch (err) {
+            console.error('Error:', err);
+        }
+
+        setShowModal(false); // Close the modal after submitting the data
+    };
+
+
 
     const handleBack = () => navigate(`/dashboard/company`);
 
     return (
         <>
-            <CompanyNavBar /> {}
-
+            <CompanyNavBar />
             <Container className="mt-5">
                 <h2 className="page-title">Post a New Internship Opportunity</h2>
 
@@ -111,7 +148,7 @@ function PostInternshipForm() {
 
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formTitle" className="mb-4">
-                        <Form.Label><FaPen style={{ color: '#FFB608', marginRight: '8px' }}/> Internship Title</Form.Label>
+                        <Form.Label><FaPen style={{ color: '#FFB608', marginRight: '8px' }} /> Internship Title</Form.Label>
                         <Form.Control
                             type="text"
                             value={title}
@@ -126,7 +163,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formDescription" className="mb-4">
-                        <Form.Label><FaFileAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Internship Description</Form.Label>
+                        <Form.Label><FaFileAlt style={{ color: '#FFB608', marginRight: '8px' }} /> Internship Description</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
@@ -142,7 +179,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formLocation" className="mb-4">
-                        <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Location</Form.Label>
+                        <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }} /> Location</Form.Label>
                         <Form.Control
                             type="text"
                             value={location}
@@ -154,7 +191,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formDuration" className="mb-4">
-                        <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Duration</Form.Label>
+                        <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }} /> Duration</Form.Label>
                         <Form.Control
                             as="select"
                             value={duration}
@@ -169,7 +206,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formQualifications" className="mb-4">
-                        <Form.Label><FaGraduationCap style={{ color: '#FFB608', marginRight: '8px' }}/> Qualifications</Form.Label>
+                        <Form.Label><FaGraduationCap style={{ color: '#FFB608', marginRight: '8px' }} /> Qualifications</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
@@ -185,7 +222,7 @@ function PostInternshipForm() {
                     </Form.Group>
 
                     <Form.Group controlId="formResponsibilities" className="mb-4">
-                        <Form.Label><FaTasks style={{ color: '#FFB608', marginRight: '8px' }}/> Responsibilities</Form.Label>
+                        <Form.Label><FaTasks style={{ color: '#FFB608', marginRight: '8px' }} /> Responsibilities</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
@@ -200,12 +237,12 @@ function PostInternshipForm() {
                         <small className="text-muted">Minimum 50 characters. Current length: {responsibilities.length}</small>
                     </Form.Group>
 
-                {/* Submit Button */}
-                <Form.Group className="d-flex justify-content-between mb-3">
-                    <button className='second-btn' onClick={handleBack}>Cancel</button>
-                    <button className='def-btn' type="submit">Publish</button>
-                </Form.Group>
-            </Form>
+                    {/* Submit Button */}
+                    <Form.Group className="d-flex justify-content-between mb-3">
+                        <button className='second-btn' onClick={handleBack}>Cancel</button>
+                        <button className='def-btn' type="submit">Publish</button>
+                    </Form.Group>
+                </Form>
 
                 <Confirmation
                     show={showModal}
@@ -214,7 +251,7 @@ function PostInternshipForm() {
                     bodyText="Do you want to submit this internship opportunity?"
                     closeButtonLabel="Cancel"
                     saveButtonLabel="Yes, Submit"
-                    onSave={handleSave}
+                    onSave={handleConfirmSubmit}
                 />
             </Container>
         </>

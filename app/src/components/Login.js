@@ -11,7 +11,7 @@ function Login({ onSwitchToRegister }) {
     const [password, setPassword] = useState('');
     const [formErrors, setFormErrors] = useState({});
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setFormErrors({});
         const errors = {};
@@ -22,21 +22,34 @@ function Login({ onSwitchToRegister }) {
         if (Object.keys(errors).length > 0) {
             setFormErrors(errors);
         } else {
-            if (username === 'admin' && password === 'admin') {
-                sessionStorage.setItem('loggedInUser', 'admin');
-                navigate('/welcome');
-            } else if (username === 'student' && password === 'student') {
-                sessionStorage.setItem('loggedInUser', 'student');
-                navigate('/welcome');
-            } else if (username === 'company' && password === 'company') {
-                sessionStorage.setItem('loggedInUser', 'company');
-                navigate('/welcome');
-            }            
-             else {
+            try {
+                const response = await fetch('http://localhost:3001/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // If login is successful, store session data or user info
+                    sessionStorage.setItem('loggedInUser', username);
+                    sessionStorage.setItem('userType', data.userType); // store user type (e.g., student, company)
+                    navigate('/welcome'); // Redirect to the welcome page
+                } else {
+                    // Show error alert if login failed
+                    setShowAlert(true);
+                }
+
+                // Clear form fields after submission
+                setUsername('');
+                setPassword('');
+            } catch (err) {
+                console.error('Error:', err);
                 setShowAlert(true);
             }
-            setUsername('');
-            setPassword('');
         }
     };
 
@@ -70,7 +83,7 @@ function Login({ onSwitchToRegister }) {
                     />
                 </div>
             )}
-            
+
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>
