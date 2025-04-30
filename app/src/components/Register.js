@@ -26,6 +26,8 @@ function Register({ onSwitchToRegister }) {
     const [companyPassword, setCompanyPassword] = useState('');
     const [companyConfirmPassword, setCompanyConfirmPassword] = useState('');
     const [companyVerification, setCompanyVerification] = useState(null);
+    const [companyDescription, setCompanyDescription] = useState('');
+    const [companyLogo, setCompanyLogo] = useState('');
     const [companyFormErrors, setCompanyFormErrors] = useState({});
 
     const studentHandleSubmit = async (event) => {
@@ -94,6 +96,8 @@ function Register({ onSwitchToRegister }) {
         if (!companyConfirmPassword) errors.companyConfirmPassword = 'Confirm password is required';
         if (companyPassword !== companyConfirmPassword) errors.companyConfirmPassword = 'Passwords do not match';
         if (!companyVerification) errors.companyVerification = 'Verification file is required';
+        if (!companyDescription) errors.companyDescription = 'Description file is required';
+        if (!companyLogo) errors.companyLogo = 'Logo file is required';
 
         if (Object.keys(errors).length > 0) {
             setCompanyFormErrors(errors);
@@ -101,7 +105,8 @@ function Register({ onSwitchToRegister }) {
             // Send POST request to register company
 
             const verificationFilePath = companyVerification ? companyVerification.name : '';  // Get the file name from the file object
-    
+            const LogoPath = companyLogo ? companyLogo.name : '';
+
             const response = await fetch('http://localhost:3001/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -114,8 +119,8 @@ function Register({ onSwitchToRegister }) {
                     companyPassword,
                     companyConfirmPassword,
                     companyVerification: verificationFilePath,
-                    description: '',
-                    logo: '',
+                    companyDescription,
+                    companyLogo: LogoPath,
                     registrationStatus: 'pending' 
                 }),
             });
@@ -134,6 +139,8 @@ function Register({ onSwitchToRegister }) {
                 setCompanyPassword('');
                 setCompanyConfirmPassword('');
                 setCompanyVerification(null);
+                setCompanyDescription('');
+                setCompanyLogo(null);
             }
         }
     }
@@ -360,6 +367,19 @@ function Register({ onSwitchToRegister }) {
                             {companyFormErrors.companyConfirmPassword && <Form.Text className="text-danger">{companyFormErrors.companyConfirmPassword}</Form.Text>}
                         </Form.Group>
 
+                        {/* Description */}
+                        <Form.Group className="mb-3" controlId="formDescription">
+                            <Form.Label>Company's Description</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="companyDescription"
+                                placeholder="Enter Company's Description"
+                                value={companyDescription}
+                                onChange={(e) => setCompanyDescription(e.target.value)}
+                            />
+                            {companyFormErrors.companyDescription && <Form.Text className="text-danger">{companyFormErrors.companyDescription}</Form.Text>}
+                        </Form.Group>
+
                         {/* Upload Verification */}
                         <Form.Group controlId="verification" className="mb-4">
                             <Form.Label> Upload verification of the company</Form.Label>
@@ -368,6 +388,16 @@ function Register({ onSwitchToRegister }) {
                                 onChange={(e) => setCompanyVerification(e.target.files[0])}
                             />
                             {companyFormErrors.companyVerification && <Form.Text className="text-danger">{companyFormErrors.companyVerification}</Form.Text>}
+                        </Form.Group>
+
+                        {/* Upload Logo */}
+                        <Form.Group controlId="logo" className="mb-4">
+                            <Form.Label> Upload the logo of the company</Form.Label>
+                            <Form.Control
+                                type="file"
+                                onChange={(e) => setCompanyLogo(e.target.files[0])}
+                            />
+                            {companyFormErrors.companyLogo && <Form.Text className="text-danger">{companyFormErrors.companyLogo}</Form.Text>}
                         </Form.Group>
 
                         {/* Submit Button */}

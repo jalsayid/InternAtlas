@@ -18,17 +18,16 @@ router.post('/register', async (req, res) => {
     location,
     companyName,
     sector,
+    companyUsername,
+    companyEmail,
+    companyPassword,
+    companyConfirmPassword,
+    companyDescription,
     verificationFile,
+    logo,
   } = req.body;
 
-  // Validation
-  if (!username || !email || !password || !confirmPassword) {
-    return res.status(400).json({ message: 'All fields are required' });
-  }
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: 'Passwords do not match' });
-  }
 
   try {
     await client.connect();
@@ -37,14 +36,22 @@ router.post('/register', async (req, res) => {
     const studentCollection = db.collection('StudentData');
     const companyCollection = db.collection('CompanyData');
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+
 
     if (userType === 'student') {
+
+      
+      if (!username || !email || !password || !confirmPassword) {
+        console.log("Missing fields:", { username, email, password, confirmPassword });
+        return res.status(400).json({ message: 'All fields are required' });
+      }
+
       const existingStudent = await studentCollection.findOne({ username });
       if (existingStudent) {
         return res.status(400).json({ message: 'Student already exists' });
       }
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(password, 10);
 
       // Insert the student into the StudentData collection
       await studentCollection.insertOne({
@@ -66,21 +73,29 @@ router.post('/register', async (req, res) => {
       res.status(200).json({ message: 'Student registered successfully!' });
 
     } else if (userType === 'company') {
-      const existingCompany = await companyCollection.findOne({ username });
+      
+      if (!companyUsername || !companyEmail || !companyPassword || !companyConfirmPassword) {
+        console.log("Missing fields:", { companyUsername, companyEmail, companyPassword, companyConfirmPassword });
+        return res.status(400).json({ message: 'All fields are required' });
+      }
+
+      const existingCompany = await companyCollection.findOne({ companyUsername });
       if (existingCompany) {
         return res.status(400).json({ message: 'Company already exists' });
       }
+
+      const companyHashedPassword = await bcrypt.hash(companyPassword, 10);
 
       // Insert the company into the CompanyData collection with status 'pending'
       await companyCollection.insertOne({
         companyName,
         sector,
-        username,
-        email,
-        password: hashedPassword,
+        companyUsername,
+        companyEmail,
+        companyPassword: companyHashedPassword,
+        companyDescription,
         verificationFile,
-        description: '',
-        logo: '',
+        logo,
         registrationStatus: 'pending', // New companies are in 'pending' state
       });
 
