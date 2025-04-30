@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import TrackProfilesCard from './TrackProfilesCard.js';
-import { companyProfiles } from '../dummyData'; 
 import ProfileDetailModal from './ProfileDetailModal.js';
 import Confirmation from './Confirmation.js';
 import SubmissionAlert from './Alert.js';
@@ -12,11 +11,19 @@ function TrackProfiles() {
     const [selected, setSelected] = useState(null);
     const [showDetail, setShowDetail] = useState(false);
     const [search, setSearch] = useState("");
-    const [profiles, setProfiles] = useState(companyProfiles);
+    const [profiles, setProfiles] = useState([]);
 
     const [showConfirm, setShowConfirm] = useState(false);
     const [pendingDeleteId, setPendingDeleteId] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
+
+        // Fetch data from API
+        useEffect(() => {
+          fetch('http://localhost:3001/api/companiesdata') // Adjust if hosted elsewhere
+            .then(res => res.json())
+            .then(data => setProfiles(data))
+            .catch(err => console.error("Failed to fetch company data", err));
+        }, []);
 
     const handleDelete = (id) => {
       setPendingDeleteId(id);
@@ -24,7 +31,7 @@ function TrackProfiles() {
 
       };
       const confirmDeletion = () => {
-        const updated = profiles.filter(profile => profile.id !== pendingDeleteId);
+        const updated = profiles.filter(profile => profile._id !== pendingDeleteId);
         setProfiles(updated);
         setShowConfirm(false);
         setPendingDeleteId(null);
@@ -33,7 +40,7 @@ function TrackProfiles() {
       };    
 
   const filtered = profiles.filter(app =>
-    app.name.toLowerCase().includes(search.toLowerCase())
+    app.companyName.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -58,7 +65,7 @@ function TrackProfiles() {
 
       {filtered.map(app => (
         <TrackProfilesCard
-          key={app.id}
+          key={app._id}
           app={app}
           onClick={(data) => {
             setSelected(data);

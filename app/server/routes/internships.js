@@ -16,6 +16,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+//Get a internship posts for a given compant. return a list of all company posts
+router.get('/:companyName', async (req, res) => {
+  const companyName = req.params.companyName;
+  try {
+    await client.connect();
+    const data = await client.db('App').collection('InternshipOpportunitiesData').find({company: companyName }).toArray();
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(`Error fetching internship opportunities for ${companyName}`);
+  } finally {
+    await client.close();
+  }
+}); 
+
 // POST new internship
 router.post('/', async (req, res) => {
   try {
