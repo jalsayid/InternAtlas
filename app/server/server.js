@@ -296,11 +296,9 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config({ path: './config/config.env' });
 
-//import routes
 const internshipRoutes = require('./routes/internships');
 const authRoutes = require('./routes/auth');
 const commentRoutes = require('./routes/comments');
-const companiesData = require("./routes/companiesInfo");
 
 const app = express();
 app.use(express.json());
@@ -312,8 +310,6 @@ const PORT = 3001;
 app.use('/api/internships', internshipRoutes);
 app.use('/api', authRoutes); // handles /login and /register
 app.use('/api/inappropriateComments', commentRoutes);
-app.use('/api/companiesdata', companiesData);
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

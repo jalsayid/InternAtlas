@@ -3,11 +3,30 @@ const router = express.Router();
 const client = require('../config/db');
 
 // GET all internships
+// this route is used to fetch Opportunities data with logos from CompanyData
 router.get('/', async (req, res) => {
   try {
     await client.connect();
-    const data = await client.db('App').collection('InternshipOpportunitiesData').find({}).toArray();
-    res.json(data);
+    const db = client.db('App');
+
+    const internships = await db.collection('InternshipOpportunitiesData').find({}).toArray();
+    const companies = await db.collection('CompanyData').find({}).toArray();
+
+    // Create a map: companyName (lowercased) → logo
+    const logoMap = {};
+    companies.forEach(c => {
+      if (c.companyName && c.logo) {
+        logoMap[c.companyName.toLowerCase()] = c.logo;
+      }
+    });
+
+    // Add logo to each internship by matching "company" field
+    const internshipsWithLogos = internships.map(internship => {
+      const logo = logoMap[internship.company?.toLowerCase()] || '';
+      return { ...internship, logo };
+    });
+
+    res.json(internshipsWithLogos);
   } catch (err) {
     console.error(err);
     res.status(500).send('Error fetching internship opportunities');
@@ -15,6 +34,8 @@ router.get('/', async (req, res) => {
     await client.close();
   }
 });
+
+
 
 //Get a internship posts for a given compant. return a list of all company posts
 router.get('/:companyName', async (req, res) => {
