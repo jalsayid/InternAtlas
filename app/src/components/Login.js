@@ -25,21 +25,23 @@ function Login({ onSwitchToRegister }) {
             try {
                 const response = await fetch('http://localhost:3001/api/login', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ username, password })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password }),
                 });
 
                 const data = await response.json();
 
+                // Check if the response was successful
                 if (response.ok) {
+
                     // If login is successful, store session data or user info
                     sessionStorage.setItem('loggedInUser', username);
-                    sessionStorage.setItem('userType', data.userType); // store user type (e.g., student, company)
+                    sessionStorage.setItem('userType', data.userType); 
+
                     navigate('/welcome'); // Redirect to the welcome page
                 } else {
                     // Show error alert if login failed
+                    console.error(data.message); // Log the error message for debugging
                     setShowAlert(true);
                 }
 
@@ -48,7 +50,6 @@ function Login({ onSwitchToRegister }) {
                 setPassword('');
             } catch (err) {
                 console.error('Error:', err);
-                setShowAlert(true);
             }
         }
     };
@@ -79,7 +80,7 @@ function Login({ onSwitchToRegister }) {
                         show={showAlert}
                         message="Wrong username or password"
                         variant="danger"
-                        onClose={() => setShowAlert(false)} // Close alert
+                        onClose={() => setShowAlert(false)} // Close the alert
                     />
                 </div>
             )}
@@ -108,6 +109,7 @@ function Login({ onSwitchToRegister }) {
                     />
                     {formErrors.password && <Form.Text className="text-danger">{formErrors.password}</Form.Text>}
                 </Form.Group>
+
                 <div className="d-flex justify-content-center">
                     <Button variant="primary" type="submit" className="def-button">
                         Sign in

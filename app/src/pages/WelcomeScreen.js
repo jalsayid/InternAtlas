@@ -8,23 +8,25 @@ export default function WelcomeScreen() {
   const [animationKey, setAnimationKey] = useState(0); // forces re-render for animation
 
   useEffect(() => {
-    const type = sessionStorage.getItem('loggedInUser');
+    
+    const username = sessionStorage.getItem('loggedInUser');
+    const userType = sessionStorage.getItem('userType');
 
     let msg = "Welcome 👋";
-    if (type === 'student') {
-      msg = "Hello, Student 👋 Your future starts here";
-    } else if (type === 'admin') {
-      msg = "Hello, Admin 👋 Time to oversee the platform";
-    } else if (type === 'company') {
-      msg = "Hello, Company 👋 Let’s discover new talent";
+    if (userType === 'student') {
+      msg = `Hello, ${username} 👋 Your future starts here`;
+    } else if (userType === 'admin') {
+      msg = `Hello, ${username} 👋 Time to oversee the platform`;
+    } else if (userType === 'company') {
+      msg = `Hello, ${username} 👋 Let’s discover new talent`;
     }
 
     setMessage(msg);
     setAnimationKey(prev => prev + 1); // retrigger animation when message changes
 
     const timer = setTimeout(() => {
-      if (type === 'admin') navigate('/dashboard/admin');
-      else if (type === 'company') navigate('/dashboard/company');
+      if (userType === 'admin') navigate('/dashboard/admin');
+      else if (userType === 'company') navigate('/dashboard/company');
       else navigate('/dashboard/student');
     }, 5000);
 
