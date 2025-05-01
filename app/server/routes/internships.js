@@ -200,4 +200,44 @@ router.delete('/:companyName', async (req, res) => {
   }
 });
 
+//aisha:edit company internship
+router.put('/id/:id', async (req, res) => {
+  const { id } = req.params;  // Get the internship ID from URL (which is an integer)
+  const { title, description, location, qualifications, responsibilities } = req.body;
+
+  try {
+      await client.connect();
+      const db = client.db('App');
+      
+      // Find and update the internship data using the integer ID
+      const result = await db.collection('InternshipOpportunitiesData').updateOne(
+          { _id: parseInt(id) },  // Use the integer id for querying
+          {
+              $set: {
+                  title,
+                  description,
+                  location,
+                  qualifications,
+                  responsibilities,
+              },
+          }
+      );
+
+      if (result.modifiedCount === 1) {
+          res.status(200).json({ message: 'Internship updated successfully' });
+      } else {
+          res.status(400).json({ message: 'Failed to update internship' });
+      }
+  } catch (err) {
+      console.error('Error updating internship:', err);
+      res.status(500).send('Internal server error');
+  } finally {
+      await client.close();
+  }
+});
+
+
+
+
+
 module.exports = router;

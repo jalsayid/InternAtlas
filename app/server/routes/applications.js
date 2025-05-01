@@ -42,7 +42,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST route to save student application: aisha
-app.post('/api/applications', async (req, res) => {
+router.post('/', async (req, res) => {
     const { contactInformation, generalInformation, internshipId, studentId } = req.body;
 
     try {

@@ -41,21 +41,21 @@ function ContactInformationForm() {
     const [errors, setErrors] = useState({});
 
 
-    useEffect(() => {
-        const username = sessionStorage.getItem('loggedInUser');
-        if (!username) return;
+    // useEffect(() => {
+    //     const username = sessionStorage.getItem('loggedInUser');
+    //     if (!username) return;
 
-        fetch(`http://localhost:3001/api/applications/${username}`)
-            .then(res => res.json())
-            .then(data => {
-                setFullName(data.fullName || '');
-                setEmail(data.email || '');
-                setLocation(data.location || '');
-                setUniversity(data.university || '');
-                setMajor(data.major || '');
-            })
-            .catch(err => console.error('Error fetching student data:', err));
-    }, []);
+    //     fetch(`http://localhost:3001/api/applications/${username}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setFullName(data.fullName || '');
+    //             setEmail(data.email || '');
+    //             setLocation(data.location || '');
+    //             setUniversity(data.university || '');
+    //             setMajor(data.major || '');
+    //         })
+    //         .catch(err => console.error('Error fetching student data:', err));
+    // }, []);
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('contactInformation')) || {};
@@ -67,7 +67,6 @@ function ContactInformationForm() {
         setGpa(storedData.gpa || '');
         setUniversity(storedData.university || '');
         setMajor(storedData.major || '');
-        setResume(storedData.resume);
     }, []);
 
 
@@ -152,7 +151,7 @@ function ContactInformationForm() {
             setResume(file);  // Store the file locally
         }
     };
-    
+
     return (
         <Container className="mt-5">
             <div className="header py-4 text-center">

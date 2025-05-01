@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import Confirmation from './Confirmation';
 import Alter from './Alert';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FaPen, FaFileAlt, FaMapMarkerAlt, FaClipboardCheck, FaGraduationCap, FaTasks } from 'react-icons/fa';
-import { opportunities } from '../Data/dummyDataSabic';
+import { FaPen, FaFileAlt, FaMapMarkerAlt, FaGraduationCap, FaTasks } from 'react-icons/fa';
 
-const EditInternshipForm = ({ internship, onSaveChanges }) => {
+const EditInternshipForm = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
-    const internshipId = opportunities.find(i => i.id === parseInt(id));
+    const { id } = useParams(); // Get internship ID from URL
 
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [location, setLocation] = useState('');
+    const [qualifications, setQualifications] = useState('');
+    const [responsibilities, setResponsibilities] = useState('');
 
-    const [title, setTitle] = useState(internshipId.title || '');
-    const [description, setDescription] = useState(internshipId.description || '');
-    const [location, setLocation] = useState(internshipId.location || '');
-    const [qualifications, setQualifications] = useState(internshipId.qualifications || '');
-    const [responsibilities, setResponsibilities] = useState(internshipId.responsibilities || '');
-
-    // state to store error messages
+    // State to store error messages
     const [errors, setErrors] = useState({
         title: '',
         description: '',
@@ -27,25 +24,36 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
         responsibilities: ''
     });
 
-
     const [showModal, setShowModal] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
+    // Fetch internship data when component is mounted
+    useEffect(() => {
+        // Fetch the internship data using the ID from the URL
+        fetch(`http://localhost:3001/api/internships/id/${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setTitle(data.title || '');
+                setDescription(data.description || '');
+                setLocation(data.location || '');
+                setQualifications(data.qualifications || '');
+                setResponsibilities(data.responsibilities || '');
+            })
+            .catch((err) => {
+                console.error('Error fetching internship:', err);
+            });
+    }, [id]);
 
     const handleClose = () => setShowModal(false);
 
-    // (confirmation)
     const handleSave = () => {
         handleClose(); // Close the modal after saving
-
         // Show success alert
         setShowAlert(true);
         setTimeout(() => {
             setShowAlert(false);
             navigate('/company/applications');
-
         }, 2500); // Delay navigation to show alert
-
     };
 
     // Handlers to update state on input change
@@ -55,7 +63,6 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
     const handleQualificationsChange = (event) => setQualifications(event.target.value);
     const handleResponsibilitiesChange = (event) => setResponsibilities(event.target.value);
 
-    // Handle form 
     const handleSaveChanges = (event) => {
         event.preventDefault();
 
@@ -86,15 +93,28 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
         setErrors(newErrors);
 
         if (isValid) {
-            setShowModal(true);
-
-            {/*onSaveChanges({
+            const updatedInternship = {
                 title,
                 description,
                 location,
                 qualifications,
-                responsibilities
-                });*/}
+                responsibilities,
+            };
+
+            // Sending the updated data to the server using PUT request
+            fetch(`http://localhost:3001/api/internships/id/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedInternship),
+            })
+                .then((res) => res.json())
+                .then(() => {
+                    setShowModal(true);
+                    handleSave();
+                })
+                .catch((err) => {
+                    console.error('Error updating internship:', err);
+                });
         }
     };
 
@@ -106,7 +126,7 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
         <Container className="mt-5">
             <div className='text-center'>
                 <h1>Edit Internship Opportunity</h1>
-                <h2>{internshipId?.title || 'Internship Information'}</h2>
+                <h2>{title || 'Internship Information'}</h2>
             </div>
             <br />
 
@@ -131,7 +151,7 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
             <Form onSubmit={handleSaveChanges}>
                 {/* Title */}
                 <Form.Group controlId="formTitle" className="mb-4">
-                    <Form.Label><FaPen style={{ color: '#FFB608', marginRight: '8px' }}/> Internship Title</Form.Label>
+                    <Form.Label><FaPen style={{ color: '#FFB608', marginRight: '8px' }} /> Internship Title</Form.Label>
                     <Form.Control
                         type="text"
                         value={title}
@@ -146,7 +166,7 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
 
                 {/* Description */}
                 <Form.Group controlId="formDescription" className="mb-4">
-                    <Form.Label><FaFileAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Internship Description</Form.Label>
+                    <Form.Label><FaFileAlt style={{ color: '#FFB608', marginRight: '8px' }} /> Internship Description</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={3}
@@ -162,7 +182,7 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
 
                 {/* Location */}
                 <Form.Group controlId="formLocation" className="mb-4">
-                    <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }}/> Location</Form.Label>
+                    <Form.Label><FaMapMarkerAlt style={{ color: '#FFB608', marginRight: '8px' }} /> Location</Form.Label>
                     <Form.Control
                         type="text"
                         rows={3}
@@ -176,7 +196,7 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
 
                 {/* Qualifications */}
                 <Form.Group controlId="formQualifications" className="mb-4">
-                    <Form.Label><FaGraduationCap style={{ color: '#FFB608', marginRight: '8px' }}/> Qualifications</Form.Label>
+                    <Form.Label><FaGraduationCap style={{ color: '#FFB608', marginRight: '8px' }} /> Qualifications</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={3}
@@ -192,7 +212,7 @@ const EditInternshipForm = ({ internship, onSaveChanges }) => {
 
                 {/* Responsibilities */}
                 <Form.Group controlId="formResponsibilities" className="mb-4">
-                    <Form.Label><FaTasks style={{ color: '#FFB608', marginRight: '8px' }}/> Responsibilities</Form.Label>
+                    <Form.Label><FaTasks style={{ color: '#FFB608', marginRight: '8px' }} /> Responsibilities</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={3}
