@@ -1,17 +1,27 @@
 import '../OpportunityDetails.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { opportunities } from '../Data/dummyData';
+import { useEffect, useState } from 'react';
+
 
 function OpportunityDetailsPagesStudent() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const opportunity = opportunities.find(o => o.id === parseInt(id));
 
+  const [opportunity, setOpportunity] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/api/internships/id/${id}`)
+      .then(res => res.json())
+      .then(data => setOpportunity(data))
+      .catch(err => console.error('Failed to fetch opportunity:', err));
+  }, [id]);
+  
   if (!opportunity) return <p>Opportunity not found.</p>;
 
   const handleApply = () => {
-    navigate(`/contact-informationForm/${id}`);};
+    navigate(`/contact-informationForm/${opportunity._id}`);};
+    
 
   const handleBack = () => {
     navigate('/search-opportunities');

@@ -4,15 +4,25 @@ import { useNavigate, useParams } from 'react-router-dom';
 import WithLabelExample from './ProgressBar.js'
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload,FaBook,FaGraduationCap } from 'react-icons/fa';
 
-//rawan
-import { opportunities } from '../Data/dummyData';
+
 
 function ContactInformationForm() {
     const navigate = useNavigate();
 
     //rawan
     const { id } = useParams();
-    const opportunity = opportunities.find(o => o.id === parseInt(id));
+
+
+//match the title of the chosen opportunity
+    const [opportunity, setOpportunity] = useState(null);
+
+useEffect(() => {
+  fetch(`http://localhost:3001/api/internships/id/${id}`)
+    .then((res) => res.json())
+    .then((data) => setOpportunity(data))
+    .catch((err) => console.error('Error fetching opportunity:', err));
+}, [id]);
+
 
 
     // Initial state to hold the user input values

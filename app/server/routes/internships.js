@@ -3,7 +3,7 @@ const router = express.Router();
 const client = require('../config/db');
 
 // GET all internships
-// this route is used to fetch Opportunities data with logos from CompanyData
+// this route is used to fetch Opportunities data with logos from CompanyData (serachOpportunities) -Rawan
 router.get('/', async (req, res) => {
   try {
     await client.connect();
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     const internships = await db.collection('InternshipOpportunitiesData').find({}).toArray();
     const companies = await db.collection('CompanyData').find({}).toArray();
 
-    // Create a map: companyName (lowercased) → logo
+    // map: companyName (lowercased) → logo to get both -Rawan
     const logoMap = {};
     companies.forEach(c => {
       if (c.companyName && c.logo) {
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
       }
     });
 
-    // Add logo to each internship by matching "company" field
+    // add logo to each internship by matching "company" field -Rawan
     const internshipsWithLogos = internships.map(internship => {
       const logo = logoMap[internship.company?.toLowerCase()] || '';
       return { ...internship, logo };
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get internship by ID (opportunity details)
+// Get internship by ID (opportunity details) -Rawan
 router.get('/id/:id', async (req, res) => {
   const id = parseInt(req.params.id);
   try {
@@ -89,39 +89,19 @@ router.post('/', async (req, res) => {
   }
 });
 
-// DELETE internship by ID and delete all submitted applications
+// DELETE internship by ID
 router.delete('/:id', async (req, res) => {
   const id = parseInt(req.params.id);
-
   try {
     await client.connect();
-    const db = client.db('App');
-    const internshipCollection = db.collection('InternshipOpportunitiesData');
-    const applicationCollection = db.collection('ApplicationData');
-
-    // Delete the internship post
-    const internshipResult = await internshipCollection.deleteOne({ _id: id });
-
-    if (internshipResult.deletedCount === 0) {
-      return res.status(404).json({ message: 'Internship not found' });
-    }
-
-    // Delete all applications related to the internship
-    const appResult = await applicationCollection.deleteMany({ internshipId: id });
-   
-
-    res.status(200).json({
-      message: 'Internship and related applications deleted successfully',
-      applicationsDeleted: appResult.deletedCount
-    });
-
+    const result = await client.db('App').collection('InternshipOpportunitiesData').deleteOne({ _id: id });
+    res.json(result.deletedCount === 1 ? { message: 'Deleted' } : { message: 'Not found' });
   } catch (err) {
-    console.error('Delete error:', err);
-    res.status(500).send('Internal server error');
+    console.error(err);
+    res.status(500).send('Delete error');
   } finally {
     await client.close();
   }
 });
-
 
 module.exports = router;
