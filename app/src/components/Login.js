@@ -36,7 +36,8 @@ function Login({ onSwitchToRegister }) {
 
                     // If login is successful, store session data or user info
                     sessionStorage.setItem('loggedInUser', username);
-                    sessionStorage.setItem('userType', data.userType); 
+                    sessionStorage.setItem('userType', data.userType);
+                    sessionStorage.setItem('userId', data.userId); 
 
                     navigate('/welcome'); // Redirect to the welcome page
                 } else {

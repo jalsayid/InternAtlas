@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Container, Row, Col } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import WithLabelExample from './ProgressBar.js'
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload,FaBook,FaGraduationCap } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaUniversity, FaUpload, FaBook, FaGraduationCap } from 'react-icons/fa';
 
 
 
@@ -13,15 +13,15 @@ function ContactInformationForm() {
     const { id } = useParams();
 
 
-//match the title of the chosen opportunity
+    //match the title of the chosen opportunity
     const [opportunity, setOpportunity] = useState(null);
 
-useEffect(() => {
-  fetch(`http://localhost:3001/api/internships/id/${id}`)
-    .then((res) => res.json())
-    .then((data) => setOpportunity(data))
-    .catch((err) => console.error('Error fetching opportunity:', err));
-}, [id]);
+    useEffect(() => {
+        fetch(`http://localhost:3001/api/internships/id/${id}`)
+            .then((res) => res.json())
+            .then((data) => setOpportunity(data))
+            .catch((err) => console.error('Error fetching opportunity:', err));
+    }, [id]);
 
 
 
@@ -40,7 +40,23 @@ useEffect(() => {
     // form error states
     const [errors, setErrors] = useState({});
 
-    // Load stored form data from localStorage when the component mounts
+
+    useEffect(() => {
+        const username = sessionStorage.getItem('loggedInUser');
+        if (!username) return;
+
+        fetch(`http://localhost:3001/api/applications/${username}`)
+            .then(res => res.json())
+            .then(data => {
+                setFullName(data.fullName || '');
+                setEmail(data.email || '');
+                setLocation(data.location || '');
+                setUniversity(data.university || '');
+                setMajor(data.major || '');
+            })
+            .catch(err => console.error('Error fetching student data:', err));
+    }, []);
+
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('contactInformation')) || {};
         setFullName(storedData.fullName || '');
@@ -51,8 +67,9 @@ useEffect(() => {
         setGpa(storedData.gpa || '');
         setUniversity(storedData.university || '');
         setMajor(storedData.major || '');
-        setResume(null);
+        setResume(storedData.resume);
     }, []);
+
 
     // handle form 
     const handleSubmit = (event) => {
@@ -110,6 +127,7 @@ useEffect(() => {
                 gpa,
                 university,
                 major,
+                resume,
             };
 
             // Save the form data to localStorage
@@ -131,9 +149,10 @@ useEffect(() => {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setResume(file);
+            setResume(file);  // Store the file locally
         }
     };
+    
     return (
         <Container className="mt-5">
             <div className="header py-4 text-center">

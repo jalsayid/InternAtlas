@@ -138,7 +138,7 @@ router.post('/login', async (req, res) => {
       let isMatch = false;
 
       const isHashedPassword = user.password.startsWith("$2b$"); // This checks if the password starts with bcrypt's hashed prefix
-      console.log("its " + isHashedPassword + " " + user.password);
+      //console.log("its " + isHashedPassword + " " + user.password);
 
       if (isHashedPassword) {
         isMatch = await bcrypt.compare(password, user.password);
@@ -146,11 +146,11 @@ router.post('/login', async (req, res) => {
         isMatch = password === user.password;
       }
 
-      console.log(isMatch)
+      //console.log(isMatch)
 
       if (isMatch) {
         // Login successful
-        res.status(200).json({ message: 'Login successful', userType: user.userType });
+        res.status(200).json({ message: 'Login successful', userType: user.userType,userId: user._id.toString(),username: user.username, });
       } else {
         // Incorrect password
         res.status(401).json({ message: 'Invalid username or password' });

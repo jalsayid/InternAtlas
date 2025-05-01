@@ -5,26 +5,25 @@ import WithLabelExample from './ProgressBar.js'
 import { useNavigate, useParams } from 'react-router-dom';
 import Alert from "react-bootstrap/Alert";
 
-import { opportunities } from '../Data/dummyData';
 
 
 function GeneralInformationForm() {
     const navigate = useNavigate();
 
 
-//rawan
+    //rawan
     const { id } = useParams();
 
 
-//match the title of the chosen opportunity
+    //match the title of the chosen opportunity
     const [opportunity, setOpportunity] = useState(null);
 
-useEffect(() => {
-  fetch(`http://localhost:3001/api/internships/id/${id}`)
-    .then((res) => res.json())
-    .then((data) => setOpportunity(data))
-    .catch((err) => console.error('Error fetching opportunity:', err));
-}, [id]);
+    useEffect(() => {
+        fetch(`http://localhost:3001/api/internships/id/${id}`)
+            .then((res) => res.json())
+            .then((data) => setOpportunity(data))
+            .catch((err) => console.error('Error fetching opportunity:', err));
+    }, [id]);
 
 
     // Form states
@@ -38,6 +37,7 @@ useEffect(() => {
 
     // Form error states
     const [errors, setErrors] = useState({});
+
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('generalquestions')) || {};
@@ -58,21 +58,50 @@ useEffect(() => {
     const handleClose = () => setShowModal(false);
 
     // Handle modal save (confirmation)
-    const handleSave = () => {
-        handleClose(); // Close the modal after saving
+    const handleSave = async () => {
+        const contactInformation = JSON.parse(localStorage.getItem('contactInformation'));
+        const generalInformation = JSON.parse(localStorage.getItem('generalquestions'));
 
-        // Show success alert
-        setShowAcceptAlert(true);
-        setTimeout(() => {
-            // Hide alert after 3 seconds
+        const username = sessionStorage.getItem('loggedInUser');
 
-            setShowAcceptAlert(false);
 
-            navigate('/track-applications')
+        try {
 
-        }, 2000);
+            const userId = sessionStorage.getItem('userId');
 
+            const response = await fetch('http://localhost:3001/api/applications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    studentId: userId,
+                    internshipId: id,
+                    contactInformation,
+                    generalInformation,
+                })
+            });
+
+            if (response.ok) {
+                setShowModal(false);
+                setShowAcceptAlert(true);
+
+                localStorage.removeItem('contactInformation')
+                localStorage.removeItem('generalquestions')
+
+                setTimeout(() => {
+                    setShowAcceptAlert(false);
+                    navigate('/track-applications');
+                }, 2000);
+            } else {
+                const errorData = await response.json();
+                console.error('Failed to submit application:', errorData);
+                alert('Application submission failed. Please try again.');
+            }
+        } catch (err) {
+            console.error('Error submitting application:', err);
+            alert('An unexpected error occurred.');
+        }
     };
+
 
     // Handle form submission
     const handleSubmit = (event) => {
@@ -121,7 +150,6 @@ useEffect(() => {
 
 
             setShowModal(true);  // Show confirmation modal
-            console.log("here")
         }
 
     };

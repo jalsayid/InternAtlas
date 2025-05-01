@@ -300,6 +300,7 @@ const internshipRoutes = require('./routes/internships');
 const authRoutes = require('./routes/auth');
 const commentRoutes = require('./routes/comments');
 const companiesInfo = require('./routes/companiesInfo');
+const applicationsRoutes = require('./routes/applications');
 
 const app = express();
 app.use(express.json());
@@ -312,7 +313,7 @@ app.use('/api/internships', internshipRoutes);
 app.use('/api', authRoutes); // handles /login and /register
 app.use('/api/inappropriateComments', commentRoutes);
 app.use('/api/companiesdata', companiesInfo);
-
+app.use('/api/applications', applicationsRoutes);
 
 
 app.listen(PORT, () => {
