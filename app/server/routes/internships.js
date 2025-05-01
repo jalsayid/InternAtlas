@@ -89,19 +89,39 @@ router.post('/', async (req, res) => {
   }
 });
 
-// DELETE internship by ID
+// DELETE internship by ID and delete all submitted applications
 router.delete('/:id', async (req, res) => {
   const id = parseInt(req.params.id);
+
   try {
     await client.connect();
-    const result = await client.db('App').collection('InternshipOpportunitiesData').deleteOne({ _id: id });
-    res.json(result.deletedCount === 1 ? { message: 'Deleted' } : { message: 'Not found' });
+    const db = client.db('App');
+    const internshipCollection = db.collection('InternshipOpportunitiesData');
+    const applicationCollection = db.collection('ApplicationData');
+
+    // Delete the internship post
+    const internshipResult = await internshipCollection.deleteOne({ _id: id });
+
+    if (internshipResult.deletedCount === 0) {
+      return res.status(404).json({ message: 'Internship not found' });
+    }
+
+    // Delete all applications related to the internship
+    const appResult = await applicationCollection.deleteMany({ internshipId: id });
+   
+
+    res.status(200).json({
+      message: 'Internship and related applications deleted successfully',
+      applicationsDeleted: appResult.deletedCount
+    });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).send('Delete error');
+    console.error('Delete error:', err);
+    res.status(500).send('Internal server error');
   } finally {
     await client.close();
   }
 });
+
 
 module.exports = router;

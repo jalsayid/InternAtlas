@@ -31,13 +31,22 @@ function TrackProfiles() {
 
       };
       const confirmDeletion = () => {
-        const updated = profiles.filter(profile => profile._id !== pendingDeleteId);
-        setProfiles(updated);
-        setShowConfirm(false);
-        setPendingDeleteId(null);
-        setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 3000);
-      };    
+        fetch(`http://localhost:3001/api/companiesdata/${pendingDeleteId}`, {
+          method: 'DELETE',
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error("Failed to delete company profile");
+            const updated = profiles.filter(app => app.companyName !== pendingDeleteId);
+            setProfiles(updated);
+            setShowAlert(true);
+          })
+          .catch(err => console.error("Error during deletion:", err))
+          .finally(() => {
+            setShowConfirm(false);
+            setPendingDeleteId(null);
+            setTimeout(() => setShowAlert(false), 3000);
+          });      
+        };
 
   const filtered = profiles.filter(app =>
     app.companyName.toLowerCase().includes(search.toLowerCase())
