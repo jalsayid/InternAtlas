@@ -12,6 +12,7 @@ function TrackProfiles() {
     const [showDetail, setShowDetail] = useState(false);
     const [search, setSearch] = useState("");
     const [profiles, setProfiles] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const [showConfirm, setShowConfirm] = useState(false);
     const [pendingDeleteId, setPendingDeleteId] = useState(null);
@@ -22,7 +23,8 @@ function TrackProfiles() {
           fetch('http://localhost:3001/api/companiesdata') // Adjust if hosted elsewhere
             .then(res => res.json())
             .then(data => setProfiles(data))
-            .catch(err => console.error("Failed to fetch company data", err));
+            .catch(err => console.error("Failed to fetch company data", err))
+            .finally(() => setLoading(false));
         }, []);
 
     const handleDelete = (id) => {
@@ -72,17 +74,25 @@ function TrackProfiles() {
         onClose={() => setShowAlert(false)}
       />
 
-      {filtered.map(app => (
-        <TrackProfilesCard
-          key={app._id}
-          app={app}
-          onClick={(data) => {
-            setSelected(data);
-            setShowDetail(true);
-          }}
-          onDelete={handleDelete}
-        />
-      ))}
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+          <div className="spinner-border text-warning" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        filtered.map(app => (
+          <TrackProfilesCard
+            key={app._id}
+            app={app}
+            onClick={(data) => {
+              setSelected(data);
+              setShowDetail(true);
+            }}
+            onDelete={handleDelete}
+          />
+        ))
+      )}
       <ProfileDetailModal
         show={showDetail}
         handleClose={() => setShowDetail(false)}

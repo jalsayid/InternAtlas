@@ -1,37 +1,59 @@
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useParams } from "react-router-dom";
 import Details from "../components/Details";
 
+function ApplicationDetailWrapper() {
+  const { id } = useParams();
+  const [applicationData, setApplicationData] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-export default function ApplicantDetails() {
-  const applicant1 = {
-    name: "Fatima Al-Dossari",
-    email: "fatima.a@gmail.com",
-    cv_path: "/docs/app1-cv.pdf",
-  };
-  const applicant2 = {
-    name: "Ahmed Al-Saud",
-    email: "ahmed.s@gmail.com",
-    cv_path: "/docs/app2-cv.pdf",
-  };
-  const applicant3 = {
-    name: "Omar Al-Harbi",
-    email: "omar.h@gmail.com",
-    cv_path: "/docs/app3-cv.pdf",
-  };
-  const applicant4 = {
-    name: "Nouf Al-Qahtani",
-    email: "nouf.q@gmail.com",
-    cv_path: "/docs/app4-cv.pdf",
-  };
+  useEffect(() => {
+    const fetchApplicationData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/applications/${id}`);
+        if (!response.ok) {
+          throw new Error('Application not found');
+        }
+        const data = await response.json();
+        setApplicationData(data.application);
+        setQuestions(data.questions);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchApplicationData();
+  }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!applicationData) return <div>No application found</div>;
 
   return (
-    
-      <Routes>
-        <Route path="/1" element={<Details {...applicant1} />} />
-        <Route path="/2" element={<Details {...applicant2} />} />
-        <Route path="/3" element={<Details {...applicant3} />} />
-        <Route path="/4" element={<Details {...applicant4} />} />
-      </Routes>
-    
+    <Details 
+      name={applicationData.contactInformation.fullName}
+      email={applicationData.contactInformation.email}
+      cv_path={applicationData.contactInformation.resume}
+      phone={applicationData.contactInformation.phone}
+      linkedin={applicationData.contactInformation.linkedin}
+      location={applicationData.contactInformation.location}
+      gpa={applicationData.contactInformation.gpa}
+      university={applicationData.contactInformation.university}
+      major={applicationData.contactInformation.major}
+      generalInfo={applicationData.generalInformation}
+      questions={questions}
+    />
+  );
+}
+
+export default function ApplicantDetails() {
+  return (
+    <Routes>
+      <Route path="/:id" element={<ApplicationDetailWrapper />} />
+    </Routes>
   );
 }

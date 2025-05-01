@@ -1,14 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import TrackApplicationCard from './TrackApplicationCard.js';
-import { applicationsForCompany } from '../dummyData'; 
 import CompanyNavBar from '../CompanyNavBar'; 
 
 function TrackApplications() {
   const [search, setSearch] = useState("");
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = applicationsForCompany.filter(app =>
-    app.position.toLowerCase().includes(search.toLowerCase())
+
+  useEffect(() => {
+    const username = sessionStorage.getItem('loggedInUser'); // Get the username from sessionStorage
+    if (username) {
+      fetch(`http://localhost:3001/api/internships/company/${username}`)
+        .then(res => res.json())
+        .then(data => {
+          setApplications(data); // Save fetched data into state
+        })
+        .catch(err => {
+          console.error("Failed to fetch internship opportunities", err);
+        })
+        .finally(() => setLoading(false));;
+    }
+  }, []);
+
+  const filtered = applications.filter(app =>
+    app.title.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -30,12 +47,24 @@ function TrackApplications() {
           />
         </Form>
 
-        {filtered.map(app => (
-          <TrackApplicationCard
-            key={app.id}
-            app={app}
-          />
-        ))}
+        {loading ? (
+          <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+            <div className="spinner-border text-warning" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          filtered.length === 0 ? (
+            <p className="text-center">No matching internships found.</p>
+          ) : (
+            filtered.map(app => (
+              <TrackApplicationCard
+                key={app._id}
+                app={app}
+              />
+            ))
+          )
+        )}
       </Container>
     </>
   );
