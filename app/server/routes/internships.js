@@ -75,6 +75,40 @@ router.get('/:companyName', async (req, res) => {
   }
 }); 
 
+//get an internship posts for a given company using userName, return a list of all posts
+router.get('/company/:username', async (req, res) => {
+  const user = req.params.username;
+
+  try {
+    await client.connect();
+    const db = client.db('App');
+
+    // Step 1: Get companyName using the username
+    const companyDoc = await db.collection('CompanyData').findOne({ username : user });
+
+    if (!companyDoc) {
+      return res.status(404).json({ message: 'Company not found' });
+    }
+
+    const companyName = companyDoc.companyName;
+
+    // Step 2: Find internships where "company" matches the company name
+    const internships = await db
+      .collection('InternshipOpportunitiesData')
+      .find({ company: companyName })
+      .toArray();
+
+    res.status(200).json(internships);
+
+  } catch (err) {
+    console.error('Error fetching internships for company:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  } finally {
+    await client.close();
+  }
+});
+
+
 // POST new internship
 router.post('/', async (req, res) => {
   try {
@@ -89,16 +123,78 @@ router.post('/', async (req, res) => {
   }
 });
 
-// DELETE internship by ID
+// DELETE internship by ID and delete all submitted applications
 router.delete('/:id', async (req, res) => {
   const id = parseInt(req.params.id);
   try {
     await client.connect();
-    const result = await client.db('App').collection('InternshipOpportunitiesData').deleteOne({ _id: id });
-    res.json(result.deletedCount === 1 ? { message: 'Deleted' } : { message: 'Not found' });
+    const db = client.db('App');
+
+    const internshipCollection = db.collection('InternshipOpportunitiesData');
+    const applicationCollection = db.collection('ApplicationData');
+
+    // Delete the internship post
+    const internshipResult = await internshipCollection.deleteOne({ _id: id });
+
+    if (internshipResult.deletedCount === 0) {
+      return res.status(404).json({ message: 'Internship not found' });
+    }
+
+    // Delete all applications related to the internship
+    const appResult = await applicationCollection.deleteMany({ internshipId: id });
+   
+
+    res.status(200).json({
+      message: 'Internship and related applications deleted successfully',
+      applicationsDeleted: appResult.deletedCount
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send('Delete error');
+  } finally {
+    await client.close();
+  }
+});
+// DELETE company profile by name
+router.delete('/:companyName', async (req, res) => {
+  const name = req.params.companyName;
+  console.log(name);
+  try {
+    await client.connect();
+    const db = client.db('App');
+
+    const companyCollection = db.collection('CompanyData');
+    const internshipCollection = db.collection('InternshipOpportunitiesData');
+    const applicationCollection = db.collection('ApplicationData');
+    const reviewCollection = db.collection('Review');
+
+    // Step 1: Delete the company profile
+    const companyResult = await companyCollection.deleteOne({ companyName : name });
+
+    if (companyResult.deletedCount === 0) {
+      return res.status(404).json({ message: 'Company not found' });
+    }
+
+    // Step 2: Find all internships by this company
+    const internships = await internshipCollection.find({ company: name }).toArray();
+    const internshipIds = internships.map(post => post._id);
+
+    // Step 3: Delete all internships
+    await internshipCollection.deleteMany({ company: name });
+
+    // Step 4: Delete all related applications
+    await applicationCollection.deleteMany({
+      internshipId: { $in: internshipIds }
+    });
+
+    // Step 5: Delete all comments related to the company
+    await reviewCollection.deleteMany({ company: name });
+
+    res.status(200).json({ message: 'Company and related data deleted successfully' });
+
+  } catch (err) {
+    console.error('Error deleting company:', err);
+    res.status(500).json({ message: 'Internal server error' });
   } finally {
     await client.close();
   }

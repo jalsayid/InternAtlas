@@ -8,6 +8,7 @@ import SubmissionAlert from './Alert.js';
 function TrackComments() {
     const [search, setSearch] = useState("");
     const [comments, setCommenents] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const [showConfirm, setShowConfirm] = useState(false);
     const [pendingDeleteId, setPendingDeleteId] = useState(null);
@@ -18,7 +19,8 @@ function TrackComments() {
         fetch('http://localhost:3001/api/inappropriateComments') // Adjust if hosted elsewhere
           .then(res => res.json())
           .then(data => setCommenents(data))
-          .catch(err => console.error("Failed to fetch comment", err));
+          .catch(err => console.error("Failed to fetch comment", err))
+          .finally(() => setLoading(false));;
       }, []);
 
     const handleDelete = (id) => {
@@ -71,13 +73,21 @@ function TrackComments() {
       />
 
 
-      {filtered.map(app => (
-        <TrackCommentsCard
-          key={app._id}
-          app={app}
-          onDelete={handleDelete}
-        />
-      ))}
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+          <div className="spinner-border text-warning" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) :(
+          filtered.map(app => (
+            <TrackCommentsCard
+              key={app._id}
+              app={app}
+              onDelete={handleDelete}
+            />
+          ))
+        )}
       <Confirmation 
         show={showConfirm}
         onHide={() => {

@@ -9,7 +9,7 @@ function TrackApplicationCard({ app }) {
   const { id } = useParams();
 
   const goToOpportunityDetails = () => {
-    navigate(`/OpportunityDetails/${app.id}`);
+    navigate(`/OpportunityDetails/${app._id}`);
   };
   const goToViewReviews = () => {
     navigate(`/CompanyReview/${app.company.toLowerCase()}/${app.position.toLowerCase()}/reviews`);
@@ -17,7 +17,7 @@ function TrackApplicationCard({ app }) {
   };
   const goToEdit = (id) => {
     console.log(id); // Debugging: check the value of id
-    navigate(`/edit-opportunity/${app.id}`);
+    navigate(`/edit-opportunity/${app._id}`);
 }
   const goToViewApplications= () => {
     navigate('/view-applicants');
@@ -29,9 +29,9 @@ function TrackApplicationCard({ app }) {
       <Card.Body>
         <Row className="align-items-center">
           <Col style={{textAlign: "left"}}>
-            <h5 style={{fontSize: "26px", fontFamily: 'Roboto'}}>{app.position}</h5>
+            <h5 style={{fontSize: "26px", fontFamily: 'Roboto'}}>{app.title}</h5>
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Company:</strong> {app.company} </p>
-            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Duration:</strong> {app.duration}</p>
+            <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Type:</strong> {app.type}</p>
             <p className="mb-1" style={{fontSize:"16px", color:"#666666"}}><strong>Location:</strong> {app.location}</p>
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>
               <button className="third-btn" style={{ padding: '4px 8px', fontSize: '14px', borderRadius: '20px', minWidth: '120px' }} onClick={goToOpportunityDetails}>View Details</button>

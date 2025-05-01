@@ -8,6 +8,7 @@ import SubmissionAlert from './Alert.js';
 function ManageApplications() {
   const [search, setSearch] = useState("");
   const [application, setApplication] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [showConfirm, setShowConfirm] = useState(false);
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
@@ -18,7 +19,8 @@ function ManageApplications() {
     fetch('http://localhost:3001/api/internships') // Adjust if hosted elsewhere
       .then(res => res.json())
       .then(data => setApplication(data))
-      .catch(err => console.error("Failed to fetch applications", err));
+      .catch(err => console.error("Failed to fetch applications", err))
+      .finally(() => setLoading(false));
   }, []);
 
 
@@ -75,14 +77,22 @@ function ManageApplications() {
           onClose={() => setShowAlert(false)}
         />
 
-        {filtered.map(app => (
-          <ApplicationCardAdmin
-            key={app._id}
-            app={app}
-            onDelete={handleDelete}
-          />
-        ))}
-
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+          <div className="spinner-border text-warning" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
+          filtered.map(app => (
+            <ApplicationCardAdmin
+              key={app._id}
+              app={app}
+              onDelete={handleDelete}
+            />
+          ))
+        )
+      }
         <Confirmation
           show={showConfirm}
           onHide={() => {
