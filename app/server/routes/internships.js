@@ -35,6 +35,29 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get internship by ID (opportunity details)
+router.get('/id/:id', async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    await client.connect();
+    const internship = await client
+      .db('App')
+      .collection('InternshipOpportunitiesData')
+      .findOne({ _id: id });
+
+    if (!internship) {
+      return res.status(404).json({ message: 'Internship not found' });
+    }
+
+    res.json(internship);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error fetching internship by ID');
+  } finally {
+    await client.close();
+  }
+});
+
 
 
 //Get a internship posts for a given compant. return a list of all company posts
