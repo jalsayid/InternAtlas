@@ -24,7 +24,7 @@ function TrackProfilesCard({ app ,onClick, onDelete}) {
             <div className="d-flex flex-column flex-md-row align-items-start gap-3" style={{color: "black", fontSize: "13px", marginTop:"10px"}}>
               <button onClick={(e) => {
                   e.stopPropagation();
-                  onDelete(app._id);
+                  onDelete(app.companyName);
                 }}
                type="button" className='def-btn'>Delete</button>
             </div>
