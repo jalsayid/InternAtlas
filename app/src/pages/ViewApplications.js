@@ -1,84 +1,71 @@
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ApplicantCard from "../components/ApplicantCard.js";
 import CompanyNavBar from '../CompanyNavBar';  
-
-
+import Header from "../components/Header.js";
 export default function ViewApplications() {
-  const title = "Job Applicants";
+  const { internshipId } = useParams();
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const applicant1 = {
-    imgSrc: "/imgs/applicant1.png",
-    title: "Fatima Al-Dossari",
-    content: (
-      <>
-        <p><strong>Field:</strong> Computer Science</p>
-        <p><strong>University:</strong> King Saud University</p>
-        <p><strong>Summary:</strong> Enthusiastic computer science student with a passion for full-stack development. Built a campus event app using React and Firebase.</p>
-        <p><strong>Skills:</strong> JavaScript, React, Node.js, Firebase</p>
-      </>
-    ),
-    link: "/applicant-details/1",
-  };
+  useEffect(() => {
+    const fetchApplications = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/applications/internship/${internshipId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch applications');
+        }
+        const data = await response.json();
+        setApplications(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
 
-  const applicant2 = {
-    imgSrc: "/imgs/applicant2.png",
-    title: "Ahmed Al-Saud",
-    content: (
-      <>
-        <p><strong>Field:</strong> Software Engineering</p>
-        <p><strong>University:</strong> King Fahd University</p>
-        <p><strong>Summary:</strong> Experienced software engineer with expertise in mobile app development. Created several successful iOS and Android applications.</p>
-        <p><strong>Skills:</strong> Swift, Kotlin, Java, Python</p>
-      </>
-    ),
-    link: "/applicant-details/2",
-  };
+    if (internshipId) {
+      fetchApplications();
+    }
+  }, [internshipId]);
 
-  const applicant3 = {
-    imgSrc: "/imgs/applicant3.png",
-    title: "Omar Al-Harbi",
-    content: (
-      <>
-        <p><strong>Field:</strong> Information Systems</p>
-        <p><strong>University:</strong> KFUPM</p>
-        <p><strong>Summary:</strong> Data-driven and analytical thinker with internship experience in business analytics. Loves turning data into insights.</p>
-        <p><strong>Skills:</strong> Python, SQL, Power BI, Excel</p>
-      </>
-    ),
-    link: "/applicant-details/3",
-  };
-
-  const applicant4 = {
-    imgSrc: "/imgs/applicant4.png",
-    title: "Nouf Al-Qahtani",
-    content: (
-      <>
-        <p><strong>Field:</strong> Software Engineering</p>
-        <p><strong>University:</strong> Prince Sultan University</p>
-        <p><strong>Summary:</strong> Creative problem solver and team player. Developed a secure login system as part of a cybersecurity course.</p>
-        <p><strong>Skills:</strong> Java, Python, Git, OWASP</p>
-      </>
-    ),
-    link: "/applicant-details/4",
-  };
+  if (!internshipId) return <div>No internship ID provided</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <>
-    <CompanyNavBar /> 
-    <Container style={{ paddingTop: "80px" }}>
-      
-      
-      <Row className="justify-content-center mt-4">
-        <Col>
-          <ApplicantCard {...applicant1} />
-          <ApplicantCard {...applicant2} />
-          <ApplicantCard {...applicant3} />
-          <ApplicantCard {...applicant4} />
-        </Col>
-      </Row>
-    </Container>
+      <CompanyNavBar /> 
+      <Container>
+        <Row className="justify-content-center mt-4">
+          <Col>
+            <Header title="Job Applicants" />
+            {applications.map((application) => (
+              <ApplicantCard
+                key={application._id}
+                imgSrc={`/imgs/applicant${application.studentId}.png`}
+                title={application.contactInformation.fullName}
+                content={
+                  <>
+                    <p><strong>Field:</strong> {application.contactInformation.major}</p>
+                    <p><strong>University:</strong> {application.contactInformation.university}</p>
+                    <p><strong>Summary:</strong> {application.generalInformation.summary}</p>
+                    <p><strong>Skills:</strong> {application.generalInformation.skills}</p>
+                  </>
+                }
+                link={`/applicant-details/${application._id}`}
+              />
+            ))}
+            {applications.length === 0 && (
+              <p className="text-center">No applications found.</p>
+            )}
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }

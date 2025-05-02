@@ -45,7 +45,7 @@ function App() {
       <Routes>
         <Route path="" element={<LandingPage />} /> 
 
-        <Route path="/view-applicants" element={<ViewApplications />} />
+        <Route path="/view-applicants/:internshipId" element={<ViewApplications />} />
         <Route path="/applicant-details/*" element={<ApplicantDetails />} />
         <Route path="/track-applications" element={<TrackApplications />} /> //joud
         <Route path="/application-details/*" element={<ApplicationDetails />} />

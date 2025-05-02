@@ -1,58 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ApplicantCard from "../components/ApplicantCard.js";
 import Header from "../components/Header.js";
-import StudentNavBar from '../StudentNavBar'; 
+import StudentNavBar from "../StudentNavBar";
+import Alert from "react-bootstrap/Alert";
 
 export default function TrackApplications() {
-  const title = "Track Applications";
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const application1 = {
-    imgSrc: "/imgs/openai.png",
-    title: "OpenAI Internship - Summer 2025",
-    content: (
-      <>
-        <p><strong>Location:</strong> San Francisco, CA (Hybrid)</p>
-        <p><strong>Application Status:</strong> <span className="pending-badge">pending</span></p>
-        <p><strong>Application Date:</strong> April 1, 2025</p>
-        <p><strong>Description:</strong> Work alongside OpenAI researchers on deep learning models. Python & ML skills needed.</p>
-        <p><strong>Requirements:</strong> CS degree, PyTorch/TensorFlow, neural nets, research preferred</p>
-      </>
-    ),
-    link: "/application-details/2",
-  };
+  useEffect(() => {
+    const fetchApplications = async () => {
+      try {
+        const studentName = sessionStorage.getItem("fullName");
+        const studentEmail = sessionStorage.getItem("email");
 
-  const application2 = {
-    imgSrc: "/imgs/pif.png",
-    title: "PIF Tech Internship - 2025 Cohort",
-    content: (
-      <>
-        <p><strong>Location:</strong> Riyadh, Saudi Arabia (On-site)</p>
-        <p><strong>Application Status:</strong> <span className="reject-badge">rejected</span></p>
-        <p><strong>Application Date:</strong> April 3, 2025</p>
-        <p><strong>Description:</strong> Join PIF’s digital team, develop software, and analyze data for national goals.</p>
-        <p><strong>Requirements:</strong> Saudi national, SE/IT student, backend knowledge, GPA ≥ 3.5</p>
-      </>
-    ),
-    link: "/application-details/3",
-  };
+        if (!studentName || !studentEmail) {
+          throw new Error(
+            "Student information not found. Please log in again."
+          );
+        }
 
-  const application3 = {
-    imgSrc: "/imgs/sdaia.jpg",
-    title: "SDAIA Data Science Internship - 2025",
-    content: (
+        const response = await fetch(
+          `http://localhost:3001/api/applications/student/${studentName}?email=${encodeURIComponent(
+            studentEmail
+          )}`
+        );
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Failed to fetch applications");
+        }
+
+        const data = await response.json();
+        setApplications(data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error:", err);
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchApplications();
+  }, []);
+
+  if (loading) {
+    return (
       <>
-        <p><strong>Location:</strong> Remote or Riyadh</p>
-        <p><strong>Application Status:</strong> <span className="accept-badge">accepted</span></p>
-        <p><strong>Application Date:</strong> March 20, 2025</p>
-        <p><strong>Description:</strong> Work on AI projects with SDAIA. Focus on predictive modeling & ethical AI.</p>
-        <p><strong>Requirements:</strong> Python, Pandas/Numpy, ML basics, interest in ethical AI</p>
+        <StudentNavBar />
+        <Container className="pt-5" style={{ paddingTop: "100px" }}>
+          <div className="text-center">Loading your applications...</div>
+        </Container>
       </>
-    ),
-    link: "/application-details/1",
-  };
+    );
+  }
 
   return (
     <>
@@ -60,10 +64,52 @@ export default function TrackApplications() {
       <Container className="pt-5" style={{ paddingTop: "100px" }}>
         <Row className="justify-content-center">
           <Col>
-            <Header title={title} />
-            <ApplicantCard {...application3} />
-            <ApplicantCard {...application1} />
-            <ApplicantCard {...application2} />
+            <Header title="Track Applications" />
+            {error && (
+              <Alert variant="danger" className="mb-4">
+                {error}
+              </Alert>
+            )}
+            {!error && applications.length === 0 ? (
+              <p className="text-center">
+                You haven't submitted any applications yet.
+              </p>
+            ) : (
+              applications.map((application) => (
+                <ApplicantCard
+                  key={application._id}
+                  imgSrc={`/imgs/${application.internshipDetails?.company?.toLowerCase()}.png`}
+                  title={
+                    application.internshipDetails?.title || "Unknown Position"
+                  }
+                  content={
+                    <>
+                      <p>
+                        <strong>Location:</strong>{" "}
+                        {application.internshipDetails?.location || "N/A"}
+                      </p>
+                      <p>
+                        <strong>Application Status:</strong>{" "}
+                        <span className={`${application.status}-badge`}>
+                          {application.status}
+                        </span>
+                      </p>
+                      <p>
+                        <strong>Description:</strong>{" "}
+                        {application.internshipDetails?.description ||
+                          "No description available"}
+                      </p>
+                      <p>
+                        <strong>Requirements:</strong>{" "}
+                        {application.internshipDetails?.qualifications ||
+                          "No requirements listed"}
+                      </p>
+                    </>
+                  }
+                  link={`/application-details/${application._id}`}
+                />
+              ))
+            )}
           </Col>
         </Row>
       </Container>

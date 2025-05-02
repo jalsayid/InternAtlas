@@ -1,81 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CompanyInfoCard from "../components/CompanyInfoCard";
 import Header from "../components/Header";
-import AdminNavbar from '../AdminNavbar.js'; // ✅ Correct NavBar imported
+import AdminNavbar from '../AdminNavbar.js';
 
 export default function ReviewCompany() {
-  const stc = {
-    title: "STC",
-    info: (
-      <>
-        <p>Saudi Telecom Company offering internships in network engineering, AI, and software development.</p>
-        <p><span className="pending-badge">pending</span></p>
-      </>
-    ),
-    image: "/imgs/stc.avif",
-    link: "/companies/stc",
-  };
+  const [companies, setCompanies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const neom = {
-    title: "NEOM",
-    info: (
-      <>
-        <p>A futuristic city project shaping the future of innovation and sustainability. Neom is an arcology and planned city</p>
-        <p><span className="pending-badge">pending</span></p>
-      </>
-    ),
-    image: "/imgs/neom.jpg",
-    link: "/companies/neom",
-  };
+  useEffect(() => {
+    const fetchPendingCompanies = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/companiesdata/pending');
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || 'Failed to fetch pending companies');
+        }
+        
+        setCompanies(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
 
-  const noon = {
-    title: "Noon",
-    info: (
-      <>
-        <p>E-commerce leader in MENA offering roles in data analysis, software engineering, and UX design.</p>
-        <p><span className="pending-badge">pending</span></p>
-      </>
-    ),
-    image: "./imgs/noon.png",
-    link: "/companies/noon",
-  };
+    fetchPendingCompanies();
+  }, []);
 
-  const tawuniya = {
-    title: "Tawuniya",
-    info: (
+  if (loading) {
+    return (
       <>
-        <p>A leading insurance company embracing digital transformation with AI, cybersecurity, and app dev internships.</p>
-        <p><span className="pending-badge">pending</span></p>
+        <AdminNavbar />
+        <Container fluid style={{ paddingTop: "80px" }}>
+          <Header title="Manage Company Requests" />
+          <div className="text-center">Loading pending companies...</div>
+        </Container>
       </>
-    ),
-    image: "./imgs/taw.png",
-    link: "/companies/tawuniya",
-  };
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <AdminNavbar />
+        <Container fluid style={{ paddingTop: "80px" }}>
+          <Header title="Manage Company Requests" />
+          <div className="text-center text-danger">Error: {error}</div>
+        </Container>
+      </>
+    );
+  }
 
   return (
     <>
-      <AdminNavbar /> 
-
-      <Container fluid style={{ paddingTop: "80px" }}>
+      <AdminNavbar />
+      <Container>
         <Header title="Manage Company Requests" />
-
-
         <Row className="g-4 px-4">
-          <Col lg={3} md={6} sm={12}>
-            <CompanyInfoCard {...stc} />
-          </Col>
-          <Col lg={3} md={6} sm={12}>
-            <CompanyInfoCard {...neom} />
-          </Col>
-          <Col lg={3} md={6} sm={12}>
-            <CompanyInfoCard {...noon} />
-          </Col>
-          <Col lg={3} md={6} sm={12}>
-            <CompanyInfoCard {...tawuniya} />
-          </Col>
+          {companies.length === 0 ? (
+            <Col>
+              <p className="text-center">No pending company requests</p>
+            </Col>
+          ) : (
+            companies.map((company) => (
+              <Col lg={3} md={6} sm={12} key={company._id}>
+                <CompanyInfoCard
+                  title={company.companyName}
+                  info={
+                    <>
+                      <p>{company.description}</p>
+                      <p><span className="pending-badge">pending</span></p>
+                    </>
+                  }
+                  image={company.logo}
+                  link={`/companies/${company._id}`}
+                />
+              </Col>
+            ))
+          )}
         </Row>
       </Container>
     </>
