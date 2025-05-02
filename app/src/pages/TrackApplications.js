@@ -4,8 +4,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ApplicantCard from "../components/ApplicantCard.js";
 import Header from "../components/Header.js";
-import StudentNavBar from '../StudentNavBar';
-import Alert from 'react-bootstrap/Alert';
+import StudentNavBar from "../StudentNavBar";
+import Alert from "react-bootstrap/Alert";
 
 export default function TrackApplications() {
   const [applications, setApplications] = useState([]);
@@ -15,24 +15,30 @@ export default function TrackApplications() {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const studentId = sessionStorage.getItem('userId');
-        console.log('Student ID:', studentId); // Debugging line
-        if (!studentId) {
-          throw new Error('No student ID found. Please log in again.');
+        const studentName = sessionStorage.getItem("fullName");
+        const studentEmail = sessionStorage.getItem("email");
+
+        if (!studentName || !studentEmail) {
+          throw new Error(
+            "Student information not found. Please log in again."
+          );
         }
 
-        const response = await fetch(`http://localhost:3001/api/applications/student/${studentId}`);
+        const response = await fetch(
+          `http://localhost:3001/api/applications/student/${studentName}?email=${encodeURIComponent(
+            studentEmail
+          )}`
+        );
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.message || 'Failed to fetch applications');
+          throw new Error(errorData.message || "Failed to fetch applications");
         }
 
         const data = await response.json();
         setApplications(data);
-        console.log('Fetched applications:', data); // Debugging line
         setLoading(false);
       } catch (err) {
-        console.error('Error:', err);
+        console.error("Error:", err);
         setError(err.message);
         setLoading(false);
       }
@@ -65,19 +71,39 @@ export default function TrackApplications() {
               </Alert>
             )}
             {!error && applications.length === 0 ? (
-              <p className="text-center">You haven't submitted any applications yet.</p>
+              <p className="text-center">
+                You haven't submitted any applications yet.
+              </p>
             ) : (
               applications.map((application) => (
                 <ApplicantCard
                   key={application._id}
                   imgSrc={`/imgs/${application.internshipDetails?.company?.toLowerCase()}.png`}
-                  title={application.internshipDetails?.title || 'Unknown Position'}
+                  title={
+                    application.internshipDetails?.title || "Unknown Position"
+                  }
                   content={
                     <>
-                      <p><strong>Location:</strong> {application.internshipDetails?.location || 'N/A'}</p>
-                      <p><strong>Application Status:</strong> <span className={`${application.status}-badge`}>{application.status}</span></p>
-                      <p><strong>Description:</strong> {application.internshipDetails?.description || 'No description available'}</p>
-                      <p><strong>Requirements:</strong> {application.internshipDetails?.qualifications || 'No requirements listed'}</p>
+                      <p>
+                        <strong>Location:</strong>{" "}
+                        {application.internshipDetails?.location || "N/A"}
+                      </p>
+                      <p>
+                        <strong>Application Status:</strong>{" "}
+                        <span className={`${application.status}-badge`}>
+                          {application.status}
+                        </span>
+                      </p>
+                      <p>
+                        <strong>Description:</strong>{" "}
+                        {application.internshipDetails?.description ||
+                          "No description available"}
+                      </p>
+                      <p>
+                        <strong>Requirements:</strong>{" "}
+                        {application.internshipDetails?.qualifications ||
+                          "No requirements listed"}
+                      </p>
                     </>
                   }
                   link={`/application-details/${application._id}`}
