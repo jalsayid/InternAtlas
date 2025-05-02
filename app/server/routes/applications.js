@@ -10,7 +10,7 @@ router.get('/:id', async (req, res) => {
         const db = client.db('App');
         const applicationCollection = db.collection('ApplicationData');
         const questionsCollection = db.collection('Questions');
-        
+
         // Fetch application data
         const application = await applicationCollection.findOne({_id: id});
         if (!application) {
@@ -66,23 +66,5 @@ router.post('/', async (req, res) => {
     }
 });
 
-//aisha
-router.get('/:username', async (req, res) => {
-    try {
-      const db = req.app.locals.db;
-      const student = await db.collection('StudentData').findOne({ username: req.params.username });
-  
-      if (!student) {
-        return res.status(404).json({ message: 'Student not found' });
-      }
-  
-      res.json({
-        student
-      });
-    } catch (err) {
-      console.error('Error fetching student:', err);
-      res.status(500).send('Internal server error');
-    }
-});
 
 module.exports = router;

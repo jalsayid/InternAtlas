@@ -104,29 +104,55 @@ function Register({ onSwitchToRegister }) {
         } else {
             // Send POST request to register company
 
-            const verificationFilePath = companyVerification ? companyVerification.name : '';  // Get the file name from the file object
-            const LogoPath = companyLogo ? companyLogo.name : '';
+            // const verificationFilePath = companyVerification ? companyVerification.name : '';  // Get the file name from the file object
+            // const LogoPath = companyLogo ? companyLogo.name : '';
 
+            // const response = await fetch('http://localhost:3001/api/register', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({
+            //         userType: 'company',  // Make sure userType is correctly set to 'company'
+            //         companyName,
+            //         companySector,
+            //         companyUsername,
+            //         companyEmail,
+            //         companyPassword,
+            //         companyConfirmPassword,
+            //         companyVerification: verificationFilePath,
+            //         companyDescription,
+            //         companyLogo: LogoPath,
+            //         registrationStatus: 'pending'
+            //     }),
+            // });
+
+            // Prepare the form data to be sent in a POST request
+            const formData = new FormData();
+            formData.append('userType', 'company');
+            formData.append('companyName', companyName);
+            formData.append('companySector', companySector);
+            formData.append('companyUsername', companyUsername);
+            formData.append('companyEmail', companyEmail);
+            formData.append('companyPassword', companyPassword);
+            formData.append('companyConfirmPassword', companyConfirmPassword);
+            formData.append('companyDescription', companyDescription);
+            formData.append('registrationStatus', 'pending');
+
+            // Append files (for logo and verification)
+            if (companyLogo) {
+                formData.append('companyLogo', companyLogo);
+            }
+            if (companyVerification) {
+                formData.append('companyVerification', companyVerification);
+            }
+
+            // Send the POST request with FormData (multipart/form-data)
             const response = await fetch('http://localhost:3001/api/register', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    userType: 'company',  // Make sure userType is correctly set to 'company'
-                    companyName,
-                    companySector,
-                    companyUsername,
-                    companyEmail,
-                    companyPassword,
-                    companyConfirmPassword,
-                    companyVerification: verificationFilePath,
-                    companyDescription,
-                    companyLogo: LogoPath,
-                    registrationStatus: 'pending' 
-                }),
+                body: formData,  // Notice that we pass the FormData object here
             });
-        
+
             const data = await response.json();
-            
+
             if (response.ok) {
                 setCompanyShowAlert(true);
                 setTimeout(() => setCompanyShowAlert(false), 10000);
@@ -381,14 +407,48 @@ function Register({ onSwitchToRegister }) {
                         </Form.Group>
 
                         {/* Upload Verification */}
-                        <Form.Group controlId="verification" className="mb-4">
+                        {/* <Form.Group controlId="verification" className="mb-4">
                             <Form.Label> Upload verification of the company</Form.Label>
                             <Form.Control
                                 type="file"
                                 onChange={(e) => setCompanyVerification(e.target.files[0])}
                             />
                             {companyFormErrors.companyVerification && <Form.Text className="text-danger">{companyFormErrors.companyVerification}</Form.Text>}
+                        </Form.Group> */}
+                        <Form.Group controlId="verification" className="mb-4">
+                            <Form.Label>Upload verification of the company</Form.Label>
+                            <Form.Control
+                                type="file"
+                                onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        // Validate file type
+                                        const validFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
+                                        const validSize = 5 * 1024 * 1024; // 5MB size limit
+
+                                        // Check if the file type is valid
+                                        if (!validFileTypes.includes(file.type)) {
+                                            alert('Invalid file type! Only JPEG, PNG, GIF, or PDF are allowed.');
+                                            setCompanyVerification(null); // Clear the invalid file
+                                            return;
+                                        }
+
+                                        // Check if the file size is within the limit
+                                        if (file.size > validSize) {
+                                            alert('File size is too large! Maximum allowed size is 5MB.');
+                                            setCompanyVerification(null); // Clear the file if size is too large
+                                            return;
+                                        }
+
+                                        setCompanyVerification(file);  // Only set valid files
+                                    }
+                                }}
+                            />
+                            {companyFormErrors.companyVerification && (
+                                <Form.Text className="text-danger">{companyFormErrors.companyVerification}</Form.Text>
+                            )}
                         </Form.Group>
+
 
                         {/* Upload Logo */}
                         <Form.Group controlId="logo" className="mb-4">

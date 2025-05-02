@@ -62,8 +62,6 @@ function GeneralInformationForm() {
         const contactInformation = JSON.parse(localStorage.getItem('contactInformation'));
         const generalInformation = JSON.parse(localStorage.getItem('generalquestions'));
 
-        const username = sessionStorage.getItem('loggedInUser');
-
 
         try {
 

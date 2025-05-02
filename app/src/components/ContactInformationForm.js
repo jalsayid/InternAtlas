@@ -67,6 +67,7 @@ function ContactInformationForm() {
         setGpa(storedData.gpa || '');
         setUniversity(storedData.university || '');
         setMajor(storedData.major || '');
+        setResume(null);
     }, []);
 
 
@@ -148,7 +149,7 @@ function ContactInformationForm() {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setResume(file);  // Store the file locally
+            setResume(file);
         }
     };
 
