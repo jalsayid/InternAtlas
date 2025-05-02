@@ -4,10 +4,11 @@ require('dotenv').config({ path: './config/config.env' });
 
 const internshipRoutes = require('./routes/internships');
 const authRoutes = require('./routes/auth');
-const commentRoutes = require('./routes/comments');
 const companiesInfo = require('./routes/companiesInfo');
 const applicationsRoutes = require('./routes/applications');
 const reportRoutes = require('./routes/reports');
+const inappropriateCommentsRoutes = require('./routes/comments');
+const reviewsRoutes = require('./routes/reviews');
 
 const app = express();
 app.use(express.json());
@@ -18,10 +19,12 @@ const PORT = 3001;
 // Routes
 app.use('/api/internships', internshipRoutes);
 app.use('/api', authRoutes); // handles /login and /register
-app.use('/api/inappropriateComments', commentRoutes);
 app.use('/api/companiesdata', companiesInfo);
 app.use('/api/applications', applicationsRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api/inappropriateComments', inappropriateCommentsRoutes);
+app.use('/api/reviews', reviewsRoutes); 
+
 
 
 app.listen(PORT, () => {

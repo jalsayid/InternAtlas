@@ -11,16 +11,25 @@ function TrackApplicationCard({ app }) {
   const goToOpportunityDetails = () => {
     navigate(`/OpportunityDetails/${app._id}`);
   };
-  const goToViewReviews = () => {
-    navigate(`/CompanyReview/${app.company.toLowerCase()}/${app.position.toLowerCase()}/reviews`);
-
-  };
+  
+    const goToViewReviews = () => {
+      const safeCompany = app.company ;
+      const safePosition = app.title;
+      
+      if (!safeCompany || !safePosition) {
+        alert('This application is missing company or position information.');
+        return;
+      }
+      
+      navigate(`/CompanyReview/${safeCompany}/${safePosition}/reviews`);
+      
+    };
   const goToEdit = (id) => {
     console.log(id); // Debugging: check the value of id
     navigate(`/edit-opportunity/${app._id}`);
 }
   const goToViewApplications= () => {
-    navigate(`/view-applicants/${app._id}`);
+    navigate('/view-applicants');
   }
 
 
