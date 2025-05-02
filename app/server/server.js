@@ -7,6 +7,7 @@ const authRoutes = require('./routes/auth');
 const commentRoutes = require('./routes/comments');
 const companiesInfo = require('./routes/companiesInfo');
 const applicationsRoutes = require('./routes/applications');
+const reportRoutes = require('./routes/reports');
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use('/api', authRoutes); // handles /login and /register
 app.use('/api/inappropriateComments', commentRoutes);
 app.use('/api/companiesdata', companiesInfo);
 app.use('/api/applications', applicationsRoutes);
+app.use('/api/reports', reportRoutes);
 
 
 app.listen(PORT, () => {
