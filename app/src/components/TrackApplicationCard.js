@@ -20,7 +20,7 @@ function TrackApplicationCard({ app }) {
     navigate(`/edit-opportunity/${app._id}`);
 }
   const goToViewApplications= () => {
-    navigate('/view-applicants');
+    navigate(`/view-applicants/${app._id}`);
   }
 
 

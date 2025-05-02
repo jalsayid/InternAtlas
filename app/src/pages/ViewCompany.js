@@ -1,65 +1,47 @@
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CompanyDetails from "../components/CompanyDetails";
 
 export default function ViewCompany() {
   const { id } = useParams();
+  const [company, setCompany] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Mock data - in a real application, this would come from an API
-  const companyData = {
-    stc: {
-      name: "STC",
-      email: "careers@stc.com.sa",
-      description: "Saudi Telecom Company offering internships in network engineering, AI, and software development.",
-      logo: "/imgs/stc.avif",
-      documents: [
-        {
-          title: "Commercial Registration",
-          filename: "stc_cr.pdf",
-          path: "./stcCertificate.pdf",
-        },
-      ],
-    },
-    neom: {
-      name: "NEOM",
-      email: "careers@neom.com",
-      description: "A futuristic city project shaping the future of innovation and sustainability.",
-      logo: "/imgs/neom.jpg",
-      documents: [
-        {
-          title: "Commercial Registration",
-          filename: "neom_cr.pdf",
-          path: "./neomCertificate.pdf",
-        },
-      ],
-    },
-    noon: {
-      name: "Noon",
-      email: "careers@noon.com",
-      description: "E-commerce leader in MENA offering roles in data analysis, software engineering, and UX design.",
-      logo: "/imgs/noon.png",
-      documents: [
-        {
-          title: "Commercial Registration",
-          filename: "noon_cr.pdf",
-          path: "./noonCertificate.pdf",
-        },
-      ],
-    },
-    tawuniya: {
-      name: "Tawuniya",
-      email: "careers@tawuniya.com.sa",
-      description: "A leading insurance company embracing digital transformation with AI, cybersecurity, and app dev internships.",
-      logo: "/imgs/taw.png",
-      documents: [
-        {
-          title: "Commercial Registration",
-          filename: "tawuniya_cr.pdf",
-          path: "./tawCertificate.pdf",
-        },
-      ],
-    },
-  };
-  const company = companyData[id];
+  useEffect(() => {
+    const fetchCompany = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/companiesdata/${id}`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.message || 'Failed to fetch company details');
+        }
+        const logoPath = data.logo?.startsWith('.') ? data.logo.substring(1) : data.logo;
+        setCompany({
+          name: data.companyName,
+          email: data.email,
+          description: data.description,
+          logo: logoPath,
+          documents: [{
+            title: "Commercial Registration",
+            filename: "verification.pdf",
+            path: data.verificationFile
+          }]
+        });
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchCompany();
+  }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!company) return <div>Company not found</div>;
 
   return <CompanyDetails {...company} />;
 }
