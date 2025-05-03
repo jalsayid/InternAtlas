@@ -84,27 +84,24 @@
 
 ---
 
-##📝 InternAtlas Backend & API Documentation
-###👩‍🎓 Company Reviews / Responses / Inappropriate Reviews
-This backend handles:
+## 📝 InternAtlas Backend & API Documentation
+### 👩‍🎓 Company Reviews / Responses / Inappropriate Reviews
+***This backend handles:***
 
-✅ Fetching company reviews
-✅ Posting company responses
-✅ Managing inappropriate review flags
+- ✅ Fetching company reviews
+- ✅ Posting company responses
+- ✅ Managing inappropriate review flags
 
-📍 API Endpoints
+#### 📍 API Endpoints
 ➤ GET /api/reviews/:company/:position
 Returns reviews for a specific company and position.
 
 Example Request:
-http
-Copy
-Edit
+````bash
 GET /api/reviews/Sabic/Software%20Engineering%20Intern
+````
 Example Response:
-json
-Copy
-Edit
+````bash
 {
   "_id": "680fe7aa9311423468ab9bb3",
   "company": "Sabic",
@@ -116,23 +113,21 @@ Edit
   "companyResponse": null,
   "is_inappropriate": false
 }
+````
 ➤ PATCH /api/reviews/:id/response
 Updates a review with the company’s official response.
 
 Example Request:
-http
-Copy
-Edit
+````bash
 PATCH /api/reviews/680fe7aa9311423468ab9bb3/response
 Content-Type: application/json
 
 {
   "responseText": "Thank you for the feedback!"
 }
+````
 Example Response:
-json
-Copy
-Edit
+````bash
 {
   "_id": "680fe7aa9311423468ab9bb3",
   "company": "Sabic",
@@ -144,31 +139,30 @@ Edit
   "companyResponse": "Thank you for the feedback!",
   "is_inappropriate": false
 }
+````
 ➤ PATCH /api/reviews/:id/flag
 Flags or unflags a review as inappropriate by updating the is_inappropriate boolean field.
 
 Example Request (flagging a review):
-http
-Copy
-Edit
+````bash
 PATCH /api/reviews/680fe7aa9311423468ab9bb3/flag
 Content-Type: application/json
 
 {
   "is_inappropriate": true
 }
+````
 Example Request (unflagging a review):
-http
-Copy
-Edit
+````bash
 PATCH /api/reviews/680fe7aa9311423468ab9bb3/flag
+
 Content-Type: application/json
 
 {
   "is_inappropriate": false
 }
-
-
+````
+---
 
 
 ## 👥 Team Members & Roles
