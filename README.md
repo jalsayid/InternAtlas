@@ -94,7 +94,7 @@
 
 #### 📍 API Endpoints
 ➤ GET /api/reviews/:company/:position
-Returns reviews for a specific company and position.
+- Returns reviews for a specific company and position.
 
 Example Request:
 ````bash
@@ -115,7 +115,7 @@ Example Response:
 }
 ````
 ➤ PATCH /api/reviews/:id/response
-Updates a review with the company’s official response.
+- Updates a review with the company’s official response.
 
 Example Request:
 ````bash
@@ -141,7 +141,7 @@ Example Response:
 }
 ````
 ➤ PATCH /api/reviews/:id/flag
-Flags or unflags a review as inappropriate by updating the is_inappropriate boolean field.
+- Flags or unflags a review as inappropriate by updating the is_inappropriate boolean field.
 
 Example Request (flagging a review):
 ````bash
