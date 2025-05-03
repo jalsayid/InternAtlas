@@ -85,7 +85,7 @@
 ---
 
 ## 📝 InternAtlas Backend & API Documentation
-### 👩‍🎓 Company Reviews / Responses / Inappropriate Reviews
+###  Company Reviews / Responses / Inappropriate Reviews
 ***This backend handles:***
 
 - ✅ Fetching company reviews
@@ -162,7 +162,25 @@ Content-Type: application/json
   "is_inappropriate": false
 }
 ````
+
+Example Response (flagging a review):
+````bash
+{
+  "_id": "680fe7aa9311423468ab9bb3",
+  "company": "Sabic",
+  "position": "Software Engineering Intern",
+  "studentId": 1,
+  "studentName": "Ahmed Al-Saud",
+  "rating": 1,
+  "reviewText": "Worst company ever!!",
+  "companyResponse": "Thank you for the feedback!",
+  "is_inappropriate": true
+}
+````
 ---
+
+
+
 
 
 ## 👥 Team Members & Roles
