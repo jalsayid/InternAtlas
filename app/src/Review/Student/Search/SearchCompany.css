@@ -1,0 +1,31 @@
+
+input.custom-input:focus {
+    border-color: #FFB608 !important;
+    box-shadow: 0 0 0 0.25rem #FFB60833 !important;
+    outline: none !important;
+}
+
+/* Custom input for consistent rounded corners */
+.custom-input {
+    border-radius: 0.5rem !important;
+  }
+  
+  /* Suggested company card styling */
+  .suggestion-card {
+    transition: box-shadow 0.2s;
+  }
+  
+  .suggestion-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Adjust the logo appearance if needed */
+  .suggestion-logo {
+    border-radius: 0.25rem;
+  }
+  
+  /* Ensures the suggested companies section titles and text appear correctly */
+  .text-secondary {
+    color: #6c757d !important;
+  }
+  

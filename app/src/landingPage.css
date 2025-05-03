@@ -1,0 +1,15 @@
+
+.accordion-button {
+    background-color: #FFB608 !important;
+    color: #fff !important; 
+    border-color: #FFB608 !important; 
+}
+.accordion-button:hover {
+    background-color: #e8a700 !important; 
+    border-color: #e8a700 !important; 
+    color: #fff !important; 
+}
+.accordion-body {
+    background-color: #f7f7f7 !important; 
+    color: #333; 
+}

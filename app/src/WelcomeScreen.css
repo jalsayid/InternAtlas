@@ -1,0 +1,65 @@
+.welcome-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fffef3;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+  }
+  
+  .logo {
+    width: 100px;
+    animation: drop-in 1s ease;
+  }
+  
+  @keyframes drop-in {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+  }
+  
+  .fade-in.delay {
+    animation-delay: 0.8s;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .typing-effect {
+    font-size: 20px;
+    font-weight: 450;
+    font-family: 'Roboto', sans-serif;  /* 👈 your preferred font */
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #FFB608;
+    animation: typing 5s steps(50, end), blink 0.6s step-end infinite;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #FFB608; }
+  }
+  
+  
+  

@@ -1,0 +1,193 @@
+* {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.def-btn {
+  background-color: #ffb608;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.def-btn:hover {
+  background-color: #f88c0e;
+}
+.second-btn {
+  background-color: transparent;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  color: black;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.second-btn:hover {
+  background-color: #333333;
+  color: white;
+}
+.third-btn {
+  background-color: #ffeacc;
+  border: none;
+  border-radius: 6px;
+  color: #ffb608;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.third-btn:hover {
+  color: #f8620e;
+}
+.h1-joud {
+  font-size: 48px;
+  font-weight: 600;
+}
+.h2-joud {
+  font-size: 40px;
+  font-weight: 600;
+}
+.accept-badge {
+  padding: 4px 12px;
+  border-radius: 1000px;
+  background-color: #dff8cf;
+  text-align: center;
+  color: #34c759;
+}
+.pending-badge {
+  padding: 4px 12px;
+  border-radius: 1000px;
+  background-color: #ffeacc;
+  text-align: center;
+  color: #ff9500;
+}
+.reject-badge {
+  padding: 4px 12px;
+  border-radius: 1000px;
+  background-color: #ffe1df;
+  text-align: center;
+  color: #ff3b30;
+}
+body {
+  background: url('./assets/blob-scene-haikei-3.svg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  /*font-family: 'Segoe UI', sans-serif;*/
+}
+
+.h1-joud, .h2-joud {
+  font-family: "Roboto", sans-serif; 
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-align: center ;
+
+}
+
+
+/* Global font */
+body {
+  font-family: "Roboto", sans-serif !important;
+  color: #333333  !important;
+  font-size: 16px ;
+  line-height: 1.6  ;
+}
+
+/* Headings */
+h1, .heading-xl {
+  font-size: 36px ;
+  font-weight: 700 ;
+  color: #333;
+  text-align: center;
+ 
+}
+
+h2, .heading-lg {
+  font-size: 28px ; 
+  font-weight: 600 ;
+  color: #333;
+  text-align: center ;
+
+}
+
+h3, .heading-md {
+  font-size: 22px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Subheadings / labels */
+h4, .label, .subheading {
+  font-size: 18px;
+  font-weight: 500;
+  color: #444;
+}
+
+/* Highlights like 'Location:' or 'Status:' */
+.highlight-label {
+  font-weight: 600;
+  color: #ffb608; /* Your yellow accent */
+}
+
+/* Description text */
+p, .description-text {
+  font-size: 16px;
+  color: #555;
+}
+
+.page-title {
+  font-size: 36px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  margin-top: 40px !important;
+  margin-bottom: 30px !important;
+}
+
+.animated-subtitle {
+  font-size: 28px;
+  font-weight: 500;
+  font-family: 'Courier New', monospace; /* ensures equal character spacing */
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #ffb608;
+  width: 34ch; /* total number of characters */
+  margin: 0 auto 30px auto;
+  animation: typing 2s steps(34, end), blink 1s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 34ch; }
+}
+
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #ffb608; }
+}
+@media (max-width: 768px) {
+  .animated-subtitle {
+    animation: none !important;
+    border-right: none !important;
+    width: auto !important;
+    white-space: normal !important;
+    font-size: 20px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+
+
+
+
+

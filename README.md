@@ -30,8 +30,7 @@
    npm install react-icons
    npm install d3
    npm install bootstrap-icons
-   npm install bcrypt
-   npm install multer
+
    ```
 
 3. **Start the development server**
