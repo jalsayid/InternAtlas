@@ -61,9 +61,6 @@ export default function Details({
                       readOnly
                       className="me-2"
                     />
-                    <button onClick={handleDownloadCV} className="third-btn">
-                      <i className="bi bi-download me-2"></i>CV
-                    </button>
                   </div>
                 </Form.Group>
               </Form>

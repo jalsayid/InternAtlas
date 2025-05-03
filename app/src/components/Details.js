@@ -1,16 +1,16 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import CompanyNavBar from '../CompanyNavBar'; 
+import CompanyNavBar from "../CompanyNavBar";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Alert from "react-bootstrap/Alert";
 import { useState } from "react";
 
-export default function Details({ 
-  name, 
-  email, 
-  cv_path, 
+export default function Details({
+  name,
+  email,
+  cv_path,
   phone,
   linkedin,
   location,
@@ -18,7 +18,7 @@ export default function Details({
   university,
   major,
   generalInfo,
-  questions
+  questions,
 }) {
   const [showAcceptAlert, setShowAcceptAlert] = useState(false);
   const [showRejectAlert, setShowRejectAlert] = useState(false);
@@ -118,9 +118,6 @@ export default function Details({
                       readOnly
                       className="me-2"
                     />
-                    <button onClick={handleViewDocument} className="third-btn">
-                      <i className="bi bi-download me-2"></i>CV
-                    </button>
                   </div>
                 </Form.Group>
               </Form>
@@ -131,66 +128,78 @@ export default function Details({
             <Card className="p-4">
               <h2 className="h2-joud mb-4">Application Questions</h2>
               <Form.Group className="mb-4">
-                <Form.Label className="fw-bold">{questions.question1}</Form.Label>
+                <Form.Label className="fw-bold">
+                  {questions.question1}
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={2}
-                  value={generalInfo?.summary || ''}
+                  value={generalInfo?.summary || ""}
                   readOnly
                   className="bg-light"
                 />
               </Form.Group>
 
               <Form.Group className="mb-4">
-                <Form.Label className="fw-bold">{questions.question2}</Form.Label>
+                <Form.Label className="fw-bold">
+                  {questions.question2}
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={2}
-                  value={generalInfo?.skills || ''}
+                  value={generalInfo?.skills || ""}
                   readOnly
                   className="bg-light"
                 />
               </Form.Group>
 
               <Form.Group className="mb-4">
-                <Form.Label className="fw-bold">{questions.question3}</Form.Label>
+                <Form.Label className="fw-bold">
+                  {questions.question3}
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={2}
-                  value={generalInfo?.careerGoals || ''}
+                  value={generalInfo?.careerGoals || ""}
                   readOnly
                   className="bg-light"
                 />
               </Form.Group>
 
               <Form.Group className="mb-4">
-                <Form.Label className="fw-bold">{questions.question4}</Form.Label>
+                <Form.Label className="fw-bold">
+                  {questions.question4}
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  value={generalInfo?.availability || ''}
+                  value={generalInfo?.availability || ""}
                   readOnly
                   className="bg-light"
                 />
               </Form.Group>
 
               <Form.Group className="mb-4">
-                <Form.Label className="fw-bold">{questions.question5}</Form.Label>
+                <Form.Label className="fw-bold">
+                  {questions.question5}
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  value={generalInfo?.fullTimeInterest || ''}
+                  value={generalInfo?.fullTimeInterest || ""}
                   readOnly
                   className="bg-light"
                 />
               </Form.Group>
 
               <Form.Group className="mb-4">
-                <Form.Label className="fw-bold">{questions.question6}</Form.Label>
+                <Form.Label className="fw-bold">
+                  {questions.question6}
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  value={generalInfo?.relocation || ''}
+                  value={generalInfo?.relocation || ""}
                   readOnly
                   className="bg-light"
                 />
