@@ -84,6 +84,93 @@
 
 ---
 
+##📝 InternAtlas Backend & API Documentation
+###👩‍🎓 Company Reviews / Responses / Inappropriate Reviews
+This backend handles:
+
+✅ Fetching company reviews
+✅ Posting company responses
+✅ Managing inappropriate review flags
+
+📍 API Endpoints
+➤ GET /api/reviews/:company/:position
+Returns reviews for a specific company and position.
+
+Example Request:
+http
+Copy
+Edit
+GET /api/reviews/Sabic/Software%20Engineering%20Intern
+Example Response:
+json
+Copy
+Edit
+{
+  "_id": "680fe7aa9311423468ab9bb3",
+  "company": "Sabic",
+  "position": "Software Engineering Intern",
+  "studentId": 1,
+  "studentName": "Ahmed Al-Saud",
+  "rating": 4,
+  "reviewText": "Learned a lot, but onboarding could improve.",
+  "companyResponse": null,
+  "is_inappropriate": false
+}
+➤ PATCH /api/reviews/:id/response
+Updates a review with the company’s official response.
+
+Example Request:
+http
+Copy
+Edit
+PATCH /api/reviews/680fe7aa9311423468ab9bb3/response
+Content-Type: application/json
+
+{
+  "responseText": "Thank you for the feedback!"
+}
+Example Response:
+json
+Copy
+Edit
+{
+  "_id": "680fe7aa9311423468ab9bb3",
+  "company": "Sabic",
+  "position": "Software Engineering Intern",
+  "studentId": 1,
+  "studentName": "Ahmed Al-Saud",
+  "rating": 4,
+  "reviewText": "Learned a lot, but onboarding could improve.",
+  "companyResponse": "Thank you for the feedback!",
+  "is_inappropriate": false
+}
+➤ PATCH /api/reviews/:id/flag
+Flags or unflags a review as inappropriate by updating the is_inappropriate boolean field.
+
+Example Request (flagging a review):
+http
+Copy
+Edit
+PATCH /api/reviews/680fe7aa9311423468ab9bb3/flag
+Content-Type: application/json
+
+{
+  "is_inappropriate": true
+}
+Example Request (unflagging a review):
+http
+Copy
+Edit
+PATCH /api/reviews/680fe7aa9311423468ab9bb3/flag
+Content-Type: application/json
+
+{
+  "is_inappropriate": false
+}
+
+
+
+
 ## 👥 Team Members & Roles
 
 | Name            | Role        |
