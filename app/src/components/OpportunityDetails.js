@@ -42,7 +42,7 @@ function OpportunityDetails() {
                   Location <strong>{opportunity.location}</strong>
                   <span className="separator"></span>|
                   <span className="separator"></span>
-                  Duration: (<strong>{opportunity.type}</strong>)
+                  Type: (<strong>{opportunity.type}</strong>)
                 </p>
               </Col>
             </Row>
