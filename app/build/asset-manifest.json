@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e6695e2c.css",
+    "main.js": "/static/js/main.b4f21c55.js",
+    "static/js/453.a6a97343.chunk.js": "/static/js/453.a6a97343.chunk.js",
+    "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/internatlas-logo.png": "/static/media/internatlas-logo.b39c809ce9c7ccc710cc.png",
+    "static/media/blob-scene-haikei-3.svg": "/static/media/blob-scene-haikei-3.3f1de8a596352ac423d2.svg",
+    "index.html": "/index.html",
+    "main.e6695e2c.css.map": "/static/css/main.e6695e2c.css.map",
+    "main.b4f21c55.js.map": "/static/js/main.b4f21c55.js.map",
+    "453.a6a97343.chunk.js.map": "/static/js/453.a6a97343.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6695e2c.css",
+    "static/js/main.b4f21c55.js"
+  ]
+}
