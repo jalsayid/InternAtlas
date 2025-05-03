@@ -53,9 +53,13 @@ export default function CompanyDetails({
   const handleReject = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/companiesdata/${name}`,
+        `http://localhost:3001/api/companiesdata/${name}/status`,
         {
-          method: "DELETE",
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: "rejected" }),
         }
       );
 
