@@ -30,7 +30,7 @@ const EditInternshipForm = () => {
     // Fetch internship data when component is mounted
     useEffect(() => {
         // Fetch the internship data using the ID from the URL
-        fetch(`http://localhost:3001/api/internships/id/${id}`)
+        fetch(`${REACT_APP_API_URL}/api/internships/id/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setTitle(data.title || '');
@@ -102,7 +102,7 @@ const EditInternshipForm = () => {
             };
 
             // Sending the updated data to the server using PUT request
-            fetch(`http://localhost:3001/api/internships/id/${id}`, {
+            fetch(`${REACT_APP_API_URL}/api/internships/id/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedInternship),

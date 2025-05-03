@@ -15,7 +15,7 @@ export default function ReviewCompany() {
     const fetchPendingCompanies = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3001/api/companiesdata/pending"
+          `${REACT_APP_API_URL}/api/companiesdata/pending`
         );
         const data = await response.json();
 

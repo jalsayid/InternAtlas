@@ -14,7 +14,7 @@ const CompanyPageReviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/api/reviews/${companyName}/${position}`);
+        const res = await fetch(`${REACT_APP_API_URL}/api/reviews/${companyName}/${position}`);
         const data = await res.json();
 
         const mapped = data.map((r) => ({
@@ -52,7 +52,7 @@ const CompanyPageReviews = () => {
   const handleSave = async (id) => {
     const review = reviews.find((r) => r.id === id);
     try {
-      await fetch(`http://localhost:3001/api/reviews/${id}/response`, {
+      await fetch(`${REACT_APP_API_URL}/api/reviews/${id}/response`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ responseText: review.editText }),
@@ -70,7 +70,7 @@ const CompanyPageReviews = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:3001/api/reviews/${id}/response`, {
+      await fetch(`${REACT_APP_API_URL}/api/reviews/${id}/response`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ responseText: null }),

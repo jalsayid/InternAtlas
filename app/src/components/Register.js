@@ -146,7 +146,7 @@ function Register({ onSwitchToRegister }) {
             }
 
             // Send the POST request with FormData (multipart/form-data)
-            const response = await fetch('http://localhost:3001/api/register', {
+            const response = await fetch(`${REACT_APP_API_URL}/api/register`, {
                 method: 'POST',
                 body: formData,  // Notice that we pass the FormData object here
             });

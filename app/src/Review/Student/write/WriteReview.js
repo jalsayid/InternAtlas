@@ -53,7 +53,7 @@ const WriteReview = () => {
         const overallRating = Math.round(Object.values(ratings).reduce((a, b) => a + b) / 4);
 
         try {
-            const response = await fetch('http://localhost:3001/api/reviews', {
+            const response = await fetch(`${REACT_APP_API_URL}/api/reviews`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

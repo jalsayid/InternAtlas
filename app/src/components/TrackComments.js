@@ -16,7 +16,7 @@ function TrackComments() {
   // ✅ refresh function
   const refreshComments = () => {
     setLoading(true);
-    fetch('http://localhost:3001/api/inappropriateComments')
+    fetch(`${REACT_APP_API_URL}/api/inappropriateComments`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -40,7 +40,7 @@ function TrackComments() {
   };
 
   const confirmDeletion = () => {
-    fetch(`http://localhost:3001/api/inappropriateComments/${pendingDeleteId}`, {
+    fetch(`${REACT_APP_API_URL}/api/inappropriateComments/${pendingDeleteId}`, {
       method: 'DELETE',
     })
       .then((res) => {

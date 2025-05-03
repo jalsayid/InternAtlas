@@ -12,7 +12,7 @@ export default function ViewCompany() {
     const fetchCompany = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/api/companiesdata/${id}`
+          `${REACT_APP_API_URL}/api/companiesdata/${id}`
         );
         const data = await response.json();
 

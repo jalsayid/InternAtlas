@@ -26,14 +26,14 @@ export default function TrackApplications() {
         }
 
         const response = await fetch(
-          `http://localhost:3001/api/applications/student/${studentName}?email=${encodeURIComponent(
+          `${REACT_APP_API_URL}/api/applications/student/${studentName}?email=${encodeURIComponent(
             studentEmail
           )}`
         );
         console.log("Applications API response:", response);
 
         const response2 = await fetch(
-          "http://localhost:3001/api/companiesdata"
+          `${REACT_APP_API_URL}/api/companiesdata`
         );
         console.log("Companies API response:", response2);
 

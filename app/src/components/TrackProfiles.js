@@ -20,7 +20,7 @@ function TrackProfiles() {
 
         // Fetch data from API
         useEffect(() => {
-          fetch('http://localhost:3001/api/companiesdata') // Adjust if hosted elsewhere
+          fetch(`${REACT_APP_API_URL}/api/companiesdata`) // Adjust if hosted elsewhere
             .then(res => res.json())
             .then(data => {
               if (Array.isArray(data)) {
@@ -39,7 +39,7 @@ function TrackProfiles() {
 
       };
       const confirmDeletion = () => {
-        fetch(`http://localhost:3001/api/companiesdata/${pendingDeleteId}`, {
+        fetch(`${REACT_APP_API_URL}/api/companiesdata/${pendingDeleteId}`, {
           method: 'DELETE',
         })
           .then((res) => {

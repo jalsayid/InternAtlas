@@ -16,7 +16,7 @@ function ManageApplications() {
 
    // Fetch data from API
    useEffect(() => {
-    fetch('http://localhost:3001/api/internships') // Adjust if hosted elsewhere
+    fetch(`${REACT_APP_API_URL}/api/internships`) // Adjust if hosted elsewhere
       .then(res => res.json())
       .then(data => setApplication(data))
       .catch(err => console.error("Failed to fetch applications", err))
@@ -34,7 +34,7 @@ function ManageApplications() {
   };
 
   const confirmDeletion = () => {
-    fetch(`http://localhost:3001/api/internships/${pendingDeleteId}`, {
+    fetch(`${REACT_APP_API_URL}/api/internships/${pendingDeleteId}`, {
       method: 'DELETE',
     })
       .then((res) => {

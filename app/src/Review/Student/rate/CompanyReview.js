@@ -15,7 +15,7 @@ const CompanyReview = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/api/reviews/${companyName}/${position}`);
+        const res = await fetch(`${REACT_APP_API_URL}/api/reviews/${companyName}/${position}`);
         const data = await res.json();
 
         const mapped = data.map((r) => ({

@@ -14,7 +14,7 @@ function ApplicationDetailWrapper() {
     const fetchApplicationData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/api/applications/${id}`
+          `${REACT_APP_API_URL}/api/applications/${id}`
         );
         if (!response.ok) {
           throw new Error("Application not found");

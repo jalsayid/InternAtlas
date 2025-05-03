@@ -19,7 +19,7 @@ function SearchOpportunities() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/internships')
+    fetch(`${REACT_APP_API_URL}/api/internships`)
       .then(response => response.json())
       .then(data => {
         const activeOnly = data.filter(item => item.status?.toLowerCase() === 'active');

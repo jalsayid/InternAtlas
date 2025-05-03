@@ -17,7 +17,7 @@ function ContactInformationForm() {
     const [opportunity, setOpportunity] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:3001/api/internships/id/${id}`)
+        fetch(`${REACT_APP_API_URL}/api/internships/id/${id}`)
             .then((res) => res.json())
             .then((data) => setOpportunity(data))
             .catch((err) => console.error('Error fetching opportunity:', err));
