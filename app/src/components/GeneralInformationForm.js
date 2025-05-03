@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Alert from "react-bootstrap/Alert";
 
 
-
 function GeneralInformationForm() {
     const navigate = useNavigate();
 
@@ -62,10 +61,12 @@ function GeneralInformationForm() {
         const contactInformation = JSON.parse(localStorage.getItem('contactInformation'));
         const generalInformation = JSON.parse(localStorage.getItem('generalquestions'));
 
+        const userId = sessionStorage.getItem('userId');
+
+        console.log("file "+ contactInformation.resume);
+
 
         try {
-
-            const userId = sessionStorage.getItem('userId');
 
             const response = await fetch('http://localhost:3001/api/applications', {
                 method: 'POST',
@@ -84,6 +85,7 @@ function GeneralInformationForm() {
 
                 localStorage.removeItem('contactInformation')
                 localStorage.removeItem('generalquestions')
+                localStorage.removeItem('resumeName');
 
                 setTimeout(() => {
                     setShowAcceptAlert(false);

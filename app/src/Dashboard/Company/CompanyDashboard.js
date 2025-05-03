@@ -37,7 +37,7 @@ const CompanyDashboard = () => {
           </button>
           <div className="d-flex align-items-center gap-2">
             <PersonCircle size={24} />
-            <span className="fw-bold">Hello, Sabic</span>
+            <span className="fw-bold">Hello, Company</span>
           </div>
         </div>
       </div>

@@ -41,22 +41,6 @@ function ContactInformationForm() {
     const [errors, setErrors] = useState({});
 
 
-    // useEffect(() => {
-    //     const username = sessionStorage.getItem('loggedInUser');
-    //     if (!username) return;
-
-    //     fetch(`http://localhost:3001/api/applications/${username}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setFullName(data.fullName || '');
-    //             setEmail(data.email || '');
-    //             setLocation(data.location || '');
-    //             setUniversity(data.university || '');
-    //             setMajor(data.major || '');
-    //         })
-    //         .catch(err => console.error('Error fetching student data:', err));
-    // }, []);
-
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('contactInformation')) || {};
         setFullName(storedData.fullName || '');
@@ -69,7 +53,6 @@ function ContactInformationForm() {
         setMajor(storedData.major || '');
         setResume(null);
     }, []);
-
 
     // handle form 
     const handleSubmit = (event) => {
@@ -117,24 +100,53 @@ function ContactInformationForm() {
         setErrors(formErrors);
 
         if (valid) {
-            // Create a data object
-            const formData = {
-                fullName,
-                email,
-                phone,
-                linkedin,
-                location,
-                gpa,
-                university,
-                major,
-                resume,
-            };
+            const formData = new FormData();
 
-            // Save the form data to localStorage
-            localStorage.setItem('contactInformation', JSON.stringify(formData));
+        formData.append('fullName', fullName);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('linkedin', linkedin);
+        formData.append('location', location);
+        formData.append('gpa', gpa);
+        formData.append('university', university);
+        formData.append('major', major);
+        
+        // Append the file to FormData
+        if (resume) {
+            formData.append('resume', resume);  // Append the file object itself
+        }
+
+        // Save the form data to localStorage
+        localStorage.setItem('contactInformation', JSON.stringify({
+            fullName,
+            email,
+            phone,
+            linkedin,
+            location,
+            gpa,
+            university,
+            major,
+            resumeName: resume.name  // Save the file name for reference
+        }));
+
+            // // Create a data object
+            // const formData = {
+            //     fullName,
+            //     email,
+            //     phone,
+            //     linkedin,
+            //     location,
+            //     gpa,
+            //     university,
+            //     major,
+            //     resume,
+            // };
+
+            // // Save the form data to localStorage
+            // localStorage.setItem('contactInformation', JSON.stringify(formData));
 
             // Navigate to the next page
-            navigate(`/general-informationForm/${id}}`);
+            navigate(`/general-informationForm/${id}`); 
         }
 
 
@@ -149,9 +161,11 @@ function ContactInformationForm() {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setResume(file);
+            setResume(file);  // Store the file object in state
         }
     };
+    
+    
 
     return (
         <Container className="mt-5">
@@ -176,7 +190,7 @@ function ContactInformationForm() {
 
 
             {/* Contact Information Form */}
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} encType="multipart/form-data">
                 {/* Full Name */}
                 <Form.Group controlId="fullName" className="mb-4">
                     <Form.Label><FaUser style={{ color: '#FFB608', marginRight: '8px' }} /> Full Name</Form.Label>
@@ -287,6 +301,7 @@ function ContactInformationForm() {
                     <Form.Label><FaUpload style={{ color: '#FFB608', marginRight: '8px' }} /> Upload Resume</Form.Label>
                     <Form.Control
                         type="file"
+                        name="resume"// Ensure this matches the Multer file field name
                         onChange={handleFileChange}
                         isInvalid={!!errors.resume}
                     />
