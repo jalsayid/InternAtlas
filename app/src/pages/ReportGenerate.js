@@ -228,34 +228,42 @@ export default function ReportGenerate() {
                     </div>
 
                     {selectedCompany && (
-                        <div className="mt-5">
-                            <h4 className="mb-3">📈 {selectedCompany}'s Analytical Statistics</h4>
-                            <div className="row">
-                                <div className="col-md-6 mb-4">
-                                    <div className="p-3 shadow rounded bg-white overflow-auto">
-                                        <div style={{ minWidth: "350px" }}>
-                                            <h6 className="mb-3 text-secondary">Approval vs. Rejection Rates</h6>
-                                            <ApprovalBarChart data={approvalChartData} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-6 mb-4">
-                                    <div className="p-3 shadow rounded bg-white overflow-auto">
-                                        <div style={{ minWidth: "350px" }}>
-                                            <h6 className="mb-3 text-secondary">Accepted Students by Major</h6>
-                                            <MajorPieChart data={majorPieData} />
-                                        </div>
-                                    </div>
-                                </div>
+  <div className="mt-5">
+    <h4 className="mb-3">📈 {selectedCompany}'s Analytical Statistics</h4>
+    <div className="row">
+      <div className="col-md-6 mb-4">
+        <div className="p-3 shadow rounded bg-white overflow-auto">
+          <div style={{ minWidth: "350px" }}>
+            <h6 className="mb-3 text-secondary">Approval vs. Rejection Rates</h6>
+            {approvalChartData.length > 0 ? (
+              <ApprovalBarChart data={approvalChartData} />
+            ) : (
+              <p className="text-muted">No approval data available.</p>
+            )}
+          </div>
+        </div>
+      </div>
 
-                            </div>
-                            <a href="/docs/reportZMI.pdf" target="_blank" rel="noopener noreferrer">
-                                <button className="def-btn">
-                                    Export as PDF
-                                </button>
-                            </a>
-                        </div>
-                    )}
+      <div className="col-md-6 mb-4">
+        <div className="p-3 shadow rounded bg-white overflow-auto">
+          <div style={{ minWidth: "350px" }}>
+            <h6 className="mb-3 text-secondary">Accepted Students by Major</h6>
+            {majorPieData.length > 0 ? (
+              <MajorPieChart data={majorPieData} />
+            ) : (
+              <p className="text-muted">No major data available.</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="/docs/reportZMI.pdf" target="_blank" rel="noopener noreferrer">
+      <button className="def-btn">Export as PDF</button>
+    </a>
+  </div>
+)}
+
                 </div>
 
                 <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">

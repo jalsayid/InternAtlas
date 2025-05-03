@@ -40,7 +40,7 @@ export default function ApprovalBarChart({ data }) {
       .attr("fill", "#FFB608")
       .on("mouseover", function (event, d) {
         d3.select(this)
-        .attr("fill", d => d.label === "Approved" ? "#66BB6A" : "#E57373"); // lighter green or red
+        .attr("fill", d => d.label === "accepted" ? "#66BB6A" : "#E57373"); // lighter green or red
 
         chart.append("text")
           .attr("id", "tooltip")
@@ -62,8 +62,9 @@ export default function ApprovalBarChart({ data }) {
       .selectAll("text")
       .style("font-weight", "bold");
 
-    chart.append("g").call(d3.axisLeft(y));
-  }, [data]);
+      chart.append("g")
+      .call(d3.axisLeft(y).ticks(4).tickFormat(d3.format("d"))); //numbers on the y axis of approval bar
+        }, [data]);
 
   return <svg ref={chartRef}></svg>;
 }

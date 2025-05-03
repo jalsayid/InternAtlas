@@ -125,47 +125,79 @@ module.exports = router;
   
       // Count approved/rejected for the company
       const approvalStats = await applications.aggregate([
-        { $match: { company: companyName } },
+        {
+          $lookup: {
+            from: "InternshipOpportunitiesData",
+            localField: "internshipId",
+            foreignField: "_id",
+            as: "internship"
+          }
+        },
+        { $unwind: "$internship" },
+        { $match: { "internship.company": companyName } },
         {
           $group: {
-            _id: "$status",
+            _id: "$status",  // accepted / rejected / pending
             count: { $sum: 1 }
           }
         }
       ]).toArray();
+      
   
       const approvalData = [
-        { label: "Approved", value: 0 },
-        { label: "Rejected", value: 0 }
+        { label: "accepted", value: 0 },
+        { label: "rejected", value: 0 }
       ];
       
   
       approvalStats.forEach(item => {
-        const label = item._id.charAt(0).toUpperCase() + item._id.slice(1); // capitalize
-        const match = approvalData.find(d => d.label === label);
+        const match = approvalData.find(d => d.label.toLowerCase() === item._id.toLowerCase().trim());
         if (match) match.value = item.count;
       });
+
   
       // Group approved applications by student major
-      const acceptedApps = await applications.find({ company: companyName, status: "accepted" }).toArray();
-      const studentIds = acceptedApps.map(app => app.studentId);
+      //const acceptedApps = await applications.find({ company: companyName, status: "accepted" }).toArray();
+      //const studentIds = acceptedApps.map(app => app.studentId);
   
-      const majors = await students.aggregate([
-        { $match: { _id: { $in: studentIds.map(id => typeof id === 'object' ? id : new Object(id)) } } },
-        {
-          $group: {
-            _id: "$major",
-            count: { $sum: 1 }
-          }
-        },
-        {
-          $project: {
-            label: "$_id",
-            value: "$count",
-            _id: 0
-          }
-        }
-      ]).toArray();
+// Group accepted applications by contactInformation.major directly
+const majors = await applications.aggregate([
+  {
+    $match: {
+      status: "accepted",
+      "contactInformation.major": { $exists: true, $ne: null }
+    }
+  },
+  {
+    $lookup: {
+      from: "InternshipOpportunitiesData",
+      localField: "internshipId",
+      foreignField: "_id",
+      as: "internship"
+    }
+  },
+  { $unwind: "$internship" },
+  {
+    $match: {
+      "internship.company": companyName
+    }
+  },
+  {
+    $group: {
+      _id: "$contactInformation.major",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      label: "$_id",
+      value: "$count",
+      _id: 0
+    }
+  }
+]).toArray();
+
+
   
       res.json({
         approvalData,
