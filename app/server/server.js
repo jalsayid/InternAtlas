@@ -12,6 +12,7 @@ const reviewsRoutes = require("./routes/reviews");
 
 const app = express();
 app.use(express.json());
+
 app.use(cors()); // Allow frontend to call the backend
 
 const PORT = 3001;
