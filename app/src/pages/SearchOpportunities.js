@@ -7,6 +7,8 @@ import StudentNavBar from '../StudentNavBar';
 
 function SearchOpportunities() {
   const [opportunities, setOpportunities] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [filters, setFilters] = useState({
     type: '',
     company: '',
@@ -22,10 +24,13 @@ function SearchOpportunities() {
       .then(data => {
         const activeOnly = data.filter(item => item.status?.toLowerCase() === 'active');
         setOpportunities(activeOnly);
+        setLoading(false);
       })
-      .catch(error => console.error('Error fetching internships:', error));
+      .catch(error => {
+        console.error('Error fetching internships:', error);
+        setLoading(false); // ✅ moved inside catch block
+      });
   }, []);
-  
 
   const filtered = opportunities.filter(o =>
     (!filters.type || o.type === filters.type) &&
@@ -33,6 +38,10 @@ function SearchOpportunities() {
     (!filters.location || o.location?.toLowerCase().includes(filters.location.toLowerCase())) &&
     (!filters.title || o.title?.toLowerCase().includes(filters.title.toLowerCase()))
   );
+
+  function handleFilterChange(type, value) {
+    setFilters(prev => ({ ...prev, [type]: value }));
+  }
 
   return (
     <>
@@ -59,27 +68,31 @@ function SearchOpportunities() {
           />
         </Form>
 
-        {/* Results */}
-        <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
-          {filtered.length > 0 ? (
-            filtered.map(op => (
-              <OpportunityCard
-                key={op._id}
-                opportunity={op}
-                onClick={() => navigate(`/opportunity/${op._id}`)}
-              />
-            ))
-          ) : (
-            <p className="text-muted text-center">No opportunities match your search.</p>
-          )}
-        </div>
+        {/* Loading Spinner or Results */}
+        {loading ? (
+          <div className="d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+            <div className="spinner-border text-warning" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          <div style={{ maxHeight: '600px', overflowY: 'auto' }}>
+            {filtered.length > 0 ? (
+              filtered.map(op => (
+                <OpportunityCard
+                  key={op._id}
+                  opportunity={op}
+                  onClick={() => navigate(`/opportunity/${op._id}`)}
+                />
+              ))
+            ) : (
+              <p className="text-muted text-center">No opportunities match your search.</p>
+            )}
+          </div>
+        )}
       </Container>
     </>
   );
-
-  function handleFilterChange(type, value) {
-    setFilters(prev => ({ ...prev, [type]: value }));
-  }
 }
 
 export default SearchOpportunities;
