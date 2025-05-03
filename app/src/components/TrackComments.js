@@ -19,8 +19,11 @@ function TrackComments() {
     fetch('http://localhost:3001/api/inappropriateComments')
       .then(res => res.json())
       .then(data => {
-        console.log("Loaded inappropriate comments:", data);
-        setComments(data);
+        if (Array.isArray(data)) {
+          setComments(data);
+        } else {
+          setComments([]);
+        }
       })
       .catch(err => console.error("Failed to fetch comments:", err))
       .finally(() => setLoading(false));

@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const data = await client
       .db("App")
       .collection("CompanyData")
-      .find({})
+      .find({registrationStatus: "accepted"})
       .toArray();
     res.json(data);
   } catch (err) {

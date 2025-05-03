@@ -15,7 +15,11 @@ function TrackApplications() {
       fetch(`http://localhost:3001/api/internships/company/${username}`)
         .then(res => res.json())
         .then(data => {
-          setApplications(data); // Save fetched data into state
+          if (Array.isArray(data)) {
+            setApplications(data);
+          } else {
+            setApplications([]);
+          }
         })
         .catch(err => {
           console.error("Failed to fetch internship opportunities", err);

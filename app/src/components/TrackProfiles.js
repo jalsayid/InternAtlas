@@ -22,7 +22,13 @@ function TrackProfiles() {
         useEffect(() => {
           fetch('http://localhost:3001/api/companiesdata') // Adjust if hosted elsewhere
             .then(res => res.json())
-            .then(data => setProfiles(data))
+            .then(data => {
+              if (Array.isArray(data)) {
+                setProfiles(data);
+              } else {
+                setProfiles([]);
+              }
+            })
             .catch(err => console.error("Failed to fetch company data", err))
             .finally(() => setLoading(false));
         }, []);
@@ -80,7 +86,10 @@ function TrackProfiles() {
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
-      ) : (
+      ) : ( 
+        filtered.length === 0 ? (
+          <p className="text-center">No matching profiles found.</p>
+        ) : (
         filtered.map(app => (
           <TrackProfilesCard
             key={app._id}
@@ -92,7 +101,7 @@ function TrackProfiles() {
             onDelete={handleDelete}
           />
         ))
-      )}
+      ))}
       <ProfileDetailModal
         show={showDetail}
         handleClose={() => setShowDetail(false)}
