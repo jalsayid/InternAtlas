@@ -2,6 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CompanySearch from './Review/Student/Search/CompanySearch';
 import ViewApplications from "./pages/ViewApplications.js";
 import ApplicantDetails from "./pages/ApplicantDetails.js";
 import TrackApplications from "./pages/TrackApplications.js";
@@ -81,8 +82,9 @@ function App() {
 
         <Route path="/dashboard/student" element={<StudentDashboard />} />
         <Route path="/search" element={<SearchCompany />} />
-        <Route path="/company/:companyName/write-review" element={<WriteReview />} />
-        <Route path="/company/:companyName" element={<CompanyReview />} />
+        <Route path="/company/:companyName/:position/write-review" element={<WriteReview />} />
+        <Route path="/company/:companyName/:position" element={<CompanyReview />} />
+        <Route path="/company/:companyName" element={<CompanySearch />} />
         <Route path="/CompanyReview/:companyName/:position/reviews" element={<CompanyPageReviews />} /> // has been linked in the track applications - aryam
 
     

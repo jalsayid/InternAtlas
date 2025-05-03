@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 import Details from "../components/Details";
+import CompanyNavbar from "../CompanyNavBar";
 
 function ApplicationDetailWrapper() {
   const { id } = useParams();
@@ -12,9 +13,11 @@ function ApplicationDetailWrapper() {
   useEffect(() => {
     const fetchApplicationData = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/applications/${id}`);
+        const response = await fetch(
+          `http://localhost:3001/api/applications/${id}`
+        );
         if (!response.ok) {
-          throw new Error('Application not found');
+          throw new Error("Application not found");
         }
         const data = await response.json();
         setApplicationData(data.application);
@@ -29,12 +32,26 @@ function ApplicationDetailWrapper() {
     fetchApplicationData();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <>
+        <CompanyNavbar />
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "200px" }}
+        >
+          <div className="spinner-border text-warning" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </>
+    );
+  }
   if (error) return <div>Error: {error}</div>;
   if (!applicationData) return <div>No application found</div>;
 
   return (
-    <Details 
+    <Details
       name={applicationData.contactInformation.fullName}
       email={applicationData.contactInformation.email}
       cv_path={applicationData.contactInformation.resume}

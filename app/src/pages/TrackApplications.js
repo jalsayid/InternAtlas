@@ -11,6 +11,7 @@ export default function TrackApplications() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
     const fetchApplications = async () => {
@@ -29,17 +30,33 @@ export default function TrackApplications() {
             studentEmail
           )}`
         );
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || "Failed to fetch applications");
+        console.log("Applications API response:", response);
+
+        const response2 = await fetch(
+          "http://localhost:3001/api/companiesdata"
+        );
+        console.log("Companies API response:", response2);
+
+        if (!response.ok || !response2.ok) {
+          const errorText = await response.text();
+          throw new Error(
+            errorText || "Failed to fetch applications or companies"
+          );
         }
 
         const data = await response.json();
+        console.log("Applications data:", data);
+
+        const data2 = await response2.json();
+        console.log("Companies data:", data2);
+
         setApplications(data);
+        setCompanies(data2);
         setLoading(false);
       } catch (err) {
-        console.error("Error:", err);
-        setError(err.message);
+        setError(
+          err.message || "An error occurred while fetching your applications."
+        );
         setLoading(false);
       }
     };
@@ -47,16 +64,29 @@ export default function TrackApplications() {
     fetchApplications();
   }, []);
 
+  const getCompanyLogo = (companyName) => {
+    const company = companies.find((c) => c.companyName === companyName);
+    return company?.logo || "/imgs/default-company-logo.png";
+  };
+
   if (loading) {
     return (
       <>
         <StudentNavBar />
-        <Container className="pt-5" style={{ paddingTop: "100px" }}>
-          <div className="text-center">Loading your applications...</div>
-        </Container>
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "200px" }}
+        >
+          <div className="spinner-border text-warning" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
       </>
     );
   }
+
+  console.log("Error state:", error);
+  console.log("Applications state:", applications);
 
   return (
     <>
@@ -65,51 +95,47 @@ export default function TrackApplications() {
         <Row className="justify-content-center">
           <Col>
             <Header title="Track Applications" />
-            {error && (
-              <Alert variant="danger" className="mb-4">
-                {error}
-              </Alert>
-            )}
-            {!error && applications.length === 0 ? (
-              <p className="text-center">
-                You haven't submitted any applications yet.
-              </p>
-            ) : (
-              applications.map((application) => (
-                <ApplicantCard
-                  key={application._id}
-                  imgSrc={`/imgs/${application.internshipDetails?.company?.toLowerCase()}.png`}
-                  title={
-                    application.internshipDetails?.title || "Unknown Position"
-                  }
-                  content={
-                    <>
-                      <p>
-                        <strong>Location:</strong>{" "}
-                        {application.internshipDetails?.location || "N/A"}
-                      </p>
-                      <p>
-                        <strong>Application Status:</strong>{" "}
-                        <span className={`${application.status}-badge`}>
-                          {application.status}
-                        </span>
-                      </p>
-                      <p>
-                        <strong>Description:</strong>{" "}
-                        {application.internshipDetails?.description ||
-                          "No description available"}
-                      </p>
-                      <p>
-                        <strong>Requirements:</strong>{" "}
-                        {application.internshipDetails?.qualifications ||
-                          "No requirements listed"}
-                      </p>
-                    </>
-                  }
-                  link={`/application-details/${application._id}`}
-                />
-              ))
-            )}
+            {applications.map((application) => (
+              <ApplicantCard
+                key={application._id}
+                imgSrc={getCompanyLogo(application.internshipDetails?.company)}
+                imgAlt={`${
+                  application.internshipDetails?.company || "Company"
+                } Logo`}
+                title={
+                  application.internshipDetails?.title || "Unknown Position"
+                }
+                content={
+                  <>
+                    <p>
+                      <strong>Company:</strong>{" "}
+                      {application.internshipDetails?.company || "N/A"}
+                    </p>
+                    <p>
+                      <strong>Location:</strong>{" "}
+                      {application.internshipDetails?.location || "N/A"}
+                    </p>
+                    <p>
+                      <strong>Application Status:</strong>{" "}
+                      <span className={`${application.status}-badge`}>
+                        {application.status}
+                      </span>
+                    </p>
+                    <p>
+                      <strong>Description:</strong>{" "}
+                      {application.internshipDetails?.description ||
+                        "No description available"}
+                    </p>
+                    <p>
+                      <strong>Requirements:</strong>{" "}
+                      {application.internshipDetails?.qualifications ||
+                        "No requirements listed"}
+                    </p>
+                  </>
+                }
+                link={`/application-details/${application._id}`}
+              />
+            ))}
           </Col>
         </Row>
       </Container>

@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CompanyInfoCard from "../components/CompanyInfoCard";
 import Header from "../components/Header";
-import AdminNavbar from '../AdminNavbar.js';
+import AdminNavbar from "../AdminNavbar.js";
 
 export default function ReviewCompany() {
   const [companies, setCompanies] = useState([]);
@@ -14,13 +14,15 @@ export default function ReviewCompany() {
   useEffect(() => {
     const fetchPendingCompanies = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/companiesdata/pending');
+        const response = await fetch(
+          "http://localhost:3001/api/companiesdata/pending"
+        );
         const data = await response.json();
-        
+
         if (!response.ok) {
-          throw new Error(data.message || 'Failed to fetch pending companies');
+          throw new Error(data.message || "Failed to fetch pending companies");
         }
-        
+
         setCompanies(data);
         setLoading(false);
       } catch (err) {
@@ -38,7 +40,14 @@ export default function ReviewCompany() {
         <AdminNavbar />
         <Container fluid style={{ paddingTop: "80px" }}>
           <Header title="Manage Company Requests" />
-          <div className="text-center">Loading pending companies...</div>
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ height: "200px" }}
+          >
+            <div className="spinner-border text-warning" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
         </Container>
       </>
     );
@@ -74,7 +83,9 @@ export default function ReviewCompany() {
                   info={
                     <>
                       <p>{company.description}</p>
-                      <p><span className="pending-badge">pending</span></p>
+                      <p>
+                        <span className="pending-badge">pending</span>
+                      </p>
                     </>
                   }
                   image={company.logo}

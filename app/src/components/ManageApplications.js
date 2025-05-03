@@ -84,6 +84,9 @@ function ManageApplications() {
           </div>
         </div>
       ) : (
+        filtered.length === 0 ? (
+          <p className="text-center">No matching applications found.</p>
+        ) : (
           filtered.map(app => (
             <ApplicationCardAdmin
               key={app._id}
@@ -92,7 +95,7 @@ function ManageApplications() {
             />
           ))
         )
-      }
+      )}
         <Confirmation
           show={showConfirm}
           onHide={() => {

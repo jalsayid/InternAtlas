@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Form, Button, Alert, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { StarFill, InfoCircle } from 'react-bootstrap-icons';
+import StudentNavBar from '../../../StudentNavBar';
 import './WriteReview.css';
-import StudentNavBar from '../../../StudentNavBar'; 
-import { addReview } from '../../../Data/reviews';
 
 const WriteReview = () => {
-    const { companyName } = useParams();
+    const { companyName, position } = useParams();
     const navigate = useNavigate();
 
     const [comment, setComment] = useState('');
@@ -26,7 +25,20 @@ const WriteReview = () => {
     const [error, setError] = useState(false);
     const [showThankYou, setShowThankYou] = useState(false);
 
-    const handleSubmit = (e) => {
+    // ✅ get logged-in user info from sessionStorage
+    const userId = sessionStorage.getItem('userId');
+    const username = sessionStorage.getItem('loggedInUser');
+    const userType = sessionStorage.getItem('userType');
+
+    useEffect(() => {
+        // if user is not logged in or not a student, redirect
+        if (!userId || userType !== 'student') {
+            alert('You must be logged in as a student to submit a review.');
+            navigate('/login');
+        }
+    }, [userId, userType, navigate]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const allRated = Object.values(ratings).every((r) => r > 0);
@@ -38,15 +50,34 @@ const WriteReview = () => {
         }
 
         setError(false);
+        const overallRating = Math.round(Object.values(ratings).reduce((a, b) => a + b) / 4);
 
-        addReview(companyName, {
-            text: comment,
-            rating: Math.round(Object.values(ratings).reduce((a, b) => a + b) / 4),
-            response: null
-        });
+        try {
+            const response = await fetch('http://localhost:3001/api/reviews', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    company: companyName,
+                    position: position,
+                    studentId: userId,
+                    studentName: username,
+                    rating: overallRating,
+                    reviewText: comment
+                })
+            });
 
-        setShowThankYou(true);
-        setTimeout(() => navigate(`/company/${companyName}`), 1500);
+            if (response.ok) {
+                setShowThankYou(true);
+                setTimeout(() => navigate(`/company/${companyName}/${encodeURIComponent(position)}`), 1500);
+            } else {
+                const data = await response.json();
+                console.error('Review submission failed:', data);
+                alert('Failed to submit review. Please try again.');
+            }
+        } catch (err) {
+            console.error('Error submitting review:', err);
+            alert('Server error. Please try again later.');
+        }
     };
 
     const renderStars = (field) => (
@@ -69,7 +100,7 @@ const WriteReview = () => {
         <>
             <StudentNavBar />
             <Container className="my-5 review-container">
-                <a href={`/company/${companyName}`} className="text-muted mb-3 d-inline-block">
+                <a href={`/company/${companyName}/${position}`} className="text-muted mb-3 d-inline-block">
                     &larr; Back to reviews
                 </a>
 
@@ -77,25 +108,22 @@ const WriteReview = () => {
                     <div className="d-flex align-items-center">
                         <i className="bi bi-building me-3"></i>
                         <div>
-                        <h5 className="mb-0 company-name">{companyName}</h5>
-
-                            <small className="text-muted">Software Engineering Intern</small>
+                            <h5 className="mb-0 company-name">{companyName}</h5>
+                            <small className="text-muted">{position}</small>
                         </div>
-                    </div>
-                    <div className="text-primary d-flex align-items-center">
-                        <span className="me-1 fs-5 fw-semibold">4.5</span>
-                        <StarFill className="text-warning" />
                     </div>
                 </div>
 
                 <Alert variant="light" className="guideline-box">
-                    <h6><InfoCircle className="me-2" />Guidelines</h6>
-                    <ul className="mb-0">
-                        <li>Your rating could be removed if you use profanity or derogatory terms.</li>
-                        <li>Refer to the rating categories to help you better elaborate your comments.</li>
-                        <li>Don’t forget to proofread!</li>
-                    </ul>
-                </Alert>
+                
+  <h6><InfoCircle className="me-2" />Guidelines</h6>
+  <ul className="mb-0">
+    <li>Reviews containing profanity or offensive language may be flagged for moderation.</li>
+    <li>Focus on constructive, professional feedback to help others learn from your experience.</li>
+    <li>Please check your spelling and grammar before submitting.</li>
+  </ul>
+</Alert>
+
 
                 <Form onSubmit={handleSubmit}>
                     <Row className="mb-4">
@@ -118,9 +146,7 @@ const WriteReview = () => {
                     </Row>
 
                     <Form.Group className="mb-3">
-                        <Form.Label>
-                            Discuss your personal experience on this company. <span className="text-danger">*</span>
-                        </Form.Label>
+                        <Form.Label>Discuss your personal experience on this company. <span className="text-danger">*</span></Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
@@ -130,9 +156,7 @@ const WriteReview = () => {
                             onChange={(e) => setComment(e.target.value)}
                         />
                         {error && comment.trim() === '' && (
-                            <div className="invalid-feedback">
-                                Please fill out this field.
-                            </div>
+                            <div className="invalid-feedback">Please fill out this field.</div>
                         )}
                     </Form.Group>
 

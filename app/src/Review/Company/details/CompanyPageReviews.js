@@ -1,40 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Card, Alert, Form } from 'react-bootstrap';
 import { StarFill } from 'react-bootstrap-icons';
 import { useParams } from 'react-router-dom';
 import './CompanyPageReview.css';
 import CompanyNavBar from '../../../CompanyNavBar';
 
-const reviewsData = {
-  'sabic_software engineering intern': [
-    { id: 1, rating: 5, text: 'Excellent mentorship, engaging tasks.', response: 'Thank you!' },
-    { id: 2, rating: 4, text: 'Learned a lot, but onboarding was slow.', response: null },
-    { id: 3, rating: 5, text: 'Great learning culture!', response: null }
-  ],
-  'aramco_ai & machine learning intern': [
-    { id: 4, rating: 4, text: 'Loved the datasets and mentorship.', response: 'Glad to hear!' },
-    { id: 5, rating: 5, text: 'Exciting work on real models.', response: null },
-    { id: 6, rating: 3, text: 'Need better docs.', response: 'We’ll improve that.' }
-  ],
-  'sdaia_cybersecurity intern': [
-    { id: 7, rating: 5, text: 'Challenging and rewarding!', response: null },
-    { id: 8, rating: 4, text: 'Real-world firewall tasks.', response: null },
-    { id: 9, rating: 4, text: 'Great mentoring.', response: 'Thank you!' }
-  ]
-};
-
 const CompanyPageReviews = () => {
   const { companyName, position } = useParams();
-  const key = `${(companyName || '').toLowerCase()}_${(position || '').toLowerCase()}`;
-  const initialReviews = reviewsData[key] || [];
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [reviews, setReviews] = useState(
-    initialReviews.map((r) => ({
-      ...r,
-      isEditing: false,
-      editText: r.response || ''
-    }))
-  );
+  // ✅ Fetch reviews from backend
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch(`http://localhost:3001/api/reviews/${companyName}/${position}`);
+        const data = await res.json();
+
+        const mapped = data.map((r) => ({
+          id: r._id,
+          rating: r.rating,
+          text: r.reviewText,
+          response: r.companyResponse,
+          isEditing: false,
+          editText: r.companyResponse || '',
+        }));
+
+        setReviews(mapped);
+      } catch (err) {
+        console.error('Fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, [companyName, position]);
 
   const toggleEditing = (id) => {
     setReviews((prev) =>
@@ -48,20 +49,41 @@ const CompanyPageReviews = () => {
     );
   };
 
-  const handleSave = (id) => {
-    setReviews((prev) =>
-      prev.map((r) =>
-        r.id === id ? { ...r, response: r.editText, isEditing: false } : r
-      )
-    );
+  const handleSave = async (id) => {
+    const review = reviews.find((r) => r.id === id);
+    try {
+      await fetch(`http://localhost:3001/api/reviews/${id}/response`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ responseText: review.editText }),
+      });
+
+      setReviews((prev) =>
+        prev.map((r) =>
+          r.id === id ? { ...r, response: r.editText, isEditing: false } : r
+        )
+      );
+    } catch (err) {
+      console.error('Save error:', err);
+    }
   };
 
-  const handleDelete = (id) => {
-    setReviews((prev) =>
-      prev.map((r) =>
-        r.id === id ? { ...r, response: null, editText: '', isEditing: false } : r
-      )
-    );
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:3001/api/reviews/${id}/response`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ responseText: null }),
+      });
+
+      setReviews((prev) =>
+        prev.map((r) =>
+          r.id === id ? { ...r, response: null, editText: '', isEditing: false } : r
+        )
+      );
+    } catch (err) {
+      console.error('Delete error:', err);
+    }
   };
 
   const renderStars = (count) =>
@@ -77,11 +99,10 @@ const CompanyPageReviews = () => {
       <CompanyNavBar />
 
       <Container className="py-4">
-        {/* Header */}
         <div className="d-flex align-items-center mt-3 mb-4">
           <i className="bi bi-building fs-3 text-secondary me-3"></i>
           <div>
-            <h5 className="mb-0 text-capitalize company-name fw-bold text-dark">{companyName}</h5>
+            <h5 className="mb-0 text-capitalize fw-bold text-dark">{companyName}</h5>
             <small className="text-muted text-capitalize">{position}</small>
           </div>
           <div className="ms-auto text-primary d-flex align-items-center">
@@ -90,17 +111,17 @@ const CompanyPageReviews = () => {
           </div>
         </div>
 
-        {/* Ratings Summary */}
         <div className="mb-4 d-flex flex-wrap gap-4">
-          <div><strong className="rating-label">Reputation</strong> {renderStars(4)}</div>
-          <div><strong className="rating-label">Social</strong> {renderStars(5)}</div>
-          <div><strong className="rating-label">Opportunities</strong> {renderStars(4)}</div>
-          <div><strong className="rating-label">Location</strong> {renderStars(4)}</div>
+          <div><strong>Reputation</strong> {renderStars(4)}</div>
+          <div><strong>Social</strong> {renderStars(5)}</div>
+          <div><strong>Opportunities</strong> {renderStars(4)}</div>
+          <div><strong>Location</strong> {renderStars(4)}</div>
         </div>
 
-        {/* Reviews */}
         <h5 className="mb-3">Student Reviews</h5>
-        {reviews.length === 0 ? (
+        {loading ? (
+          <p>Loading reviews...</p>
+        ) : reviews.length === 0 ? (
           <p className="text-muted">No reviews yet. Be the first to write one!</p>
         ) : (
           reviews.map((r) => (
