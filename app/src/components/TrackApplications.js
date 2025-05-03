@@ -12,7 +12,7 @@ function TrackApplications() {
   useEffect(() => {
     const username = sessionStorage.getItem('loggedInUser'); // Get the username from sessionStorage
     if (username) {
-      fetch(`${REACT_APP_API_URL}/api/internships/company/${username}`)
+      fetch(`https://internatlas.onrender.com/api/internships/company/${username}`)
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) {

@@ -16,7 +16,7 @@ function TrackComments() {
   // ✅ refresh function
   const refreshComments = () => {
     setLoading(true);
-    fetch(`${REACT_APP_API_URL}/api/inappropriateComments`)
+    fetch(`https://internatlas.onrender.com/api/inappropriateComments`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {

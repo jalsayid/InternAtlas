@@ -39,7 +39,7 @@ function TrackProfiles() {
 
       };
       const confirmDeletion = () => {
-        fetch(`${REACT_APP_API_URL}/api/companiesdata/${pendingDeleteId}`, {
+        fetch(`https://internatlas.onrender.com/api/companiesdata/${pendingDeleteId}`, {
           method: 'DELETE',
         })
           .then((res) => {
