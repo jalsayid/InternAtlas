@@ -25,6 +25,16 @@ app.use("/api/reports", reportRoutes);
 app.use("/api/inappropriateComments", inappropriateCommentsRoutes);
 app.use("/api/reviews", reviewsRoutes);
 
+
+const path = require("path");
+
+// Serve React static files
+app.use(express.static(path.join(__dirname, "../build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
