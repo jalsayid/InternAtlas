@@ -33,7 +33,7 @@ export default function TrackApplications() {
         console.log("Applications API response:", response);
 
         const response2 = await fetch(
-          `${REACT_APP_API_URL}/api/companiesdata`
+          `https://internatlas.onrender.com/api/companiesdata`
         );
         console.log("Companies API response:", response2);
 

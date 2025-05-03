@@ -40,7 +40,7 @@ function TrackComments() {
   };
 
   const confirmDeletion = () => {
-    fetch(`${REACT_APP_API_URL}/api/inappropriateComments/${pendingDeleteId}`, {
+    fetch(`https://internatlas.onrender.com/api/inappropriateComments/${pendingDeleteId}`, {
       method: 'DELETE',
     })
       .then((res) => {
