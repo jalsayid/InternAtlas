@@ -15,7 +15,7 @@ const CompanySearch = () => {
   useEffect(() => {
     const fetchOpportunities = async () => {
       try {
-        const res = await fetch(`${REACT_APP_API_URL}/api/internships`);
+        const res = await fetch(`https://internatlas.onrender.com/api/internships`);
         const data = await res.json();
         const filtered = data.filter(
           op => op.company.toLowerCase() === companyName.toLowerCase()

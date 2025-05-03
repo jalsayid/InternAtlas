@@ -19,7 +19,7 @@ function SearchOpportunities() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${REACT_APP_API_URL}/api/internships`)
+    fetch(`https://internatlas.onrender.com/api/internships`)
       .then(response => response.json())
       .then(data => {
         const activeOnly = data.filter(item => item.status?.toLowerCase() === 'active');

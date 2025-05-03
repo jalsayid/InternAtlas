@@ -13,7 +13,7 @@ function ProfileDetailModal({ show, handleClose, app }) {
       async function fetchCount() {
         setLoading(true); // Start loading
         try {
-          const response = await fetch(`${REACT_APP_API_URL}/api/internships/${app.companyName}`);
+          const response = await fetch(`https://internatlas.onrender.com/api/internships/${app.companyName}`);
           if (!response.ok) throw new Error('Failed to fetch');
           const data = await response.json();
           setPostCount(data.length); // Set count

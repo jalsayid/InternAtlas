@@ -18,7 +18,7 @@ function GeneralInformationForm() {
     const [opportunity, setOpportunity] = useState(null);
 
     useEffect(() => {
-        fetch(`${REACT_APP_API_URL}/api/internships/id/${id}`)
+        fetch(`https://internatlas.onrender.com/api/internships/id/${id}`)
             .then((res) => res.json())
             .then((data) => setOpportunity(data))
             .catch((err) => console.error('Error fetching opportunity:', err));
@@ -68,7 +68,7 @@ function GeneralInformationForm() {
 
         try {
 
-            const response = await fetch(`${REACT_APP_API_URL}/api/applications`, {
+            const response = await fetch(`https://internatlas.onrender.com/api/applications`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

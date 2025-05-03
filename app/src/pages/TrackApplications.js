@@ -26,7 +26,7 @@ export default function TrackApplications() {
         }
 
         const response = await fetch(
-          `${REACT_APP_API_URL}/api/applications/student/${studentName}?email=${encodeURIComponent(
+          `https://internatlas.onrender.com/api/applications/student/${studentName}?email=${encodeURIComponent(
             studentEmail
           )}`
         );

@@ -15,7 +15,7 @@ export default function ReviewCompany() {
     const fetchPendingCompanies = async () => {
       try {
         const response = await fetch(
-          `${REACT_APP_API_URL}/api/companiesdata/pending`
+          `https://internatlas.onrender.com/api/companiesdata/pending`
         );
         const data = await response.json();
 

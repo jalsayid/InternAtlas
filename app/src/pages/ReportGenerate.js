@@ -26,7 +26,7 @@ export default function ReportGenerate() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${REACT_APP_API_URL}/api/reports/combined-summary`);
+        const res = await fetch(`https://internatlas.onrender.com/api/reports/combined-summary`);
         const data = await res.json();
 
         if (data.studentSummary) setStudentSummary(data.studentSummary);
@@ -63,7 +63,7 @@ export default function ReportGenerate() {
     if (!selected) return;
 
     try {
-      const res = await fetch(`${REACT_APP_API_URL}/api/reports/company-analytics/${encodeURIComponent(selected)}`);
+      const res = await fetch(`https://internatlas.onrender.com/api/reports/company-analytics/${encodeURIComponent(selected)}`);
       const data = await res.json();
       console.log(`Analytics for ${selected}:`, data);
 

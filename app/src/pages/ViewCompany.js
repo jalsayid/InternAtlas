@@ -12,7 +12,7 @@ export default function ViewCompany() {
     const fetchCompany = async () => {
       try {
         const response = await fetch(
-          `${REACT_APP_API_URL}/api/companiesdata/${id}`
+          `https://internatlas.onrender.com/api/companiesdata/${id}`
         );
         const data = await response.json();
 

@@ -15,7 +15,7 @@ const CompanyReview = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await fetch(`${REACT_APP_API_URL}/api/reviews/${companyName}/${position}`);
+        const res = await fetch(`https://internatlas.onrender.com/api/reviews/${companyName}/${position}`);
         const data = await res.json();
 
         const mapped = data.map((r) => ({

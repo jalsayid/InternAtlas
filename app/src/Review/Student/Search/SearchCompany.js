@@ -11,7 +11,7 @@ const SearchCompany = () => {
 
   // Fetch companies from backend on component mount
   useEffect(() => {
-    fetch(`${REACT_APP_API_URL}/api/internships`)  // Adjust your endpoint if needed
+    fetch(`https://internatlas.onrender.com/api/internships`)  // Adjust your endpoint if needed
       .then(res => res.json())
       .then(data => setSuggestedCompanies(data))
       .catch(err => console.error('Error fetching companies:', err));

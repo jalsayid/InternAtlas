@@ -27,7 +27,7 @@ export default function CompanyDetails({
   const handleApprove = async () => {
     try {
       const response = await fetch(
-        `${REACT_APP_API_URL}/api/companiesdata/${name}/status`,
+        `https://internatlas.onrender.com/api/companiesdata/${name}/status`,
         {
           method: "PUT",
           headers: {
@@ -53,7 +53,7 @@ export default function CompanyDetails({
   const handleReject = async () => {
     try {
       const response = await fetch(
-        `${REACT_APP_API_URL}/api/companiesdata/${name}/status`,
+        `https://internatlas.onrender.com/api/companiesdata/${name}/status`,
         {
           method: "PUT",
           headers: {

@@ -11,7 +11,7 @@ function OpportunityDetailsPagesStudent() {
   const [opportunity, setOpportunity] = useState(null);
 
   useEffect(() => {
-    fetch(`${REACT_APP_API_URL}/api/internships/id/${id}`)
+    fetch(`https://internatlas.onrender.com/api/internships/id/${id}`)
       .then(res => res.json())
       .then(data => setOpportunity(data))
       .catch(err => console.error('Failed to fetch opportunity:', err));

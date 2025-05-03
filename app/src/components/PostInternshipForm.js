@@ -90,7 +90,7 @@ function PostInternshipForm() {
     // Handle confirmation and submit data
     const handleConfirmSubmit = async () => {
         try {
-            const response = await fetch(`${REACT_APP_API_URL}/api/internships`, {
+            const response = await fetch(`https://internatlas.onrender.com/api/internships`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

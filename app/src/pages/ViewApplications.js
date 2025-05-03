@@ -16,7 +16,7 @@ export default function ViewApplications() {
     const fetchApplications = async () => {
       try {
         const response = await fetch(
-          `${REACT_APP_API_URL}/api/applications/internship/${internshipId}`
+          `https://internatlas.onrender.com/api/applications/internship/${internshipId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch applications");

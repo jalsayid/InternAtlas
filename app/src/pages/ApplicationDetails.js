@@ -14,7 +14,7 @@ function ApplicationDetailWrapper() {
     const fetchApplicationData = async () => {
       try {
         const response = await fetch(
-          `${REACT_APP_API_URL}/api/applications/${id}`
+          `https://internatlas.onrender.com/api/applications/${id}`
         );
         if (!response.ok) {
           throw new Error("Application not found");
