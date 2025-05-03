@@ -20,7 +20,7 @@ function TrackProfiles() {
 
         // Fetch data from API
         useEffect(() => {
-          fetch(`${REACT_APP_API_URL}/api/companiesdata`) // Adjust if hosted elsewhere
+          fetch(`https://internatlas.onrender.com/api/companiesdata`) // Adjust if hosted elsewhere
             .then(res => res.json())
             .then(data => {
               if (Array.isArray(data)) {
