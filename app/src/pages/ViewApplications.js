@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ApplicantCard from "../components/ApplicantCard.js";
-import CompanyNavBar from '../CompanyNavBar';  
+import CompanyNavBar from "../CompanyNavBar";
 import Header from "../components/Header.js";
 export default function ViewApplications() {
   const { internshipId } = useParams();
@@ -15,9 +15,11 @@ export default function ViewApplications() {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/applications/internship/${internshipId}`);
+        const response = await fetch(
+          `http://localhost:3001/api/applications/internship/${internshipId}`
+        );
         if (!response.ok) {
-          throw new Error('Failed to fetch applications');
+          throw new Error("Failed to fetch applications");
         }
         const data = await response.json();
         setApplications(data);
@@ -34,12 +36,28 @@ export default function ViewApplications() {
   }, [internshipId]);
 
   if (!internshipId) return <div>No internship ID provided</div>;
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <>
+        <CompanyNavBar />
+        <Container>
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ height: "200px" }}
+          >
+            <div className="spinner-border text-warning" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </Container>
+      </>
+    );
+  }
   if (error) return <div>Error: {error}</div>;
 
   return (
     <>
-      <CompanyNavBar /> 
+      <CompanyNavBar />
       <Container>
         <Row className="justify-content-center mt-4">
           <Col>
@@ -51,10 +69,22 @@ export default function ViewApplications() {
                 title={application.contactInformation.fullName}
                 content={
                   <>
-                    <p><strong>Field:</strong> {application.contactInformation.major}</p>
-                    <p><strong>University:</strong> {application.contactInformation.university}</p>
-                    <p><strong>Summary:</strong> {application.generalInformation.summary}</p>
-                    <p><strong>Skills:</strong> {application.generalInformation.skills}</p>
+                    <p>
+                      <strong>Field:</strong>{" "}
+                      {application.contactInformation.major}
+                    </p>
+                    <p>
+                      <strong>University:</strong>{" "}
+                      {application.contactInformation.university}
+                    </p>
+                    <p>
+                      <strong>Summary:</strong>{" "}
+                      {application.generalInformation.summary}
+                    </p>
+                    <p>
+                      <strong>Skills:</strong>{" "}
+                      {application.generalInformation.skills}
+                    </p>
                   </>
                 }
                 link={`/applicant-details/${application._id}`}

@@ -51,9 +51,14 @@ export default function TrackApplications() {
     return (
       <>
         <StudentNavBar />
-        <Container className="pt-5" style={{ paddingTop: "100px" }}>
-          <div className="text-center">Loading your applications...</div>
-        </Container>
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "200px" }}
+        >
+          <div className="spinner-border text-warning" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
       </>
     );
   }
